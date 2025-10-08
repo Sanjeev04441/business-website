@@ -114,27 +114,13 @@ export default function RootLayout({
         <link rel="apple-touch-icon" sizes="180x180" href="/images/icon/logo.png?v=2" />
         <link rel="shortcut icon" href="/images/icon/logo.png?v=2" />
         
-        {/* Fonts - Optimized Single Import */}
+        {/* Fonts - Optimized: Only load weights actually used (400, 500, 600, 700) */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
         
-        {/* Critical Image Preloads */}
-        <link rel="preload" href="/images/icon/logo.png?v=2" as="image" type="image/png" />
-        
-        {/* Client Logos Preloads for 3D Carousel */}
-        <link rel="preload" href="/images/clients/Firstchoice.png" as="image" type="image/png" />
-        <link rel="preload" href="/images/clients/Haldiram.png" as="image" type="image/png" />
-        <link rel="preload" href="/images/clients/mankind.png" as="image" type="image/png" />
-        <link rel="preload" href="/images/clients/motherson.jpg" as="image" type="image/jpeg" />
-        <link rel="preload" href="/images/clients/patanjali.png" as="image" type="image/png" />
-        <link rel="preload" href="/images/clients/unominda.png" as="image" type="image/png" />
-        <link rel="preload" href="/images/clients/Varun_Beverages.svg.png" as="image" type="image/png" />
-        <link rel="preload" href="/images/clients/lucas.jpg" as="image" type="image/jpeg" />
-        <link rel="preload" href="/images/clients/coca.png" as="image" type="image/png" />
-        
-        {/* Video Preloads */}
-        <link rel="preload" href="/videos/HeroV_optimized.mp4" as="video" type="video/mp4" />
+        {/* Critical Image Preload - Logo only */}
+        <link rel="preload" href="/images/icon/logo.png?v=2" as="image" type="image/png" fetchPriority="high" />
         
         {/* DNS Prefetch for better performance */}
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />

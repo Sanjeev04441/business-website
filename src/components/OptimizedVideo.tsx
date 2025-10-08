@@ -152,7 +152,7 @@ export default function OptimizedVideo({
           onLoadedData={handleLoad}
           onError={handleError}
           style={style}
-          preload={priority ? 'auto' : 'metadata'}
+          preload={priority ? 'metadata' : 'none'}
           {...props}
         >
           <source src={src} type="video/mp4" />

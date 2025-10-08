@@ -23,8 +23,16 @@ const nextConfig: NextConfig = {
     remotePatterns: [],
   },
   experimental: {
-    optimizePackageImports: ['@heroicons/react'],
+    optimizePackageImports: ['@heroicons/react', 'framer-motion'],
   },
+  // Optimize bundle
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
+  // Optimize CSS
+  optimizeFonts: true,
+  // Optimize production build
+  productionBrowserSourceMaps: false,
   // Add headers for better caching
   async headers() {
     return [
