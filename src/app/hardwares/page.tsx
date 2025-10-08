@@ -227,9 +227,9 @@ export default function Hardwares() {
             </p>
           </div>
 
-          <div className="space-y-24">
+          <div className="space-y-40">
             {/* Printers Section */}
-            <div id="printers" className="mb-16">
+            <div id="printers" className="mb-20">
               <div className="text-center mb-12">
                 <h3 className="text-3xl font-bold text-gray-900 mb-4">Printers</h3>
                 <p className="text-lg text-gray-600">Professional printing solutions for every business need</p>
@@ -237,7 +237,7 @@ export default function Hardwares() {
             </div>
             
             {/* Desktop Printers */}
-            <div id="desktop-printers" className="grid lg:grid-cols-2 gap-12 items-center">
+            <div id="desktop-printers" className="grid lg:grid-cols-2 gap-16 items-start pb-8">
               {(() => {
                 const solution = hardwareSolutions[0]
                 return (
@@ -245,15 +245,22 @@ export default function Hardwares() {
                     {/* Image */}
                     <div className="order-1">
                       <div className="relative group">
-                        <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-800 rounded-2xl transform rotate-3 group-hover:rotate-6 transition-transform duration-300"></div>
-                        <div className="relative bg-white rounded-2xl p-4 shadow-xl transform -rotate-3 group-hover:-rotate-6 transition-transform duration-300">
-                          <OptimizedImage
-                            src={solution.image}
-                            alt={solution.name}
-                            width={600}
-                            height={400}
-                            className="w-full h-96 rounded-xl object-cover"
-                          />
+                        {/* Animated gradient border */}
+                        <div className="absolute -inset-1 bg-gradient-to-r from-red-600 to-orange-600 rounded-2xl opacity-75 group-hover:opacity-100 blur-sm group-hover:blur-md transition-all duration-500"></div>
+                        
+                        {/* Card content */}
+                        <div className="relative bg-white rounded-2xl p-2 shadow-xl transform transition-all duration-500 group-hover:scale-[1.02] group-hover:-translate-y-2">
+                          <div className="relative overflow-hidden rounded-xl">
+                            <OptimizedImage
+                              src={solution.image}
+                              alt={solution.name}
+                              width={600}
+                              height={400}
+                              className="w-full h-96 rounded-xl object-contain transition-transform duration-700 group-hover:scale-110"
+                            />
+                            {/* Overlay on hover */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-red-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -305,7 +312,7 @@ export default function Hardwares() {
             </div>
 
             {/* Industrial Printers */}
-            <div id="industrial-printers" className="grid lg:grid-cols-2 gap-12 items-center lg:grid-flow-col-dense">
+            <div id="industrial-printers" className="grid lg:grid-cols-2 gap-16 items-start lg:grid-flow-col-dense pb-8">
               {(() => {
                 const solution = hardwareSolutions[1]
                 return (
@@ -313,15 +320,22 @@ export default function Hardwares() {
                     {/* Image */}
                     <div className="order-1 lg:order-2">
                       <div className="relative group">
-                        <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-800 rounded-2xl transform rotate-3 group-hover:rotate-6 transition-transform duration-300"></div>
-                        <div className="relative bg-white rounded-2xl p-4 shadow-xl transform -rotate-3 group-hover:-rotate-6 transition-transform duration-300">
-                          <OptimizedImage
-                            src={solution.image}
-                            alt={solution.name}
-                            width={600}
-                            height={400}
-                            className="w-full h-96 rounded-xl object-cover"
-                          />
+                        {/* Animated gradient border */}
+                        <div className="absolute -inset-1 bg-gradient-to-r from-red-600 to-orange-600 rounded-2xl opacity-75 group-hover:opacity-100 blur-sm group-hover:blur-md transition-all duration-500"></div>
+                        
+                        {/* Card content */}
+                        <div className="relative bg-white rounded-2xl p-2 shadow-xl transform transition-all duration-500 group-hover:scale-[1.02] group-hover:-translate-y-2">
+                          <div className="relative overflow-hidden rounded-xl">
+                            <OptimizedImage
+                              src={solution.image}
+                              alt={solution.name}
+                              width={600}
+                              height={400}
+                              className="w-full h-96 rounded-xl object-contain transition-transform duration-700 group-hover:scale-110"
+                            />
+                            {/* Overlay on hover */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-red-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -373,7 +387,7 @@ export default function Hardwares() {
             </div>
 
             {/* ID Card Printers */}
-            <div id="id-card-printers" className="grid lg:grid-cols-2 gap-12 items-center">
+            <div id="id-card-printers" className="grid lg:grid-cols-2 gap-16 items-start pb-8">
               {(() => {
                 const solution = hardwareSolutions[2]
                 return (
@@ -381,15 +395,22 @@ export default function Hardwares() {
                     {/* Image */}
                     <div className="order-1">
                       <div className="relative group">
-                        <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-800 rounded-2xl transform rotate-3 group-hover:rotate-6 transition-transform duration-300"></div>
-                        <div className="relative bg-white rounded-2xl p-4 shadow-xl transform -rotate-3 group-hover:-rotate-6 transition-transform duration-300">
-                          <OptimizedImage
-                            src={solution.image}
-                            alt={solution.name}
-                            width={600}
-                            height={400}
-                            className="w-full h-96 rounded-xl object-cover"
-                          />
+                        {/* Animated gradient border */}
+                        <div className="absolute -inset-1 bg-gradient-to-r from-red-600 to-orange-600 rounded-2xl opacity-75 group-hover:opacity-100 blur-sm group-hover:blur-md transition-all duration-500"></div>
+                        
+                        {/* Card content */}
+                        <div className="relative bg-white rounded-2xl p-2 shadow-xl transform transition-all duration-500 group-hover:scale-[1.02] group-hover:-translate-y-2">
+                          <div className="relative overflow-hidden rounded-xl">
+                            <OptimizedImage
+                              src={solution.image}
+                              alt={solution.name}
+                              width={600}
+                              height={400}
+                              className="w-full h-96 rounded-xl object-contain transition-transform duration-700 group-hover:scale-110"
+                            />
+                            {/* Overlay on hover */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-red-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -441,7 +462,7 @@ export default function Hardwares() {
             </div>
 
             {/* Scanners Section */}
-            <div id="scanners" className="mb-16">
+            <div id="scanners" className="mb-20">
               <div className="text-center mb-12">
                 <h3 className="text-3xl font-bold text-gray-900 mb-4">Scanners</h3>
                 <p className="text-lg text-gray-600">Advanced scanning solutions for data capture and inventory management</p>
@@ -449,7 +470,7 @@ export default function Hardwares() {
             </div>
 
             {/* 1D Scanners */}
-            <div id="1d-scanners" className="grid lg:grid-cols-2 gap-12 items-center lg:grid-flow-col-dense">
+            <div id="1d-scanners" className="grid lg:grid-cols-2 gap-16 items-start lg:grid-flow-col-dense pb-8">
               {(() => {
                 const solution = hardwareSolutions[3]
                 return (
@@ -457,15 +478,22 @@ export default function Hardwares() {
                     {/* Image */}
                     <div className="order-1 lg:order-2">
                       <div className="relative group">
-                        <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-800 rounded-2xl transform rotate-3 group-hover:rotate-6 transition-transform duration-300"></div>
-                        <div className="relative bg-white rounded-2xl p-4 shadow-xl transform -rotate-3 group-hover:-rotate-6 transition-transform duration-300">
-                          <OptimizedImage
-                            src={solution.image}
-                            alt={solution.name}
-                            width={600}
-                            height={400}
-                            className="w-full h-96 rounded-xl object-cover"
-                          />
+                        {/* Animated gradient border */}
+                        <div className="absolute -inset-1 bg-gradient-to-r from-red-600 to-orange-600 rounded-2xl opacity-75 group-hover:opacity-100 blur-sm group-hover:blur-md transition-all duration-500"></div>
+                        
+                        {/* Card content */}
+                        <div className="relative bg-white rounded-2xl p-2 shadow-xl transform transition-all duration-500 group-hover:scale-[1.02] group-hover:-translate-y-2">
+                          <div className="relative overflow-hidden rounded-xl">
+                            <OptimizedImage
+                              src={solution.image}
+                              alt={solution.name}
+                              width={600}
+                              height={400}
+                              className="w-full h-96 rounded-xl object-contain transition-transform duration-700 group-hover:scale-110"
+                            />
+                            {/* Overlay on hover */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-red-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -517,7 +545,7 @@ export default function Hardwares() {
             </div>
 
             {/* 2D Scanners */}
-            <div id="2d-scanners" className="grid lg:grid-cols-2 gap-12 items-center">
+            <div id="2d-scanners" className="grid lg:grid-cols-2 gap-16 items-start pb-8">
               {(() => {
                 const solution = hardwareSolutions[4]
                 return (
@@ -525,15 +553,22 @@ export default function Hardwares() {
                     {/* Image */}
                     <div className="order-1">
                       <div className="relative group">
-                        <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-800 rounded-2xl transform rotate-3 group-hover:rotate-6 transition-transform duration-300"></div>
-                        <div className="relative bg-white rounded-2xl p-4 shadow-xl transform -rotate-3 group-hover:-rotate-6 transition-transform duration-300">
-                          <OptimizedImage
-                            src={solution.image}
-                            alt={solution.name}
-                            width={600}
-                            height={400}
-                            className="w-full h-96 rounded-xl object-cover"
-                          />
+                        {/* Animated gradient border */}
+                        <div className="absolute -inset-1 bg-gradient-to-r from-red-600 to-orange-600 rounded-2xl opacity-75 group-hover:opacity-100 blur-sm group-hover:blur-md transition-all duration-500"></div>
+                        
+                        {/* Card content */}
+                        <div className="relative bg-white rounded-2xl p-2 shadow-xl transform transition-all duration-500 group-hover:scale-[1.02] group-hover:-translate-y-2">
+                          <div className="relative overflow-hidden rounded-xl">
+                            <OptimizedImage
+                              src={solution.image}
+                              alt={solution.name}
+                              width={600}
+                              height={400}
+                              className="w-full h-96 rounded-xl object-contain transition-transform duration-700 group-hover:scale-110"
+                            />
+                            {/* Overlay on hover */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-red-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -585,7 +620,7 @@ export default function Hardwares() {
             </div>
 
             {/* Accessories Section */}
-            <div id="accessories" className="mb-16">
+            <div id="accessories" className="mb-20">
               <div className="text-center mb-12">
                 <h3 className="text-3xl font-bold text-gray-900 mb-4">Accessories</h3>
                 <p className="text-lg text-gray-600">Essential accessories and replacement parts for optimal performance</p>
@@ -593,7 +628,7 @@ export default function Hardwares() {
             </div>
 
             {/* Printer Heads - Original */}
-            <div id="printer-heads-original" className="grid lg:grid-cols-2 gap-12 items-center lg:grid-flow-col-dense">
+            <div id="printer-heads-original" className="grid lg:grid-cols-2 gap-16 items-start lg:grid-flow-col-dense pb-8">
               {(() => {
                 const solution = hardwareSolutions[5]
                 return (
@@ -601,15 +636,22 @@ export default function Hardwares() {
                     {/* Image */}
                     <div className="order-1 lg:order-2">
                       <div className="relative group">
-                        <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-800 rounded-2xl transform rotate-3 group-hover:rotate-6 transition-transform duration-300"></div>
-                        <div className="relative bg-white rounded-2xl p-4 shadow-xl transform -rotate-3 group-hover:-rotate-6 transition-transform duration-300">
-                          <OptimizedImage
-                            src={solution.image}
-                            alt={solution.name}
-                            width={600}
-                            height={400}
-                            className="w-full h-96 rounded-xl object-cover"
-                          />
+                        {/* Animated gradient border */}
+                        <div className="absolute -inset-1 bg-gradient-to-r from-red-600 to-orange-600 rounded-2xl opacity-75 group-hover:opacity-100 blur-sm group-hover:blur-md transition-all duration-500"></div>
+                        
+                        {/* Card content */}
+                        <div className="relative bg-white rounded-2xl p-2 shadow-xl transform transition-all duration-500 group-hover:scale-[1.02] group-hover:-translate-y-2">
+                          <div className="relative overflow-hidden rounded-xl">
+                            <OptimizedImage
+                              src={solution.image}
+                              alt={solution.name}
+                              width={600}
+                              height={400}
+                              className="w-full h-96 rounded-xl object-contain transition-transform duration-700 group-hover:scale-110"
+                            />
+                            {/* Overlay on hover */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-red-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -661,7 +703,7 @@ export default function Hardwares() {
             </div>
 
             {/* Printer Heads - OEM */}
-            <div id="printer-heads-oem" className="grid lg:grid-cols-2 gap-12 items-center">
+            <div id="printer-heads-oem" className="grid lg:grid-cols-2 gap-16 items-start pb-8">
               {(() => {
                 const solution = hardwareSolutions[6]
                 return (
@@ -669,15 +711,22 @@ export default function Hardwares() {
                     {/* Image */}
                     <div className="order-1">
                       <div className="relative group">
-                        <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-800 rounded-2xl transform rotate-3 group-hover:rotate-6 transition-transform duration-300"></div>
-                        <div className="relative bg-white rounded-2xl p-4 shadow-xl transform -rotate-3 group-hover:-rotate-6 transition-transform duration-300">
-                          <OptimizedImage
-                            src={solution.image}
-                            alt={solution.name}
-                            width={600}
-                            height={400}
-                            className="w-full h-96 rounded-xl object-cover"
-                          />
+                        {/* Animated gradient border */}
+                        <div className="absolute -inset-1 bg-gradient-to-r from-red-600 to-orange-600 rounded-2xl opacity-75 group-hover:opacity-100 blur-sm group-hover:blur-md transition-all duration-500"></div>
+                        
+                        {/* Card content */}
+                        <div className="relative bg-white rounded-2xl p-2 shadow-xl transform transition-all duration-500 group-hover:scale-[1.02] group-hover:-translate-y-2">
+                          <div className="relative overflow-hidden rounded-xl">
+                            <OptimizedImage
+                              src={solution.image}
+                              alt={solution.name}
+                              width={600}
+                              height={400}
+                              className="w-full h-96 rounded-xl object-contain transition-transform duration-700 group-hover:scale-110"
+                            />
+                            {/* Overlay on hover */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-red-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -729,7 +778,7 @@ export default function Hardwares() {
             </div>
 
             {/* POS Systems Section */}
-            <div id="pos-systems" className="grid lg:grid-cols-2 gap-12 items-center lg:grid-flow-col-dense">
+            <div id="pos-systems" className="grid lg:grid-cols-2 gap-16 items-start lg:grid-flow-col-dense pb-8">
               {(() => {
                 const solution = hardwareSolutions[7]
                 return (
@@ -737,15 +786,22 @@ export default function Hardwares() {
                     {/* Image */}
                     <div className="order-1 lg:order-2">
                       <div className="relative group">
-                        <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-800 rounded-2xl transform rotate-3 group-hover:rotate-6 transition-transform duration-300"></div>
-                        <div className="relative bg-white rounded-2xl p-4 shadow-xl transform -rotate-3 group-hover:-rotate-6 transition-transform duration-300">
-                          <OptimizedImage
-                            src={solution.image}
-                            alt={solution.name}
-                            width={600}
-                            height={400}
-                            className="w-full h-96 rounded-xl object-cover"
-                          />
+                        {/* Animated gradient border */}
+                        <div className="absolute -inset-1 bg-gradient-to-r from-red-600 to-orange-600 rounded-2xl opacity-75 group-hover:opacity-100 blur-sm group-hover:blur-md transition-all duration-500"></div>
+                        
+                        {/* Card content */}
+                        <div className="relative bg-white rounded-2xl p-2 shadow-xl transform transition-all duration-500 group-hover:scale-[1.02] group-hover:-translate-y-2">
+                          <div className="relative overflow-hidden rounded-xl">
+                            <OptimizedImage
+                              src={solution.image}
+                              alt={solution.name}
+                              width={600}
+                              height={400}
+                              className="w-full h-96 rounded-xl object-contain transition-transform duration-700 group-hover:scale-110"
+                            />
+                            {/* Overlay on hover */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-red-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                          </div>
                         </div>
                       </div>
                     </div>

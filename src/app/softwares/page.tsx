@@ -200,21 +200,28 @@ export default function Softwares() {
           </div>
 
           {/* Software Solutions with Images and Descriptions */}
-          <div className="space-y-24">
+          <div className="space-y-40">
             {softwareSolutions.map((solution, index) => (
-              <div key={index} id={solution.title.toLowerCase().replace(/\s+/g, '-')} className={`grid lg:grid-cols-2 gap-12 items-center scroll-mt-24 ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>
+              <div key={index} id={solution.title.toLowerCase().replace(/\s+/g, '-')} className={`grid lg:grid-cols-2 gap-16 items-start scroll-mt-32 pb-8 ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>
                 {/* Image Section */}
                 <div className={`${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
                   <div className="relative group">
-                    <div className="absolute inset-0 bg-gradient-to-r from-red-600/10 to-orange-600/10 rounded-2xl transform rotate-3 group-hover:rotate-6 transition-transform duration-300"></div>
-                    <div className="relative bg-white rounded-2xl p-4 shadow-md border border-gray-200">
+                    {/* Animated gradient border */}
+                    <div className="absolute -inset-1 bg-gradient-to-r from-red-600 to-orange-600 rounded-2xl opacity-75 group-hover:opacity-100 blur-sm group-hover:blur-md transition-all duration-500"></div>
+                    
+                    {/* Card content */}
+                    <div className="relative bg-white rounded-2xl p-2 shadow-xl transform transition-all duration-500 group-hover:scale-[1.02] group-hover:-translate-y-2">
+                      <div className="relative overflow-hidden rounded-xl">
                         <OptimizedImage
-                        src={solution.image}
-                        alt={solution.title}
-                        width={600}
-                        height={400}
-                        className="w-full h-auto rounded-xl object-cover"
-                      />
+                          src={solution.image}
+                          alt={solution.title}
+                          width={600}
+                          height={400}
+                          className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                        {/* Overlay on hover */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-red-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                      </div>
                     </div>
                   </div>
                 </div>

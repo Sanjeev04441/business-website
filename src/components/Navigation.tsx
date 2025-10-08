@@ -314,7 +314,7 @@ const NavigationComponent = () => {
                   className="font-medium tracking-wide uppercase hidden sm:block bg-gradient-to-r from-red-200 via-red-300 to-red-200 bg-clip-text text-transparent group-hover:from-red-400 group-hover:via-white group-hover:to-red-400 transition-all duration-500 drop-shadow-md text-xs sm:text-xs lg:text-sm"
                   whileHover={{ scale: 1.005 }}
                 >
-                  Labelling Solutions
+                  Build To Stick
                 </motion.span>
                 
                 {/* Animated Underline */}
