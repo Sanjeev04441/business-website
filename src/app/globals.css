@@ -249,6 +249,7 @@ html {
 @layer base {
   html {
     scroll-behavior: smooth;
+    font-size: 90%; /* Base font size scaled to 90% (14.4px instead of 16px) */
   }
   
   html, body {
