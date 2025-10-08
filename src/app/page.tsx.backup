@@ -1,0 +1,1436 @@
+'use client'
+
+import Navigation from '@/components/Navigation'
+import Footer from '@/components/Footer'
+import PriceCalculator from '@/components/PriceCalculator'
+import Image from 'next/image'
+import { useEffect, useRef, useState } from 'react'
+import { 
+  TagIcon, 
+  ComputerDesktopIcon, 
+  CpuChipIcon, 
+  UserGroupIcon,
+  ArrowRightIcon,
+  ArrowLeftIcon,
+  CheckCircleIcon,
+  StarIcon,
+  SparklesIcon,
+  RocketLaunchIcon,
+  ShieldCheckIcon
+} from '@heroicons/react/24/outline'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { EffectCoverflow, Pagination, Navigation as SwiperNavigation, Autoplay } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/effect-coverflow'
+import 'swiper/css/pagination'
+import 'swiper/css/navigation'
+
+export default function Home() {
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    const video = videoRef.current
+    const fallbackBg = document.getElementById('fallback-bg')
+    
+    if (video && fallbackBg) {
+      const handleVideoError = () => {
+        console.log('Video failed to load, showing fallback background')
+        fallbackBg.classList.remove('opacity-0')
+        fallbackBg.classList.add('opacity-100')
+      }
+      
+      const handleVideoLoad = () => {
+        console.log('Video loaded successfully')
+        fallbackBg.classList.add('opacity-0')
+        fallbackBg.classList.remove('opacity-100')
+      }
+      
+      video.addEventListener('error', handleVideoError)
+      video.addEventListener('loadeddata', handleVideoLoad)
+      
+      return () => {
+        video.removeEventListener('error', handleVideoError)
+        video.removeEventListener('loadeddata', handleVideoLoad)
+      }
+    }
+  }, [])
+
+  const [isSubmittingHomepage, setIsSubmittingHomepage] = useState(false)
+  const homepageFormRef = useRef<HTMLFormElement>(null)
+
+  const handleHomepageContactSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsSubmittingHomepage(true)
+
+    const formData = new FormData(e.currentTarget)
+    const data = {
+      firstName: formData.get('firstName') as string,
+      lastName: formData.get('lastName') as string,
+      email: formData.get('email') as string,
+      phone: formData.get('phone') as string,
+      company: formData.get('company') as string,
+      service: formData.get('service') as string,
+      message: formData.get('message') as string,
+    }
+
+    try {
+      const response = await fetch('/api/homepage-contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+
+      const result = await response.json()
+
+      if (response.ok) {
+        // Track form submission (temporarily disabled for debugging)
+        // try {
+        //   await fetch('/api/form-submissions', {
+        //     method: 'POST',
+        //     headers: {
+        //       'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify({
+        //       formType: 'Homepage Contact',
+        //       formData: data,
+        //       page: '/',
+        //       timestamp: new Date().toISOString(),
+        //       userAgent: navigator.userAgent,
+        //       ipAddress: 'Client-side tracking'
+        //     }),
+        //   });
+        // } catch (trackingError) {
+        //   console.error('Form tracking error:', trackingError);
+        // }
+
+        alert('Thank you for your message! We\'ll get back to you soon.')
+        // Reset form
+        if (homepageFormRef.current) {
+          homepageFormRef.current.reset()
+        }
+      } else {
+        alert('Sorry, there was an error sending your message. Please try again.')
+        console.error('Form submission error:', result)
+      }
+    } catch (error) {
+      console.error('Network error:', error)
+      alert('Sorry, there was an error sending your message. Please try again.')
+    } finally {
+      setIsSubmittingHomepage(false)
+    }
+  }
+
+  const services = [
+    {
+      icon: TagIcon,
+      title: 'Sticker Labels',
+      description: 'High-quality product labels, barcode labels, billing rolls, holograms, and RFID solutions.',
+      color: 'from-red-500 to-pink-500'
+    },
+    {
+      icon: ComputerDesktopIcon,
+      title: 'Hardware Solutions',
+      description: 'Printers, scanners, industrial printers, and ID card printers for all your business needs.',
+      color: 'from-pink-500 to-purple-500'
+    },
+    {
+      icon: CpuChipIcon,
+      title: 'Software Systems',
+      description: 'Inventory management, asset tracking, product tracking, and comprehensive ERP solutions.',
+      color: 'from-purple-500 to-indigo-500'
+    },
+    {
+      icon: UserGroupIcon,
+      title: 'Consultancy',
+      description: 'Expert guidance and strategic consulting to optimize your business operations.',
+      color: 'from-indigo-500 to-blue-500'
+    }
+  ]
+
+  const features = [
+    'Premium Quality Materials',
+    '24/7 Customer Support',
+    'Fast Delivery',
+    'Custom Solutions',
+    'Competitive Pricing',
+    'Technical Expertise'
+  ]
+
+  const clientLogos = [
+    { name: 'Patanjali', src: '/images/clients/patanjali.png', width: 120, height: 60 },
+    { name: 'Mankind', src: '/images/clients/mankind.png', width: 120, height: 60 },
+    { name: 'Lucas', src: '/images/clients/lucas.jpg', width: 120, height: 60 },
+    { name: 'Haldiram', src: '/images/clients/Haldiram.png', width: 120, height: 60 },
+    { name: 'Varun Beverages', src: '/images/clients/Varun_Beverages.svg.png', width: 120, height: 60 },
+    { name: 'Motherson', src: '/images/clients/motherson.jpg', width: 120, height: 60 },
+    { name: 'Unominda', src: '/images/clients/unominda.png', width: 120, height: 60 }
+  ]
+
+  const testimonials = [
+    {
+      name: 'Priya Sharma',
+      company: 'Patanjali',
+      rating: 5,
+      comment: 'Outstanding quality and exceptional service. Their labels have significantly improved our product presentation.'
+    },
+    {
+      name: 'Rajesh Kumar',
+      company: 'Mankind',
+      rating: 5,
+      comment: 'The inventory management software has streamlined our operations completely. Highly recommended!'
+    },
+    {
+      name: 'Anjali Patel',
+      company: 'Lucas',
+      rating: 5,
+      comment: 'Professional team with excellent technical support. They truly understand our business needs.'
+    },
+    {
+      name: 'Amit Singh',
+      company: 'Haldiram',
+      rating: 5,
+      comment: 'Exceptional quality and reliable delivery. SDB LABEL has been our trusted partner for years.'
+    },
+    {
+      name: 'Meera Reddy',
+      company: 'Varun Beverages',
+      rating: 5,
+      comment: 'Their labeling solutions have transformed our product packaging. Excellent service and support.'
+    },
+    {
+      name: 'Vikram Malhotra',
+      company: 'Motherson',
+      rating: 5,
+      comment: 'Professional approach and innovative solutions. They consistently exceed our expectations.'
+    },
+    {
+      name: 'Kavita Gupta',
+      company: 'Unominda',
+      rating: 5,
+      comment: 'Outstanding technical expertise and customer service. Highly recommended for any business.'
+    },
+    {
+      name: 'Arjun Mehta',
+      company: 'First Choice',
+      rating: 5,
+      comment: 'Reliable partner with excellent product quality. Their solutions have boosted our efficiency significantly.'
+    }
+  ]
+
+  // Function to find matching logo for a company
+  const getCompanyLogo = (companyName: string) => {
+    return clientLogos.find(logo => logo.name === companyName) || null
+  }
+
+  return (
+    <div className="min-h-screen bg-white font-poppins">
+      {/* Video Background - Covers entire viewport from navigation to hero */}
+      <div className="fixed inset-0 w-full h-full z-0">
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          className="w-full h-full object-cover"
+          style={{
+            minHeight: '100vh',
+            width: '100vw',
+            height: '100vh',
+            objectFit: 'cover'
+          }}
+        >
+          <source src="/videos/HeroV_optimized.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        {/* Overlay for better text readability - increased transparency */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/50 via-red-900/40 to-slate-900/50"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-red-900/20 via-transparent to-red-900/20"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-red-900/15 to-red-900/20"></div>
+        {/* Fallback background in case video doesn't load - only visible if video fails */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-red-900 to-rose-900 opacity-0" id="fallback-bg"></div>
+      </div>
+
+      {/* Navigation with transparent background */}
+      <div className="relative z-[9999]">
+        <Navigation />
+      </div>
+      
+      {/* Hero Section - Now positioned relative to work with the fixed video background */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden z-1">
+        {/* Professional Floating Elements */}
+        <div className="absolute top-20 left-4 sm:left-20 w-16 h-16 sm:w-32 sm:h-32 bg-red-600/20 rounded-full blur-3xl z-1"></div>
+        <div className="absolute top-40 right-4 sm:right-20 w-20 h-20 sm:w-40 sm:h-40 bg-red-500/20 rounded-full blur-3xl z-1"></div>
+        <div className="absolute bottom-20 left-1/3 w-18 h-18 sm:w-36 sm:h-36 bg-red-700/20 rounded-full blur-3xl z-1"></div>
+
+        <div className="container-custom relative z-10 px-4 sm:px-6 lg:px-8">
+          {/* Asymmetric Hero Layout */}
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[80vh]">
+            {/* Left Column - Main Content */}
+            <div className="text-left">
+              {/* Animated Badge */}
+              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-red-600/20 to-red-500/20 border border-red-400/30 rounded-full px-4 sm:px-6 py-2 sm:py-3 backdrop-blur-md shadow-lg mb-6 animate-fade-in">
+                <div className="w-2 h-2 bg-gradient-to-r from-red-400 to-red-300 rounded-full animate-pulse shadow-sm"></div>
+                <span className="text-red-100 font-semibold text-xs sm:text-sm tracking-wide">500+ Clients Trust Us</span>
+              </div>
+
+              {/* Main Heading - More Human and Natural */}
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-4">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-red-100 to-red-200">
+                  SDB LABEL
+                </span>
+              </h1>
+              
+              {/* Subtitle - More Personal */}
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-0.5 bg-gradient-to-r from-red-400 to-red-300 rounded-full"></div>
+                <p className="text-lg sm:text-xl lg:text-2xl text-red-100 font-normal">
+                  Your Trusted Partner in Business Solutions
+                </p>
+              </div>
+              
+              {/* Description - More Conversational */}
+              <p className="text-base sm:text-lg text-red-200 leading-relaxed max-w-lg mb-8">
+                We help businesses grow with premium labels, cutting-edge hardware, innovative software, and expert guidance. Let's build something amazing together.
+              </p>
+
+              {/* CTA Buttons - More Natural */}
+              <div className="flex flex-col sm:flex-row gap-4 mb-8">
+                <a href="/get-quotation" className="group inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-102 shadow-lg hover:shadow-red-600/25">
+                  <SparklesIcon className="w-5 h-5 mr-2 group-hover:animate-pulse transition-all duration-300" />
+                  Get Your Free Quote
+                </a>
+                <a href="/contact" className="group inline-flex items-center justify-center px-6 py-3 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white hover:bg-white/20 font-semibold rounded-lg transition-all duration-300 transform hover:scale-102 shadow-lg">
+                  Let's Talk
+                  <ArrowRightIcon className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+                </a>
+              </div>
+
+              {/* Stats - More Human */}
+              <div className="flex gap-6">
+                <div>
+                  <div className="text-2xl sm:text-3xl font-bold text-red-400 mb-1">500+</div>
+                  <div className="text-gray-400 text-sm">Happy Clients</div>
+                </div>
+                <div>
+                  <div className="text-2xl sm:text-3xl font-bold text-red-400 mb-1">10+</div>
+                  <div className="text-gray-400 text-sm">Years of Trust</div>
+                </div>
+                <div>
+                  <div className="text-2xl sm:text-3xl font-bold text-red-400 mb-1">24/7</div>
+                  <div className="text-gray-400 text-sm">Here for You</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column - Services Grid */}
+            <div className="lg:pl-8">
+              {/* Services Grid - Vertical Layout */}
+              <div className="grid grid-cols-1 gap-4 max-w-md lg:max-w-none">
+                <div className="group bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:scale-105">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-red-600 rounded-lg flex items-center justify-center">
+                      <TagIcon className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-white mb-1">Premium Labels</h4>
+                      <p className="text-gray-300 text-sm">High-quality sticker solutions</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="group bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:scale-105">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-red-600 rounded-lg flex items-center justify-center">
+                      <ComputerDesktopIcon className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-white mb-1">Hardware</h4>
+                      <p className="text-gray-300 text-sm">Cutting-edge technology</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="group bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:scale-105">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-red-600 rounded-lg flex items-center justify-center">
+                      <CpuChipIcon className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-white mb-1">Software</h4>
+                      <p className="text-gray-300 text-sm">Innovative solutions</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="group bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:scale-105">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-red-600 rounded-lg flex items-center justify-center">
+                      <UserGroupIcon className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-white mb-1">Consultancy</h4>
+                      <p className="text-gray-300 text-sm">Expert guidance</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Professional Scroll Indicator */}
+        <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2">
+          <div className="flex flex-col items-center text-red-400">
+            <span className="text-xs sm:text-sm mb-2">Scroll to explore</span>
+            <div className="w-5 h-8 sm:w-6 sm:h-10 border-2 border-red-400/30 rounded-full flex justify-center">
+              <div className="w-1 h-2 sm:h-3 bg-red-400 rounded-full mt-2 animate-pulse"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Swiper Carousel Section */}
+      <section className="py-16 lg:py-24 bg-gradient-to-br from-gray-50 via-white to-red-50 relative overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-10 left-10 w-32 h-32 bg-red-200/20 rounded-full blur-3xl animate-float-slow"></div>
+          <div className="absolute bottom-10 right-10 w-40 h-40 bg-red-300/20 rounded-full blur-3xl animate-float-medium"></div>
+        </div>
+
+        <div className="container-custom px-4 sm:px-6 lg:px-8 relative z-10">
+          {/* Section Header */}
+          <div className="text-center mb-12 lg:mb-16">
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-3 rounded-full text-sm font-semibold mb-6 shadow-lg">
+              <SparklesIcon className="w-4 h-4" />
+              Our Work
+            </div>
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+              Showcasing{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-red-700 to-red-800">
+                Excellence
+              </span>
+            </h2>
+            <p className="text-xl lg:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-light">
+              Discover our portfolio of premium labeling solutions and innovative projects that have transformed businesses across industries.
+            </p>
+          </div>
+
+          {/* Stunning Coverflow Gallery */}
+          <div className="relative min-h-[600px] perspective-1000">
+            {/* Floating Background Elements */}
+            <div className="absolute inset-0 overflow-hidden">
+              <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-br from-red-400/20 to-rose-500/20 rounded-full blur-3xl animate-float-slow"></div>
+              <div className="absolute bottom-20 right-20 w-40 h-40 bg-gradient-to-br from-rose-400/20 to-red-500/20 rounded-full blur-3xl animate-float-medium"></div>
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-gradient-to-br from-red-300/10 to-rose-400/10 rounded-full blur-3xl animate-float-fast"></div>
+            </div>
+
+            {/* Marquee Gallery */}
+            <div className="relative z-10">
+              <div className="marquee-container">
+                <div className="marquee-track">
+                  {/* Slide 1 - Premium Solutions */}
+                  <div className="marquee-slide">
+                    <div className="group relative h-[520px] w-[380px] overflow-hidden rounded-3xl transform transition-all duration-700 hover:scale-105 hover:rotate-1">
+                    <Image
+                      src="/images/Homepage/HomeG1.jpg"
+                      alt="Premium Labeling Solutions"
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      sizes="400px"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-transparent to-black/60"></div>
+                    
+                    {/* Floating Elements */}
+                    <div className="absolute top-8 right-8 w-20 h-20 bg-gradient-to-br from-red-500/90 to-rose-600/90 rounded-2xl shadow-2xl flex items-center justify-center transform rotate-12 group-hover:rotate-0 transition-transform duration-500">
+                      <TagIcon className="w-10 h-10 text-white" />
+                    </div>
+                    
+                    <div className="absolute bottom-8 left-8">
+                      <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md rounded-full px-4 py-2 mb-4">
+                        <div className="w-2 h-2 bg-red-400 rounded-full animate-pulse"></div>
+                        <span className="text-white/90 text-sm font-medium">Featured</span>
+                      </div>
+                      <h3 className="text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight">
+                        PREMIUM
+                        <br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-300 to-rose-300">
+                          SOLUTIONS
+                        </span>
+                      </h3>
+                      <p className="text-white/80 text-base mb-6 max-w-sm">
+                        High-quality labeling products designed for superior performance and durability.
+                      </p>
+                      <div className="flex gap-4">
+                        <a href="/products" className="inline-flex items-center gap-2 bg-gradient-to-r from-red-600 to-rose-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-red-500 hover:to-rose-500 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                          Explore Products
+                          <ArrowRightIcon className="w-5 h-5" />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+
+                  {/* Slide 2 - Industrial Applications */}
+                  <div className="marquee-slide">
+                    <div className="group relative h-[480px] w-[360px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105 hover:-rotate-1">
+                    <Image
+                      src="/images/Homepage/HomeG2.jpg"
+                      alt="Industrial Applications"
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      sizes="350px"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    
+                    <div className="absolute top-4 right-4 w-12 h-12 bg-gradient-to-br from-red-500/90 to-rose-600/90 rounded-xl shadow-lg flex items-center justify-center transform rotate-6 group-hover:rotate-0 transition-transform duration-300">
+                      <CpuChipIcon className="w-6 h-6 text-white" />
+                    </div>
+                    
+                    <div className="absolute bottom-4 left-4">
+                      <h4 className="text-xl font-bold text-white mb-2">INDUSTRIAL</h4>
+                      <p className="text-white/80 text-sm">Robust solutions for heavy-duty applications</p>
+                    </div>
+                  </div>
+
+                  {/* Slide 3 - Creative Design */}
+                  <div className="marquee-slide">
+                    <div className="group relative h-[480px] w-[360px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105 hover:rotate-1">
+                    <Image
+                      src="/images/Homepage/HomeG3.jpg"
+                      alt="Creative Design Solutions"
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      sizes="350px"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    
+                    <div className="absolute top-4 right-4 w-12 h-12 bg-gradient-to-br from-red-500/90 to-rose-600/90 rounded-xl shadow-lg flex items-center justify-center transform -rotate-6 group-hover:rotate-0 transition-transform duration-300">
+                      <SparklesIcon className="w-6 h-6 text-white" />
+                    </div>
+                    
+                    <div className="absolute bottom-4 left-4">
+                      <h4 className="text-xl font-bold text-white mb-2">CREATIVE</h4>
+                      <p className="text-white/80 text-sm">Innovative design solutions</p>
+                    </div>
+                  </div>
+
+                  {/* Slide 4 - Technology */}
+                  <div className="marquee-slide">
+                    <div className="group relative h-[480px] w-[360px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105 hover:-rotate-1">
+                    <Image
+                      src="/images/Homepage/HomeG4.jpg"
+                      alt="Technology Integration"
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      sizes="350px"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    
+                    <div className="absolute top-4 right-4 w-12 h-12 bg-gradient-to-br from-red-500/90 to-rose-600/90 rounded-xl shadow-lg flex items-center justify-center transform rotate-6 group-hover:rotate-0 transition-transform duration-300">
+                      <ComputerDesktopIcon className="w-6 h-6 text-white" />
+                    </div>
+                    
+                    <div className="absolute bottom-4 left-4">
+                      <h4 className="text-xl font-bold text-white mb-2">TECHNOLOGY</h4>
+                      <p className="text-white/80 text-sm">Advanced digital solutions</p>
+                    </div>
+                  </div>
+
+                  {/* Slide 5 - Quality */}
+                  <div className="marquee-slide">
+                    <div className="group relative h-[480px] w-[360px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105 hover:rotate-1">
+                    <Image
+                      src="/images/Homepage/HomeG5.jpg"
+                      alt="Quality Assurance"
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      sizes="350px"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    
+                    <div className="absolute top-4 right-4 w-12 h-12 bg-gradient-to-br from-red-500/90 to-rose-600/90 rounded-xl shadow-lg flex items-center justify-center transform -rotate-6 group-hover:rotate-0 transition-transform duration-300">
+                      <ShieldCheckIcon className="w-6 h-6 text-white" />
+                    </div>
+                    
+                    <div className="absolute bottom-4 left-4">
+                      <h4 className="text-xl font-bold text-white mb-2">QUALITY</h4>
+                      <p className="text-white/80 text-sm">Rigorous testing & validation</p>
+                    </div>
+                  </div>
+
+                  {/* Duplicate Set for Seamless Loop */}
+                  <div className="marquee-slide">
+                    <div className="group relative h-[520px] w-[380px] overflow-hidden rounded-3xl transform transition-all duration-700 hover:scale-105 hover:rotate-1">
+                      <Image
+                        src="/images/Homepage/HomeG1.jpg"
+                        alt="Premium Labeling Solutions"
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        sizes="380px"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-transparent to-black/60"></div>
+                      
+                      <div className="absolute top-8 right-8 w-20 h-20 bg-gradient-to-br from-red-500/90 to-rose-600/90 rounded-2xl shadow-2xl flex items-center justify-center transform rotate-12 group-hover:rotate-0 transition-transform duration-500">
+                        <TagIcon className="w-10 h-10 text-white" />
+                      </div>
+                      
+                      <div className="absolute bottom-8 left-8">
+                        <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md rounded-full px-4 py-2 mb-4">
+                          <div className="w-2 h-2 bg-red-400 rounded-full animate-pulse"></div>
+                          <span className="text-white/90 text-sm font-medium">Featured</span>
+                        </div>
+                        <h3 className="text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight">
+                          PREMIUM
+                          <br />
+                          <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-300 to-rose-300">
+                            SOLUTIONS
+                          </span>
+                        </h3>
+                        <p className="text-white/80 text-base mb-6 max-w-sm">
+                          High-quality labeling products designed for superior performance and durability.
+                        </p>
+                        <div className="flex gap-4">
+                          <a href="/products" className="inline-flex items-center gap-2 bg-gradient-to-r from-red-600 to-rose-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-red-500 hover:to-rose-500 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                            Explore Products
+                            <ArrowRightIcon className="w-5 h-5" />
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="marquee-slide">
+                    <div className="group relative h-[480px] w-[360px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105 hover:-rotate-1">
+                      <Image
+                        src="/images/Homepage/HomeG2.jpg"
+                        alt="Industrial Applications"
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                        sizes="360px"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                      
+                      <div className="absolute top-4 right-4 w-12 h-12 bg-gradient-to-br from-red-500/90 to-rose-600/90 rounded-xl shadow-lg flex items-center justify-center transform rotate-6 group-hover:rotate-0 transition-transform duration-300">
+                        <CpuChipIcon className="w-6 h-6 text-white" />
+                      </div>
+                      
+                      <div className="absolute bottom-4 left-4">
+                        <h4 className="text-xl font-bold text-white mb-2">INDUSTRIAL</h4>
+                        <p className="text-white/80 text-sm">Robust solutions for heavy-duty applications</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="marquee-slide">
+                    <div className="group relative h-[480px] w-[360px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105 hover:rotate-1">
+                      <Image
+                        src="/images/Homepage/HomeG3.jpg"
+                        alt="Creative Design Solutions"
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                        sizes="360px"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                      
+                      <div className="absolute top-4 right-4 w-12 h-12 bg-gradient-to-br from-red-500/90 to-rose-600/90 rounded-xl shadow-lg flex items-center justify-center transform -rotate-6 group-hover:rotate-0 transition-transform duration-300">
+                        <SparklesIcon className="w-6 h-6 text-white" />
+                      </div>
+                      
+                      <div className="absolute bottom-4 left-4">
+                        <h4 className="text-xl font-bold text-white mb-2">CREATIVE</h4>
+                        <p className="text-white/80 text-sm">Innovative design solutions</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="marquee-slide">
+                    <div className="group relative h-[480px] w-[360px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105 hover:-rotate-1">
+                      <Image
+                        src="/images/Homepage/HomeG4.jpg"
+                        alt="Technology Integration"
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                        sizes="360px"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                      
+                      <div className="absolute top-4 right-4 w-12 h-12 bg-gradient-to-br from-red-500/90 to-rose-600/90 rounded-xl shadow-lg flex items-center justify-center transform rotate-6 group-hover:rotate-0 transition-transform duration-300">
+                        <ComputerDesktopIcon className="w-6 h-6 text-white" />
+                      </div>
+                      
+                      <div className="absolute bottom-4 left-4">
+                        <h4 className="text-xl font-bold text-white mb-2">TECHNOLOGY</h4>
+                        <p className="text-white/80 text-sm">Advanced digital solutions</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="marquee-slide">
+                    <div className="group relative h-[480px] w-[360px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105 hover:rotate-1">
+                      <Image
+                        src="/images/Homepage/HomeG5.jpg"
+                        alt="Quality Assurance"
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                        sizes="360px"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                      
+                      <div className="absolute top-4 right-4 w-12 h-12 bg-gradient-to-br from-red-500/90 to-rose-600/90 rounded-xl shadow-lg flex items-center justify-center transform -rotate-6 group-hover:rotate-0 transition-transform duration-300">
+                        <ShieldCheckIcon className="w-6 h-6 text-white" />
+                      </div>
+                      
+                      <div className="absolute bottom-4 left-4">
+                        <h4 className="text-xl font-bold text-white mb-2">QUALITY</h4>
+                        <p className="text-white/80 text-sm">Rigorous testing & validation</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+            {/* Interactive Floating Particles */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+              <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-red-400/60 rounded-full animate-float-slow"></div>
+              <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-rose-400/80 rounded-full animate-float-medium"></div>
+              <div className="absolute top-1/2 left-1/3 w-1.5 h-1.5 bg-red-300/70 rounded-full animate-float-fast"></div>
+              <div className="absolute bottom-1/4 right-1/3 w-1 h-1 bg-rose-300/90 rounded-full animate-float-slow"></div>
+            </div>
+          </div>
+
+          {/* Call to Action */}
+          <div className="text-center mt-12 lg:mt-16">
+            <p className="text-lg text-gray-600 mb-6">Ready to see what we can do for your business?</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a href="/products" className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-red-600/25">
+                <TagIcon className="w-5 h-5 mr-2" />
+                Explore Our Products
+              </a>
+              <a href="/contact" className="inline-flex items-center justify-center px-8 py-4 bg-white border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
+                <ArrowRightIcon className="w-5 h-5 mr-2" />
+                Get In Touch
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Us Section - Compact with Contact Form */}
+      <section className="py-16 lg:py-20 bg-gradient-to-br from-gray-50 via-white to-red-50 relative overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-10 left-10 w-32 h-32 bg-red-200/20 rounded-full blur-3xl animate-float-slow"></div>
+          <div className="absolute bottom-10 right-10 w-40 h-40 bg-red-300/20 rounded-full blur-3xl animate-float-medium"></div>
+        </div>
+
+        <div className="container-custom px-4 sm:px-6 lg:px-8 relative z-10">
+          {/* Header Section */}
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-3 rounded-full text-sm font-semibold mb-6 shadow-lg">
+              <SparklesIcon className="w-4 h-4" />
+              Our Story
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-4">
+              Trusted Partner Since{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-red-700 to-red-800">
+                2011
+              </span>
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              From humble beginnings to industry leadership, we've built our success on innovation, 
+              integrity, and an unwavering commitment to our clients' growth.
+            </p>
+          </div>
+
+          {/* Main Content Grid - Expanded Story + Contact Form */}
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+            {/* Left Column - Balanced Our Story */}
+            <div className="space-y-6">
+              {/* Company Image */}
+              <div className="relative group">
+                <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-700 rounded-2xl transform rotate-2 group-hover:rotate-3 transition-transform duration-500"></div>
+                <div className="relative bg-white rounded-2xl p-2 transform -rotate-1 group-hover:-rotate-1 transition-transform duration-500">
+                  <Image
+                    src="/images/homepage/About.jpg"
+                    alt="SDB LABEL Team"
+                    width={500}
+                    height={300}
+                    className="w-full h-48 lg:h-56 object-cover rounded-xl"
+                    priority
+                  />
+                </div>
+              </div>
+
+              {/* Stats Row */}
+              <div className="grid grid-cols-3 gap-4">
+                <div className="text-center group bg-white rounded-xl p-3 shadow-lg hover:shadow-xl transition-all duration-300">
+                  <div className="text-2xl lg:text-3xl font-bold text-red-600 mb-1 group-hover:scale-110 transition-transform duration-300">2011</div>
+                  <div className="text-sm text-gray-600 font-medium">Founded</div>
+                </div>
+                <div className="text-center group bg-white rounded-xl p-3 shadow-lg hover:shadow-xl transition-all duration-300">
+                  <div className="text-2xl lg:text-3xl font-bold text-red-600 mb-1 group-hover:scale-110 transition-transform duration-300">500+</div>
+                  <div className="text-sm text-gray-600 font-medium">Happy Clients</div>
+                </div>
+                <div className="text-center group bg-white rounded-xl p-3 shadow-lg hover:shadow-xl transition-all duration-300">
+                  <div className="text-2xl lg:text-3xl font-bold text-red-600 mb-1 group-hover:scale-110 transition-transform duration-300">10+</div>
+                  <div className="text-sm text-gray-600 font-medium">Years Experience</div>
+              </div>
+            </div>
+
+              {/* Our Story */}
+              <div className="bg-white rounded-2xl p-6 shadow-lg">
+                <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                  <div className="w-8 h-8 bg-gradient-to-r from-red-500 to-red-600 rounded-lg flex items-center justify-center mr-3">
+                    <SparklesIcon className="w-4 h-4 text-white" />
+                  </div>
+                  Our Story
+                </h3>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  Since 2011, SDB LABEL has grown from a small startup to a trusted industry leader. 
+                  We began with a simple vision: to provide exceptional labeling solutions that help 
+                  businesses succeed. Today, we serve over 500 clients across diverse industries.
+                </p>
+                <p className="text-gray-600 leading-relaxed">
+                  Our journey has been marked by continuous innovation, strategic partnerships, 
+                  and an unwavering commitment to quality. We've expanded our capabilities 
+                  beyond traditional labeling to offer comprehensive business solutions.
+                </p>
+              </div>
+
+              {/* Core Values */}
+              <div className="bg-white rounded-2xl p-6 shadow-lg">
+                <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                  <div className="w-8 h-8 bg-gradient-to-r from-red-500 to-red-600 rounded-lg flex items-center justify-center mr-3">
+                    <StarIcon className="w-4 h-4 text-white" />
+                  </div>
+                  Our Core Values
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-gradient-to-r from-red-500 to-red-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <UserGroupIcon className="w-4 h-4 text-white" />
+                  </div>
+                  <div>
+                      <h4 className="font-semibold text-gray-900">Client-Centric</h4>
+                      <p className="text-sm text-gray-600">Your success is our priority</p>
+                  </div>
+                </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-gradient-to-r from-red-500 to-red-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <CheckCircleIcon className="w-4 h-4 text-white" />
+                  </div>
+                  <div>
+                      <h4 className="font-semibold text-gray-900">Commitment</h4>
+                      <p className="text-sm text-gray-600">Dedicated to delivering on promises</p>
+                  </div>
+                </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-gradient-to-r from-red-500 to-red-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <ShieldCheckIcon className="w-4 h-4 text-white" />
+                  </div>
+                  <div>
+                      <h4 className="font-semibold text-gray-900">Reliability</h4>
+                      <p className="text-sm text-gray-600">Consistent performance and trust</p>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+
+              {/* Mission & Vision */}
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-gradient-to-br from-red-50 to-red-100 rounded-xl p-4 border border-red-200">
+                  <div className="w-8 h-8 bg-gradient-to-r from-red-500 to-red-600 rounded-lg flex items-center justify-center mb-3">
+                    <SparklesIcon className="w-4 h-4 text-white" />
+                  </div>
+                  <h4 className="font-bold text-gray-900 mb-2">Mission</h4>
+                  <p className="text-xs text-gray-700 leading-relaxed">
+                    To empower businesses with innovative labeling solutions and expert guidance.
+                    </p>
+                  </div>
+                <div className="bg-gradient-to-br from-red-50 to-red-100 rounded-xl p-4 border border-red-200">
+                  <div className="w-8 h-8 bg-gradient-to-r from-red-500 to-red-600 rounded-lg flex items-center justify-center mb-3">
+                    <ShieldCheckIcon className="w-4 h-4 text-white" />
+                </div>
+                  <h4 className="font-bold text-gray-900 mb-2">Vision</h4>
+                  <p className="text-xs text-gray-700 leading-relaxed">
+                    To be the most trusted partner for comprehensive labeling and technology solutions.
+                  </p>
+              </div>
+            </div>
+          </div>
+
+            {/* Right Column - Contact Form */}
+            <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+              <div className="text-center mb-6">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Get In Touch</h3>
+                <p className="text-gray-600">Ready to discuss your project? We'd love to hear from you.</p>
+              </div>
+
+              <form ref={homepageFormRef} onSubmit={handleHomepageContactSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
+                      First Name *
+                    </label>
+                    <input
+                      type="text"
+                      id="firstName"
+                      name="firstName"
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors"
+                      placeholder="First Name"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
+                      Last Name *
+                    </label>
+                    <input
+                      type="text"
+                      id="lastName"
+                      name="lastName"
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors"
+                      placeholder="Last Name"
+                    />
+                  </div>
+            </div>
+
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                    Email Address *
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors"
+                    placeholder="Email Address"
+                  />
+              </div>
+
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                    Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors"
+                    placeholder="Phone Number"
+                  />
+            </div>
+
+                <div>
+                  <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
+                    Company Name
+                  </label>
+                  <input
+                    type="text"
+                    id="company"
+                    name="company"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors"
+                    placeholder="Company Name"
+                  />
+          </div>
+
+                <div>
+                  <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-2">
+                    Service Interested In
+                  </label>
+                  <select
+                    id="service"
+                    name="service"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors"
+                  >
+                    <option value="">Select a service</option>
+                    <option value="labels">Sticker Labels</option>
+                    <option value="hardware">Hardware Solutions</option>
+                    <option value="software">Software Systems</option>
+                    <option value="consultancy">Consultancy</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                    Message *
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={4}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors resize-none"
+                    placeholder="Your Message"
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmittingHomepage}
+                  className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-red-500/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                >
+                  {isSubmittingHomepage ? (
+                    <>
+                      <div className="inline-block animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      Send Message
+                      <ArrowRightIcon className="w-5 h-5 ml-2 inline" />
+                    </>
+                  )}
+                </button>
+              </form>
+
+              <div className="mt-6 pt-6 border-t border-gray-200">
+                <div className="flex items-center justify-center space-x-6 text-sm text-gray-600">
+                  <div className="flex items-center">
+                    <div className="w-2 h-2 bg-red-500 rounded-full mr-2"></div>
+                    <span>Quick Response</span>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="w-2 h-2 bg-red-500 rounded-full mr-2"></div>
+                    <span>Free Consultation</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section - Compact */}
+      <section className="py-12 lg:py-16 bg-white relative overflow-hidden">
+        {/* Simplified Background Elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-10 right-10 w-32 h-32 bg-red-100/30 rounded-full blur-2xl animate-float-slow"></div>
+          <div className="absolute bottom-10 left-10 w-40 h-40 bg-rose-100/30 rounded-full blur-2xl animate-float-medium"></div>
+        </div>
+        
+        <div className="container-custom px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-full text-sm font-medium mb-4">
+              <SparklesIcon className="w-4 h-4" />
+              Our Services
+            </div>
+            <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-3">
+              Our Services
+            </h2>
+            <p className="text-gray-700 max-w-2xl mx-auto">
+              End-to-end solutions for all your business needs.
+            </p>
+          </div>
+          
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+            {services.map((service, index) => (
+              <div key={index} className="bg-white rounded-xl p-4 lg:p-6 shadow-lg border border-gray-200 hover:shadow-red-500/20 hover:scale-105 transition-all duration-300">
+                <div className="w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-r from-red-500 to-red-600 rounded-lg flex items-center justify-center mb-3 lg:mb-4">
+                  <service.icon className="w-5 h-5 lg:w-6 lg:h-6 text-white" />
+                </div>
+                <h3 className="text-base lg:text-lg font-bold text-gray-900 mb-2 lg:mb-3">{service.title}</h3>
+                <p className="text-gray-700 text-sm leading-relaxed">{service.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="section-padding bg-gray-50 relative overflow-hidden">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-20 right-20 w-64 h-64 bg-red-100/50 rounded-full blur-3xl animate-float-slow"></div>
+          <div className="absolute bottom-20 left-20 w-80 h-80 bg-rose-100/50 rounded-full blur-3xl animate-float-medium"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-red-200/50 rounded-full blur-3xl animate-float-fast"></div>
+        </div>
+        
+        <div className="container-custom px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 bg-red-600 text-white px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6">
+                <CheckCircleIcon className="w-3 h-3 sm:w-4 sm:h-4" />
+                Why Choose Us
+              </div>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 sm:mb-6">
+                Why Choose SDB LABEL?
+              </h2>
+              <p className="text-base sm:text-lg lg:text-xl text-gray-700 mb-6 sm:mb-8">
+                We are committed to delivering excellence in every aspect of our services, 
+                ensuring your business success with our proven track record.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                {features.map((feature, index) => (
+                  <div key={index} className="flex items-center space-x-3">
+                    <CheckCircleIcon className="w-5 h-5 sm:w-6 sm:h-6 text-red-500 flex-shrink-0" />
+                    <span className="text-gray-700 font-medium text-sm sm:text-base">{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="bg-white rounded-2xl p-6 sm:p-8 border border-gray-200 shadow-xl mt-8 lg:mt-0">
+              <div className="text-center">
+                <div className="text-4xl sm:text-5xl lg:text-6xl font-bold text-red-600 mb-3 sm:mb-4">500+</div>
+                <div className="text-lg sm:text-xl text-gray-900 mb-1 sm:mb-2">Happy Clients</div>
+                <div className="text-gray-600 text-sm sm:text-base">Trusted by businesses worldwide</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Clients - 3D Octagon Animation Section */}
+      <section className="section-padding bg-white relative overflow-hidden">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-20 left-20 w-64 h-64 bg-red-100/50 rounded-full blur-3xl animate-float-medium"></div>
+          <div className="absolute bottom-20 right-20 w-80 h-80 bg-rose-100/50 rounded-full blur-3xl animate-float-slow"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-red-200/50 rounded-full blur-3xl animate-float-fast"></div>
+        </div>
+        
+        <div className="container-custom px-4 sm:px-6 lg:px-8 relative z-10">
+          {/* Header Section */}
+          <div className="text-center mb-32 lg:mb-48">
+            <div className="inline-flex items-center gap-2 bg-red-600 text-white px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6">
+              <SparklesIcon className="w-3 h-3 sm:w-4 sm:h-4" />
+              Our Clients
+            </div>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
+              Trusted by Leading Brands
+            </h2>
+            <p className="text-base sm:text-lg lg:text-xl text-gray-700">
+              A snapshot of partners who trust us
+            </p>
+          </div>
+
+          {/* 3D Octagon Animation - Centered with proper spacing */}
+          <div className="flex items-center justify-center min-h-[400px] lg:min-h-[500px] pt-32 lg:pt-40 pb-8">
+            <div className="octagon-container relative w-[16rem] h-[16rem] sm:w-[20rem] sm:h-[20rem] md:w-[24rem] md:h-[24rem] lg:w-[28rem] lg:h-[28rem] octagon-scene cursor-pointer">
+              <div className="octagon">
+                {/* Face 1 */}
+                <div className="octagon-face face face--1 rounded-xl overflow-hidden bg-white shadow-xl ring-2 ring-red-100">
+                  <Image src={clientLogos[0].src} alt={clientLogos[0].name} fill sizes="(max-width: 640px) 160px, (max-width: 768px) 200px, (max-width: 1024px) 240px, 280px" className="object-contain p-4 sm:p-6 lg:p-8" />
+                </div>
+                {/* Face 2 */}
+                <div className="octagon-face face face--2 rounded-xl overflow-hidden bg-white shadow-xl ring-2 ring-red-100">
+                  <Image src={clientLogos[1].src} alt={clientLogos[1].name} fill sizes="(max-width: 640px) 160px, (max-width: 768px) 200px, (max-width: 1024px) 240px, 280px" className="object-contain p-4 sm:p-6 lg:p-8" />
+                </div>
+                {/* Face 3 */}
+                <div className="octagon-face face face--3 rounded-xl overflow-hidden bg-white shadow-xl ring-2 ring-red-100">
+                  <Image src={clientLogos[2].src} alt={clientLogos[2].name} fill sizes="(max-width: 640px) 160px, (max-width: 768px) 200px, (max-width: 1024px) 240px, 280px" className="object-contain p-4 sm:p-6 lg:p-8" />
+                </div>
+                {/* Face 4 */}
+                <div className="octagon-face face face--4 rounded-xl overflow-hidden bg-white shadow-xl ring-2 ring-red-100">
+                  <Image src={clientLogos[3].src} alt={clientLogos[3].name} fill sizes="(max-width: 640px) 160px, (max-width: 768px) 200px, (max-width: 1024px) 240px, 280px" className="object-contain p-4 sm:p-6 lg:p-8" />
+                </div>
+                {/* Face 5 */}
+                <div className="octagon-face face face--5 rounded-xl overflow-hidden bg-white shadow-xl ring-2 ring-red-100">
+                  <Image src={clientLogos[4].src} alt={clientLogos[4].name} fill sizes="(max-width: 640px) 160px, (max-width: 768px) 200px, (max-width: 1024px) 240px, 280px" className="object-contain p-4 sm:p-6 lg:p-8" />
+                </div>
+                {/* Face 6 */}
+                <div className="octagon-face face face--6 rounded-xl overflow-hidden bg-white shadow-xl ring-2 ring-red-100">
+                  <Image src={clientLogos[5].src} alt={clientLogos[5].name} fill sizes="(max-width: 640px) 160px, (max-width: 768px) 200px, (max-width: 1024px) 240px, 280px" className="object-contain p-4 sm:p-6 lg:p-8" />
+                </div>
+                {/* Face 7 */}
+                <div className="octagon-face face face--7 rounded-xl overflow-hidden bg-white shadow-xl ring-2 ring-red-100">
+                  <Image src={clientLogos[6].src} alt={clientLogos[6].name} fill sizes="(max-width: 640px) 160px, (max-width: 768px) 200px, (max-width: 1024px) 240px, 280px" className="object-contain p-4 sm:p-6 lg:p-8" />
+                </div>
+                {/* Face 8 */}
+                <div className="octagon-face face face--8 rounded-xl overflow-hidden bg-white shadow-xl ring-2 ring-red-100">
+                  <Image src={clientLogos[1].src} alt={clientLogos[1].name} fill sizes="(max-width: 640px) 160px, (max-width: 768px) 200px, (max-width: 1024px) 240px, 280px" className="object-contain p-4 sm:p-6 lg:p-8" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Sliding Company Logos - Right to Left */}
+          <div className="mt-6 lg:mt-8">
+            <div className="relative overflow-hidden w-full">
+              <div className="flex animate-slide-left-fast" style={{ width: 'fit-content' }}>
+                {/* First set of logos */}
+                {clientLogos.map((logo, index) => (
+                  <div key={`first-${index}`} className="flex-shrink-0 mx-4 sm:mx-6 lg:mx-8">
+                    <div className="relative w-32 h-20 sm:w-40 sm:h-24 lg:w-48 lg:h-28 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                      <Image 
+                        src={logo.src} 
+                        alt={logo.name} 
+                        fill 
+                        sizes="(max-width: 640px) 128px, (max-width: 768px) 160px, 192px" 
+                        className="object-contain" 
+                        loading="lazy"
+                        placeholder="blur"
+                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                      />
+                    </div>
+                  </div>
+                ))}
+                {/* Second set for seamless loop */}
+                {clientLogos.map((logo, index) => (
+                  <div key={`second-${index}`} className="flex-shrink-0 mx-4 sm:mx-6 lg:mx-8">
+                    <div className="relative w-32 h-20 sm:w-40 sm:h-24 lg:w-48 lg:h-28 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                      <Image 
+                        src={logo.src} 
+                        alt={logo.name} 
+                        fill 
+                        sizes="(max-width: 640px) 128px, (max-width: 768px) 160px, 192px" 
+                        className="object-contain" 
+                        loading="lazy"
+                        placeholder="blur"
+                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                      />
+                    </div>
+                  </div>
+                ))}
+                {/* Third set for extra smooth infinite loop */}
+                {clientLogos.map((logo, index) => (
+                  <div key={`third-${index}`} className="flex-shrink-0 mx-4 sm:mx-6 lg:mx-8">
+                    <div className="relative w-32 h-20 sm:w-40 sm:h-24 lg:w-48 lg:h-28 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                      <Image 
+                        src={logo.src} 
+                        alt={logo.name} 
+                        fill 
+                        sizes="(max-width: 640px) 128px, (max-width: 768px) 160px, 192px" 
+                        className="object-contain" 
+                        loading="lazy"
+                        placeholder="blur"
+                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="pt-8 pb-12 px-4 sm:px-6 lg:px-8 bg-gray-50 relative overflow-hidden">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-20 right-20 w-64 h-64 bg-red-100/50 rounded-full blur-3xl animate-float-slow"></div>
+          <div className="absolute bottom-20 left-20 w-80 h-80 bg-rose-100/50 rounded-full blur-3xl animate-float-medium"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-red-200/50 rounded-full blur-3xl animate-float-fast"></div>
+        </div>
+        
+        <div className="container-custom px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-12 lg:mb-16">
+            <div className="inline-flex items-center gap-2 bg-red-600 text-white px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6">
+              <StarIcon className="w-3 h-3 sm:w-4 sm:h-4" />
+              Client Testimonials
+            </div>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
+              What Our Clients Say
+            </h2>
+            <p className="text-base sm:text-lg lg:text-xl text-gray-700">
+              Don't just take our word for it - hear from our satisfied customers
+            </p>
+          </div>
+          
+          {/* Moving Testimonials Carousel - Full Width */}
+          <div className="relative overflow-hidden w-full">
+            <div className="flex animate-slide-left" style={{ width: 'fit-content' }}>
+              {/* First set of testimonials */}
+              {testimonials.map((testimonial, index) => {
+                const companyLogo = getCompanyLogo(testimonial.company)
+                return (
+                  <div key={`first-${index}`} className="flex-shrink-0 w-80 sm:w-96 md:w-[28rem] lg:w-[32rem] mx-4 sm:mx-6 md:mx-8">
+                    <div className="bg-white rounded-xl p-6 sm:p-8 md:p-10 shadow-xl border border-gray-200 hover:shadow-red-500/20 transition-all duration-300 h-full">
+                      <div className="flex mb-4 sm:mb-6">
+                        {[...Array(testimonial.rating)].map((_, i) => (
+                          <StarIcon key={i} className="w-5 h-5 sm:w-6 sm:h-6 text-red-500 fill-current" />
+                        ))}
+                      </div>
+                      <p className="text-gray-700 mb-6 sm:mb-8 italic text-base sm:text-lg leading-relaxed">"{testimonial.comment}"</p>
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <div className="font-semibold text-gray-900 text-base sm:text-lg">{testimonial.name}</div>
+                          <div className="text-red-600 text-base sm:text-lg font-bold">{testimonial.company}</div>
+                        </div>
+                        {companyLogo && (
+                          <div className="relative w-20 h-12 sm:w-24 sm:h-16 flex-shrink-0">
+                            <Image 
+                              src={companyLogo.src} 
+                              alt={companyLogo.name} 
+                              fill 
+                              sizes="(max-width: 640px) 80px, 96px" 
+                              className="object-contain" 
+                              loading="lazy"
+                            />
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
+              {/* Second set for seamless loop */}
+              {testimonials.map((testimonial, index) => {
+                const companyLogo = getCompanyLogo(testimonial.company)
+                return (
+                  <div key={`second-${index}`} className="flex-shrink-0 w-80 sm:w-96 md:w-[28rem] lg:w-[32rem] mx-4 sm:mx-6 md:mx-8">
+                    <div className="bg-white rounded-xl p-6 sm:p-8 md:p-10 shadow-xl border border-gray-200 hover:shadow-red-500/20 transition-all duration-300 h-full">
+                      <div className="flex mb-4 sm:mb-6">
+                        {[...Array(testimonial.rating)].map((_, i) => (
+                          <StarIcon key={i} className="w-5 h-5 sm:w-6 sm:h-6 text-red-500 fill-current" />
+                        ))}
+                      </div>
+                      <p className="text-gray-700 mb-6 sm:mb-8 italic text-base sm:text-lg leading-relaxed">"{testimonial.comment}"</p>
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <div className="font-semibold text-gray-900 text-base sm:text-lg">{testimonial.name}</div>
+                          <div className="text-red-600 text-base sm:text-lg font-bold">{testimonial.company}</div>
+                        </div>
+                        {companyLogo && (
+                          <div className="relative w-20 h-12 sm:w-24 sm:h-16 flex-shrink-0">
+                            <Image 
+                              src={companyLogo.src} 
+                              alt={companyLogo.name} 
+                              fill 
+                              sizes="(max-width: 640px) 80px, 96px" 
+                              className="object-contain" 
+                              loading="lazy"
+                            />
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
+              {/* Third set for extra smooth infinite loop */}
+              {testimonials.map((testimonial, index) => {
+                const companyLogo = getCompanyLogo(testimonial.company)
+                return (
+                  <div key={`third-${index}`} className="flex-shrink-0 w-80 sm:w-96 md:w-[28rem] lg:w-[32rem] mx-4 sm:mx-6 md:mx-8">
+                    <div className="bg-white rounded-xl p-6 sm:p-8 md:p-10 shadow-xl border border-gray-200 hover:shadow-red-500/20 transition-all duration-300 h-full">
+                      <div className="flex mb-4 sm:mb-6">
+                        {[...Array(testimonial.rating)].map((_, i) => (
+                          <StarIcon key={i} className="w-5 h-5 sm:w-6 sm:h-6 text-red-500 fill-current" />
+                        ))}
+                      </div>
+                      <p className="text-gray-700 mb-6 sm:mb-8 italic text-base sm:text-lg leading-relaxed">"{testimonial.comment}"</p>
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <div className="font-semibold text-gray-900 text-base sm:text-lg">{testimonial.name}</div>
+                          <div className="text-red-600 text-base sm:text-lg font-bold">{testimonial.company}</div>
+                        </div>
+                        {companyLogo && (
+                          <div className="relative w-20 h-12 sm:w-24 sm:h-16 flex-shrink-0">
+                            <Image 
+                              src={companyLogo.src} 
+                              alt={companyLogo.name} 
+                              fill 
+                              sizes="(max-width: 640px) 80px, 96px" 
+                              className="object-contain" 
+                              loading="lazy"
+                            />
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section (standardized to match Softwares page) */}
+      <section className="section-padding relative overflow-hidden" style={{backgroundColor: '#722F37'}}>
+        {/* Background Pattern */}
+        <div className="absolute inset-0">
+          <div className="absolute top-10 left-10 w-32 h-32 bg-red-400/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-10 right-10 w-40 h-40 bg-rose-400/10 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-red-300/5 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="container-custom relative z-10">
+          <div className="text-center">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 bg-red-600 backdrop-blur-sm border border-white/30 rounded-full px-6 py-3 mb-8">
+              <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+              <span className="text-white font-semibold text-sm">Take Action Today</span>
+            </div>
+
+            <h2 className="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+              Ready to{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-300">
+                Transform
+              </span>{' '}
+              Your Business?
+            </h2>
+            
+            <p className="text-xl text-red-100 mb-8 max-w-3xl mx-auto leading-relaxed">
+              Join 500+ businesses that trust our solutions. Let's build your success story together with proven expertise and support.
+            </p>
+
+            {/* Stats Row */}
+            <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto mb-12">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-yellow-300 mb-2">500+</div>
+                <div className="text-red-100 text-sm">Happy Clients</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-yellow-300 mb-2">10+</div>
+                <div className="text-red-100 text-sm">Years Experience</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-yellow-300 mb-2">24/7</div>
+                <div className="text-red-100 text-sm">Support</div>
+              </div>
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-8">
+              <a 
+                href="/get-quotation" 
+                className="inline-flex items-center justify-center px-10 py-4 bg-white text-red-600 hover:bg-gray-100 font-bold text-lg rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-white/20"
+              >
+                <RocketLaunchIcon className="w-6 h-6 mr-3" />
+                Get Free Quotation
+              </a>
+              <a 
+                href="/contact" 
+                className="inline-flex items-center justify-center px-10 py-4 bg-transparent border-3 border-white text-white hover:bg-white hover:text-red-600 font-bold text-lg rounded-2xl transition-all duration-300 shadow-2xl"
+              >
+                <ArrowRightIcon className="w-6 h-6 mr-3" />
+                Contact Sales
+              </a>
+            </div>
+
+            {/* Trust Indicators */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-8 text-red-100">
+              <div className="flex items-center space-x-2">
+                <CheckCircleIcon className="w-5 h-5 text-yellow-300" />
+                <span className="text-sm">Free Consultation</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <CheckCircleIcon className="w-5 h-5 text-yellow-300" />
+                <span className="text-sm">Custom Solutions</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <CheckCircleIcon className="w-5 h-5 text-yellow-300" />
+                <span className="text-sm">Expert Support</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="relative z-20 bg-white">
+        <Footer />
+      </div>
+
+      {/* Price Calculator Widget */}
+      <PriceCalculator />
+    </div>
+  )
+} 

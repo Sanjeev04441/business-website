@@ -1,0 +1,210 @@
+/* Admin Dashboard Color System */
+:root {
+  /* Primary Color Palette - Dark Blue */
+  --admin-primary: #134686;
+  --admin-primary-light: #1E5A9A;
+  --admin-primary-dark: #0F2A52;
+  --admin-primary-lighter: #2A6AAA;
+  --admin-primary-darker: #0A1A3A;
+  
+  /* Secondary Color Palette - Red */
+  --admin-secondary: #ED3F27;
+  --admin-secondary-light: #F55A42;
+  --admin-secondary-dark: #C52A0F;
+  --admin-secondary-lighter: #F76A52;
+  --admin-secondary-darker: #A51A00;
+  
+  /* Accent Color Palette - Orange */
+  --admin-accent: #FEB21A;
+  --admin-accent-light: #FFC742;
+  --admin-accent-dark: #E69A00;
+  --admin-accent-lighter: #FFD752;
+  --admin-accent-darker: #CC7A00;
+  
+  /* Neutral Color Palette - Cream */
+  --admin-neutral: #FDF4E3;
+  --admin-neutral-light: #FFF8F0;
+  --admin-neutral-dark: #F0E6D1;
+  --admin-neutral-lighter: #FFFCF5;
+  --admin-neutral-darker: #E6D6C0;
+  
+  /* Background Gradients */
+  --admin-bg-primary: #134686;
+  --admin-bg-secondary: #ED3F27;
+  --admin-bg-tertiary: #FEB21A;
+  
+  /* Glass Morphism (slightly higher opacity for better readability) */
+  --admin-glass-bg: rgba(253, 244, 227, 0.95);
+  --admin-glass-border: rgba(19, 70, 134, 0.15);
+  --admin-glass-hover: rgba(253, 244, 227, 0.98);
+  
+  /* Text Colors */
+  --admin-text-primary: #134686;
+  --admin-text-secondary: rgba(19, 70, 134, 0.9);
+  --admin-text-tertiary: rgba(19, 70, 134, 0.7);
+  --admin-text-light: #FDF4E3;
+  
+  /* Accent Colors */
+  --admin-accent: #FEB21A;
+  --admin-accent-hover: #FFC742;
+  --admin-success: #10B981;
+  --admin-warning: #FEB21A;
+  --admin-error: #ED3F27;
+  --admin-info: #134686;
+}
+
+/* Admin Background */
+.admin-bg {
+  background: linear-gradient(135deg, var(--admin-bg-primary) 0%, var(--admin-bg-secondary) 50%, var(--admin-bg-tertiary) 100%);
+}
+
+/* Enhanced Background with All 4 Colors */
+.admin-bg-enhanced {
+  background: linear-gradient(135deg, var(--admin-primary) 0%, var(--admin-secondary) 25%, var(--admin-accent) 50%, var(--admin-neutral) 75%, var(--admin-primary-dark) 100%);
+}
+
+/* Stunning Multi-Color Background */
+.admin-bg-stunning {
+  background: var(--admin-primary);
+}
+
+/* Glass Morphism Components */
+.admin-glass {
+  background: var(--admin-glass-bg);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--admin-glass-border);
+}
+
+/* Buttons */
+.admin-btn-primary {
+  background: var(--admin-primary);
+  color: white;
+  border: none;
+}
+
+.admin-btn-primary:hover {
+  background: var(--admin-primary-light);
+  transform: translateY(-1px);
+}
+
+/* Cards */
+.admin-card {
+  background: var(--admin-glass-bg);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--admin-glass-border);
+  border-radius: 1rem;
+}
+
+.admin-card:hover {
+  background: var(--admin-glass-hover);
+  transform: translateY(-2px);
+}
+
+.admin-card-secondary {
+  background: var(--admin-secondary);
+  color: white;
+  border-radius: 1rem;
+}
+
+.admin-card-secondary:hover {
+  background: var(--admin-secondary-light);
+  transform: translateY(-2px);
+}
+
+.admin-card-accent {
+  background: var(--admin-accent);
+  color: white;
+  border-radius: 1rem;
+}
+
+.admin-card-accent:hover {
+  background: var(--admin-accent-light);
+  transform: translateY(-2px);
+}
+
+.admin-card-neutral {
+  background: var(--admin-neutral);
+  color: var(--admin-primary);
+  border-radius: 1rem;
+}
+
+.admin-card-neutral:hover {
+  background: var(--admin-neutral-light);
+  transform: translateY(-2px);
+}
+
+/* Form Elements */
+.admin-input {
+  background: var(--admin-glass-bg);
+  border: 1px solid var(--admin-glass-border);
+  color: var(--admin-text-primary);
+  caret-color: var(--admin-text-primary);
+}
+
+.admin-input:focus {
+  border-color: var(--admin-primary);
+  box-shadow: 0 0 0 3px rgba(19, 70, 134, 0.25);
+}
+
+/* Ensure placeholder is readable against the lighter input background */
+.admin-input::placeholder {
+  color: rgba(19, 70, 134, 0.55) !important;
+}
+
+/* Improve label contrast slightly on glass cards */
+label[for="email"],
+label[for="password"] {
+  color: rgba(19, 70, 134, 0.9);
+}
+
+/* Icons */
+.admin-icon {
+  background: var(--admin-primary);
+}
+
+.admin-icon-secondary {
+  background: var(--admin-secondary);
+}
+
+.admin-icon-accent {
+  background: var(--admin-accent);
+}
+
+.admin-icon-neutral {
+  background: var(--admin-neutral);
+  color: var(--admin-primary);
+}
+
+.admin-icon-multi {
+  background: var(--admin-primary);
+}
+
+/* Links */
+.admin-link {
+  color: var(--admin-primary-light);
+}
+
+.admin-link:hover {
+  color: var(--admin-primary-lighter);
+}
+
+/* Status Badges */
+.admin-badge-urgent {
+  background: rgba(239, 68, 68, 0.2);
+  color: #FCA5A5;
+}
+
+.admin-badge-high {
+  background: rgba(245, 158, 11, 0.2);
+  color: #FCD34D;
+}
+
+.admin-badge-medium {
+  background: rgba(59, 130, 246, 0.2);
+  color: #93C5FD;
+}
+
+.admin-badge-low {
+  background: rgba(16, 185, 129, 0.2);
+  color: #6EE7B7;
+}
