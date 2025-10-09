@@ -193,7 +193,7 @@ const NavigationComponent = () => {
       href: '/consultancy',
     },
     {
-      name: 'CONTACT',
+      name: 'CONTACT US',
       href: '/contact',
     },
   ]

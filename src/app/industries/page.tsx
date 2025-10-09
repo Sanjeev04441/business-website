@@ -427,78 +427,32 @@ const IndustriesPage = () => {
       </section>
 
 
-      {/* CTA Section (standardized to match Softwares page) */}
-      <section className="section-padding relative overflow-hidden" style={{backgroundColor: '#722F37'}}>
-        {/* Background Pattern */}
-        <div className="absolute inset-0">
-          <div className="absolute top-10 left-10 w-32 h-32 bg-red-400/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-10 right-10 w-40 h-40 bg-rose-400/10 rounded-full blur-3xl"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-red-300/5 rounded-full blur-3xl"></div>
-        </div>
-
-        <div className="container-custom relative z-10">
+      {/* CTA Section - Simple & Stunning */}
+      <section className="py-16 lg:py-20 bg-[#AF3E3E] text-white">
+        <div className="container-custom">
           <div className="text-center">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-red-600 backdrop-blur-sm border border-white/30 rounded-full px-6 py-3 mb-8">
-              <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
-              <span className="text-white font-semibold text-sm">Take Action Today</span>
+            <div className="inline-flex items-center gap-2 bg-white/15 rounded-full px-5 py-2 mb-5">
+              <span className="text-sm font-semibold tracking-wide">Take action today</span>
             </div>
 
-            <h2 className="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-              Ready to{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-300">
-                Transform
-              </span>{' '}
-              Your Business?
-            </h2>
-            
-            <p className="text-xl text-red-100 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Let's discuss how our labeling solutions can enhance your operations, improve efficiency, and drive growth in your industry.
+            <h2 className="text-3xl sm:text-4xl font-extrabold">Accelerate growth in your industry</h2>
+            <p className="mt-3 text-white/90 max-w-2xl mx-auto">
+              Talk to our experts or request a quote. Simple process, real results.
             </p>
 
-            {/* Stats Row */}
-            <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto mb-12">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-yellow-300 mb-2">500+</div>
-                <div className="text-red-100 text-sm">Happy Clients</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-yellow-300 mb-2">10+</div>
-                <div className="text-red-100 text-sm">Years Experience</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-yellow-300 mb-2">24/7</div>
-                <div className="text-red-100 text-sm">Support</div>
-              </div>
-            </div>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-8">
-              <Link 
-                href="/get-quotation" 
-                className="inline-flex items-center justify-center px-10 py-4 bg-white text-red-600 hover:bg-gray-100 font-bold text-lg rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-white/20"
+            <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="/get-quotation"
+                className="inline-flex items-center justify-center rounded-lg bg-white px-6 py-3 text-base font-semibold text-[#AF3E3E] shadow-sm hover:shadow-md"
               >
                 Get Free Quotation
               </Link>
-              <Link 
-                href="/contact" 
-                className="inline-flex items-center justify-center px-10 py-4 bg-transparent border-3 border-white text-white hover:bg-white hover:text-red-600 font-bold text-lg rounded-2xl transition-all duration-300 shadow-2xl"
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center rounded-lg border border-white px-6 py-3 text-base font-semibold text-white hover:bg-white hover:text-[#AF3E3E]"
               >
                 Contact Sales
               </Link>
-            </div>
-
-            {/* Trust Indicators */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-8 text-red-100">
-              <div className="flex items-center space-x-2">
-                <span className="text-sm">Industry Expertise</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <span className="text-sm">Custom Solutions</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <span className="text-sm">Fast Implementation</span>
-              </div>
             </div>
           </div>
         </div>

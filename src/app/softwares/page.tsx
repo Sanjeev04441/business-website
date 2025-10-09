@@ -372,94 +372,32 @@ export default function Softwares() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="section-padding relative overflow-hidden bg-gradient-to-br from-slate-950 via-gray-900 to-slate-950">
-        {/* Background Pattern */}
-        <div className="absolute inset-0">
-          <div className="absolute top-10 left-10 w-32 h-32 bg-red-500/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-10 right-10 w-40 h-40 bg-red-600/10 rounded-full blur-3xl"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-red-500/8 rounded-full blur-3xl"></div>
-        </div>
-
-        <div className="container-custom relative z-10">
+      {/* CTA Section - Simple & Stunning */}
+      <section className="py-16 lg:py-20 bg-[#D97D55] text-white">
+        <div className="container-custom">
           <div className="text-center">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-red-600/80 backdrop-blur-sm border border-red-500/50 rounded-full px-6 py-3 mb-8">
-              <div className="w-2 h-2 bg-red-100 rounded-full animate-pulse"></div>
-              <span className="text-white font-semibold text-sm">Take Action Today</span>
+            <div className="inline-flex items-center gap-2 bg-white/15 rounded-full px-5 py-2 mb-5">
+              <span className="text-sm font-semibold tracking-wide">Take action today</span>
             </div>
 
-            <h2 className="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-              Ready to{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-red-500 to-orange-500">
-                Transform
-              </span>{' '}
-              Your Business?
-            </h2>
-            
-            <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Join 1000+ businesses that trust our software solutions for their digital transformation. 
-              Let's build your success story together with our proven technology and expert support.
+            <h2 className="text-3xl sm:text-4xl font-extrabold">Move faster with software that works</h2>
+            <p className="mt-3 text-white/90 max-w-2xl mx-auto">
+              Get a quick demo or talk to our team. Simple process, real results.
             </p>
 
-            {/* Stats Row */}
-            <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto mb-12">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-red-400 mb-2">1000+</div>
-                <div className="text-gray-300 text-sm">Active Users</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-red-400 mb-2">99.9%</div>
-                <div className="text-gray-300 text-sm">Uptime</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-red-400 mb-2">24/7</div>
-                <div className="text-gray-300 text-sm">Support</div>
-              </div>
-            </div>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-10">
-              <a 
-                href="/get-quotation" 
-                className="group relative inline-flex items-center justify-center px-12 py-5 bg-white text-red-600 font-bold text-lg rounded-2xl transition-all duration-500 transform hover:scale-105 shadow-2xl hover:shadow-white/40 overflow-hidden"
+            <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="/get-quotation"
+                className="inline-flex items-center justify-center rounded-lg bg-white px-6 py-3 text-base font-semibold text-[#D97D55] shadow-sm hover:shadow-md"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-gray-50 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <CheckCircleIcon className="w-6 h-6 mr-3 relative z-10 group-hover:scale-110 transition-transform duration-300" />
-                <span className="relative z-10">Get Free Demo</span>
+                <CheckCircleIcon className="w-5 h-5 mr-2" /> Get Free Demo
               </a>
-              <a 
-                href="/contact" 
-                className="group inline-flex items-center justify-center px-12 py-5 bg-transparent border-2 border-white/60 hover:border-white text-white hover:bg-white/10 font-bold text-lg rounded-2xl transition-all duration-500 shadow-2xl backdrop-blur-sm hover:scale-105"
+              <a
+                href="/contact"
+                className="inline-flex items-center justify-center rounded-lg border border-white px-6 py-3 text-base font-semibold text-white hover:bg-white hover:text-[#D97D55]"
               >
-                <ArrowRightIcon className="w-6 h-6 mr-3 group-hover:translate-x-2 transition-transform duration-300" />
-                <span>Contact Sales</span>
+                <ArrowRightIcon className="w-5 h-5 mr-2" /> Contact Sales
               </a>
-            </div>
-
-            {/* Trust Indicators */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10 text-gray-300">
-              <div className="flex items-center space-x-2 group cursor-default">
-                <div className="relative">
-                  <CheckCircleIcon className="w-5 h-5 text-red-400 group-hover:scale-110 transition-transform duration-300" />
-                  <div className="absolute inset-0 bg-red-400/30 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </div>
-                <span className="text-sm font-medium">No Setup Fee</span>
-              </div>
-              <div className="flex items-center space-x-2 group cursor-default">
-                <div className="relative">
-                  <ShieldCheckIcon className="w-5 h-5 text-red-400 group-hover:scale-110 transition-transform duration-300" />
-                  <div className="absolute inset-0 bg-red-400/30 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </div>
-                <span className="text-sm font-medium">Cloud-Based</span>
-              </div>
-              <div className="flex items-center space-x-2 group cursor-default">
-                <div className="relative">
-                  <StarIcon className="w-5 h-5 text-red-400 group-hover:scale-110 transition-transform duration-300" />
-                  <div className="absolute inset-0 bg-red-400/30 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </div>
-                <span className="text-sm font-medium">Custom Integration</span>
-              </div>
             </div>
           </div>
         </div>

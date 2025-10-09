@@ -750,100 +750,63 @@ export default function Consultancy() {
         </div>
       </section>
 
-      {/* Enhanced Transform Your Business CTA Section - Dark Theme */}
-      <section className="relative py-24 lg:py-32 overflow-hidden bg-gradient-to-br from-gray-900 via-black to-gray-900">
-        {/* Sophisticated Background Pattern */}
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.03%22%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2230%22%20r%3D%221%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-40"></div>
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-red-600/10 via-transparent to-red-800/10"></div>
-        </div>
-
-        {/* Animated Floating Elements */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-r from-red-600/15 to-red-800/15 rounded-full blur-3xl animate-float-slow"></div>
-          <div className="absolute bottom-20 right-20 w-80 h-80 bg-gradient-to-r from-red-800/12 to-red-900/12 rounded-full blur-3xl animate-float-medium"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-r from-red-700/10 to-red-900/10 rounded-full blur-3xl animate-float-fast"></div>
-        </div>
-
-        <div className="container-custom relative z-10 px-4 sm:px-6 lg:px-8">
+      {/* Transform Your Business CTA - Simple & Stunning */}
+      <section className="py-20 lg:py-24 bg-[#D97D55] text-white">
+        <div className="container-custom px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            {/* Glowing Badge */}
-            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-red-600 to-red-700 backdrop-blur-sm border border-red-500/30 rounded-full px-8 py-4 mb-10 shadow-2xl shadow-red-600/25">
-              <div className="w-3 h-3 bg-white rounded-full animate-pulse shadow-lg shadow-white/50"></div>
-              <span className="text-white font-bold text-base tracking-wide">Transform Your Business Today</span>
+            <div className="inline-flex items-center gap-2 bg-white/15 rounded-full px-5 py-2 mb-6">
+              <span className="text-sm font-semibold tracking-wide">Transform Your Business Today</span>
             </div>
 
-            {/* Stunning Headline */}
-            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white mb-8 leading-tight">
-              Ready to{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-red-500 to-red-600 drop-shadow-2xl">
-                Transform
-              </span>
-              <br className="hidden sm:block" />
-              Your Business?
+            <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+              Ready to transform your business?
             </h2>
-            
-            <p className="text-xl lg:text-2xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed font-light">
-              Join <span className="text-red-400 font-bold">200+ Indian businesses</span> that trust our consultancy services for strategic transformation. 
-              Let's build your success story together with proven methodologies and expert guidance.
+            <p className="mt-4 text-white/90 max-w-3xl mx-auto text-lg">
+              Simple, effective consultancy. Clear strategy. Real results. Let’s start your transformation journey.
             </p>
 
-            {/* Enhanced Stats Row */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto mb-16">
-              <div className="group relative bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:border-red-500/50 transition-all duration-500 hover:scale-105">
-                <div className="absolute inset-0 bg-gradient-to-br from-red-500/10 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative z-10">
-                  <div className="text-5xl font-black bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent mb-3">200+</div>
-                  <div className="text-gray-300 font-semibold text-sm tracking-wide">Projects Completed</div>
-                </div>
-              </div>
-              <div className="group relative bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:border-red-500/50 transition-all duration-500 hover:scale-105">
-                <div className="absolute inset-0 bg-gradient-to-br from-red-500/10 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative z-10">
-                  <div className="text-5xl font-black bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent mb-3">99.9%</div>
-                  <div className="text-gray-300 font-semibold text-sm tracking-wide">Client Satisfaction</div>
-                </div>
-              </div>
-              <div className="group relative bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:border-red-500/50 transition-all duration-500 hover:scale-105">
-                <div className="absolute inset-0 bg-gradient-to-br from-red-500/10 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative z-10">
-                  <div className="text-5xl font-black bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent mb-3">24/7</div>
-                  <div className="text-gray-300 font-semibold text-sm tracking-wide">Expert Support</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Stunning CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
-              <a 
-                href="#consultation-form" 
-                className="group relative inline-flex items-center justify-center px-12 py-5 bg-gradient-to-r from-red-600 via-red-700 to-red-800 hover:from-red-700 hover:via-red-800 hover:to-red-900 text-white font-bold text-lg rounded-2xl transition-all duration-500 transform hover:scale-105 shadow-2xl hover:shadow-red-600/40 overflow-hidden"
+            <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="#consultation-form"
+                className="inline-flex items-center justify-center rounded-lg bg-white px-6 py-3 text-base font-semibold text-[#D97D55] shadow-sm hover:shadow-md transition-all"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <span className="relative z-10 tracking-wide">Get Free Consultation</span>
+                Get Free Consultation
               </a>
-              <a 
-                href="/contact" 
-                className="group inline-flex items-center justify-center px-12 py-5 bg-transparent border-3 border-white/50 hover:border-white text-white hover:bg-white hover:text-gray-900 font-bold text-lg rounded-2xl transition-all duration-500 shadow-2xl backdrop-blur-sm hover:scale-105"
+              <a
+                href="/contact"
+                className="inline-flex items-center justify-center rounded-lg border border-white px-6 py-3 text-base font-semibold text-white hover:bg-white hover:text-[#D97D55] transition-all"
               >
-                <ArrowRightIcon className="w-6 h-6 mr-3 group-hover:translate-x-2 transition-transform duration-300" />
-                <span className="tracking-wide">Contact Our Team</span>
+                <ArrowRightIcon className="w-5 h-5 mr-2" /> Contact Our Team
               </a>
             </div>
 
-            {/* Trust Indicators with Icons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-8 text-gray-300">
-              <div className="flex items-center space-x-3 bg-white/5 backdrop-blur-sm rounded-full px-6 py-3 border border-white/10">
-                <CheckCircleIcon className="w-6 h-6 text-red-400" />
-                <span className="font-semibold">Expert Guidance</span>
+            <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl mx-auto">
+              <div className="rounded-lg bg-white/10 p-4">
+                <div className="text-3xl font-extrabold">200+</div>
+                <div className="text-white/90 text-sm mt-1">Projects Completed</div>
               </div>
-              <div className="flex items-center space-x-3 bg-white/5 backdrop-blur-sm rounded-full px-6 py-3 border border-white/10">
-                <CheckCircleIcon className="w-6 h-6 text-red-400" />
-                <span className="font-semibold">Strategic Planning</span>
+              <div className="rounded-lg bg-white/10 p-4">
+                <div className="text-3xl font-extrabold">99.9%</div>
+                <div className="text-white/90 text-sm mt-1">Client Satisfaction</div>
               </div>
-              <div className="flex items-center space-x-3 bg-white/5 backdrop-blur-sm rounded-full px-6 py-3 border border-white/10">
-                <CheckCircleIcon className="w-6 h-6 text-red-400" />
-                <span className="font-semibold">Proven Results</span>
+              <div className="rounded-lg bg-white/10 p-4">
+                <div className="text-3xl font-extrabold">24/7</div>
+                <div className="text-white/90 text-sm mt-1">Expert Support</div>
+              </div>
+            </div>
+
+            <div className="mt-10 flex items-center justify-center gap-6 text-white/95">
+              <div className="flex items-center gap-2">
+                <CheckCircleIcon className="w-5 h-5 text-white" />
+                <span className="text-sm font-medium">Expert Guidance</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircleIcon className="w-5 h-5 text-white" />
+                <span className="text-sm font-medium">Strategic Planning</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircleIcon className="w-5 h-5 text-white" />
+                <span className="text-sm font-medium">Proven Results</span>
               </div>
             </div>
           </div>
