@@ -127,23 +127,6 @@ Sent from SDB LABEL Website Contact Form`
     }
   ]
 
-  const teamContacts = [
-    {
-      designation: 'Relationship Manager',
-      name: 'Ambika Prasad',
-      phone: '+919654566078'
-    },
-    {
-      designation: 'Production Head',
-      name: 'Sanny Prasad',
-      phone: '+919811423374'
-    },
-    {
-      designation: 'Marketing Manager',
-      name: 'Sanjeev Kumar',
-      phone: '+919625520466'
-    }
-  ]
 
   return (
     <div className="min-h-screen bg-white">
@@ -377,52 +360,7 @@ Sent from SDB LABEL Website Contact Form`
                   </div>
                 ))}
               </div>
-              {/* Team Contacts inside Office Locations */}
-              <div className="pt-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Team Contacts</h3>
-                <div className="grid gap-5 sm:grid-cols-2">
-                  {teamContacts.map((member, idx) => (
-                    <div
-                      key={idx}
-                      className="relative overflow-hidden rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
-                    >
-                      <span className="pointer-events-none absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-blue-500 via-indigo-500 to-purple-500" aria-hidden />
-
-                      <div className="flex items-center gap-4">
-                        <div className="h-12 w-12 rounded-full bg-gray-900 text-white flex items-center justify-center text-sm font-semibold ring-2 ring-gray-100">
-                          {member.name
-                            .split(' ')
-                            .map((n) => n[0])
-                            .join('')
-                            .slice(0, 2)
-                            .toUpperCase()}
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <h4 className="text-lg font-semibold text-gray-900 truncate">{member.name}</h4>
-                          <p className="text-[13px] text-gray-600">{member.designation}</p>
-                        </div>
-                      </div>
-
-                      <div className="mt-4 flex items-center justify-between gap-3">
-                        <div className="flex items-center gap-2 text-gray-700 text-sm">
-                          <PhoneIcon className="w-4 h-4 text-gray-500" />
-                          <a href={`tel:${member.phone}`} className="hover:text-blue-600">{member.phone}</a>
-                        </div>
-                        <a
-                          href={`tel:${member.phone}`}
-                          className="inline-flex items-center gap-2 rounded-lg border border-blue-600 px-3 py-2 text-xs font-semibold text-blue-700 hover:bg-blue-50"
-                          aria-label={`Call ${member.name}`}
-                        >
-                          <PhoneIcon className="h-4 w-4" />
-                          Call now
-                        </a>
-                      </div>
-
-                      <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/5" />
-                    </div>
-                  ))}
-                </div>
-              </div>
+              
             </div>
           </div>
         </div>

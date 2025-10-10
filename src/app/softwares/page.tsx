@@ -68,20 +68,20 @@ export default function Softwares() {
 
   const testimonials = [
     {
-      name: 'David Chen',
-      company: 'TechFlow Solutions',
+      name: 'Rajesh Sharma',
+      company: 'Sharma Tech Solutions (Mumbai)',
       rating: 5,
       comment: 'The inventory management software has revolutionized our operations. We can now track everything in real-time and make data-driven decisions.'
     },
     {
-      name: 'Maria Rodriguez',
-      company: 'Global Manufacturing Inc',
+      name: 'Priya Iyer',
+      company: 'Bharat Manufacturing Co. (Chennai)',
       rating: 5,
       comment: 'Our asset management system has saved us thousands in maintenance costs and improved our equipment utilization significantly.'
     },
     {
-      name: 'James Wilson',
-      company: 'Retail Dynamics',
+      name: 'Arjun Mehta',
+      company: 'Sunrise Retail Pvt. Ltd. (Ahmedabad)',
       rating: 5,
       comment: 'The ERP system has streamlined all our business processes. The integration capabilities are exceptional.'
     }
