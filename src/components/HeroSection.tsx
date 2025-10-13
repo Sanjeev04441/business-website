@@ -9,6 +9,7 @@ interface HeroSectionProps {
   subtitle?: string
   description: string
   backgroundImageSrc?: string
+  backgroundImageQuality?: number
   primaryButton?: {
     text: string
     href: string
@@ -31,6 +32,7 @@ export default function HeroSection({
   subtitle,
   description,
   backgroundImageSrc = "/images/products/PHero.jpg",
+  backgroundImageQuality,
   primaryButton,
   secondaryButton,
   badge,
@@ -63,7 +65,7 @@ export default function HeroSection({
           fill
           className="object-cover"
           priority
-          quality={85}
+          quality={backgroundImageQuality ?? 85}
           sizes="100vw"
         />
         {/* Enhanced Overlay with Gradient Animation */}

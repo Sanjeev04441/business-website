@@ -441,7 +441,8 @@ export default function ProductsPage() {
         title="Our"
         subtitle="Products"
         description="Discover our comprehensive range of labeling solutions designed to meet every industry need with cutting-edge technology and superior quality."
-        backgroundImageSrc="/images/products/Phero12.jpg"
+        backgroundImageSrc="/images/products/PH.jpg"
+        backgroundImageQuality={45}
         className="-mt-20 sm:-mt-24 lg:-mt-28 pt-48 sm:pt-56 lg:pt-64"
         primaryButton={{
           text: "Start Your Journey",
