@@ -250,13 +250,13 @@ export default function Hardwares() {
                         
                         {/* Card content */}
                         <div className="relative bg-white rounded-2xl p-2 shadow-xl transform transition-all duration-500 group-hover:scale-[1.02] group-hover:-translate-y-2">
-                          <div className="relative overflow-hidden rounded-xl">
+                          <div className="relative aspect-square overflow-hidden rounded-xl">
                             <OptimizedImage
                               src={solution.image}
                               alt={solution.name}
-                              width={600}
-                              height={400}
-                              className="w-full h-96 rounded-xl object-contain transition-transform duration-700 group-hover:scale-110"
+                              fill
+                              imageFit="contain"
+                              className="rounded-xl transition-transform duration-700 group-hover:scale-110"
                             />
                             {/* Overlay on hover */}
                             <div className="absolute inset-0 bg-gradient-to-t from-red-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -325,13 +325,13 @@ export default function Hardwares() {
                         
                         {/* Card content */}
                         <div className="relative bg-white rounded-2xl p-2 shadow-xl transform transition-all duration-500 group-hover:scale-[1.02] group-hover:-translate-y-2">
-                          <div className="relative overflow-hidden rounded-xl">
+                          <div className="relative aspect-square overflow-hidden rounded-xl">
                             <OptimizedImage
                               src={solution.image}
                               alt={solution.name}
-                              width={600}
-                              height={400}
-                              className="w-full h-96 rounded-xl object-contain transition-transform duration-700 group-hover:scale-110"
+                              fill
+                              imageFit="contain"
+                              className="rounded-xl transition-transform duration-700 group-hover:scale-110"
                             />
                             {/* Overlay on hover */}
                             <div className="absolute inset-0 bg-gradient-to-t from-red-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -400,13 +400,13 @@ export default function Hardwares() {
                         
                         {/* Card content */}
                         <div className="relative bg-white rounded-2xl p-2 shadow-xl transform transition-all duration-500 group-hover:scale-[1.02] group-hover:-translate-y-2">
-                          <div className="relative overflow-hidden rounded-xl">
+                          <div className="relative aspect-square overflow-hidden rounded-xl">
                             <OptimizedImage
                               src={solution.image}
                               alt={solution.name}
-                              width={600}
-                              height={400}
-                              className="w-full h-96 rounded-xl object-contain transition-transform duration-700 group-hover:scale-110"
+                              fill
+                              imageFit="contain"
+                              className="rounded-xl transition-transform duration-700 group-hover:scale-110"
                             />
                             {/* Overlay on hover */}
                             <div className="absolute inset-0 bg-gradient-to-t from-red-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -483,13 +483,13 @@ export default function Hardwares() {
                         
                         {/* Card content */}
                         <div className="relative bg-white rounded-2xl p-2 shadow-xl transform transition-all duration-500 group-hover:scale-[1.02] group-hover:-translate-y-2">
-                          <div className="relative overflow-hidden rounded-xl">
+                          <div className="relative aspect-square overflow-hidden rounded-xl">
                             <OptimizedImage
                               src={solution.image}
                               alt={solution.name}
-                              width={600}
-                              height={400}
-                              className="w-full h-96 rounded-xl object-contain transition-transform duration-700 group-hover:scale-110"
+                              fill
+                              imageFit="contain"
+                              className="rounded-xl transition-transform duration-700 group-hover:scale-110"
                             />
                             {/* Overlay on hover */}
                             <div className="absolute inset-0 bg-gradient-to-t from-red-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -558,13 +558,13 @@ export default function Hardwares() {
                         
                         {/* Card content */}
                         <div className="relative bg-white rounded-2xl p-2 shadow-xl transform transition-all duration-500 group-hover:scale-[1.02] group-hover:-translate-y-2">
-                          <div className="relative overflow-hidden rounded-xl">
+                          <div className="relative aspect-square overflow-hidden rounded-xl">
                             <OptimizedImage
                               src={solution.image}
                               alt={solution.name}
-                              width={600}
-                              height={400}
-                              className="w-full h-96 rounded-xl object-contain transition-transform duration-700 group-hover:scale-110"
+                              fill
+                              imageFit="contain"
+                              className="rounded-xl transition-transform duration-700 group-hover:scale-110"
                             />
                             {/* Overlay on hover */}
                             <div className="absolute inset-0 bg-gradient-to-t from-red-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -641,13 +641,13 @@ export default function Hardwares() {
                         
                         {/* Card content */}
                         <div className="relative bg-white rounded-2xl p-2 shadow-xl transform transition-all duration-500 group-hover:scale-[1.02] group-hover:-translate-y-2">
-                          <div className="relative overflow-hidden rounded-xl">
+                          <div className="relative aspect-square overflow-hidden rounded-xl">
                             <OptimizedImage
                               src={solution.image}
                               alt={solution.name}
-                              width={600}
-                              height={400}
-                              className="w-full h-96 rounded-xl object-contain transition-transform duration-700 group-hover:scale-110"
+                              fill
+                              imageFit="contain"
+                              className="rounded-xl transition-transform duration-700 group-hover:scale-110"
                             />
                             {/* Overlay on hover */}
                             <div className="absolute inset-0 bg-gradient-to-t from-red-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -716,13 +716,13 @@ export default function Hardwares() {
                         
                         {/* Card content */}
                         <div className="relative bg-white rounded-2xl p-2 shadow-xl transform transition-all duration-500 group-hover:scale-[1.02] group-hover:-translate-y-2">
-                          <div className="relative overflow-hidden rounded-xl">
+                          <div className="relative aspect-square overflow-hidden rounded-xl">
                             <OptimizedImage
                               src={solution.image}
                               alt={solution.name}
-                              width={600}
-                              height={400}
-                              className="w-full h-96 rounded-xl object-contain transition-transform duration-700 group-hover:scale-110"
+                              fill
+                              imageFit="contain"
+                              className="rounded-xl transition-transform duration-700 group-hover:scale-110"
                             />
                             {/* Overlay on hover */}
                             <div className="absolute inset-0 bg-gradient-to-t from-red-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -791,13 +791,13 @@ export default function Hardwares() {
                         
                         {/* Card content */}
                         <div className="relative bg-white rounded-2xl p-2 shadow-xl transform transition-all duration-500 group-hover:scale-[1.02] group-hover:-translate-y-2">
-                          <div className="relative overflow-hidden rounded-xl">
+                          <div className="relative aspect-square overflow-hidden rounded-xl">
                             <OptimizedImage
                               src={solution.image}
                               alt={solution.name}
-                              width={600}
-                              height={400}
-                              className="w-full h-96 rounded-xl object-contain transition-transform duration-700 group-hover:scale-110"
+                              fill
+                              imageFit="contain"
+                              className="rounded-xl transition-transform duration-700 group-hover:scale-110"
                             />
                             {/* Overlay on hover */}
                             <div className="absolute inset-0 bg-gradient-to-t from-red-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>

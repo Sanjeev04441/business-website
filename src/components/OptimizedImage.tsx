@@ -20,6 +20,7 @@ interface OptimizedImageProps {
   onLoad?: () => void
   onError?: () => void
   skeletonVariant?: 'rectangular' | 'circular' | 'card'
+  imageFit?: 'cover' | 'contain' | 'none' | 'fill' | 'scale-down'
 }
 
 export default function OptimizedImage({
@@ -37,6 +38,7 @@ export default function OptimizedImage({
   onLoad,
   onError,
   skeletonVariant = 'rectangular',
+  imageFit = 'cover',
   ...props
 }: OptimizedImageProps) {
   const [isLoaded, setIsLoaded] = useState(false)
@@ -139,7 +141,13 @@ export default function OptimizedImage({
             width={width}
             height={height}
             fill={fill}
-            className={`object-cover transition-all duration-500 ${
+            className={`${
+              imageFit === 'contain' ? 'object-contain' :
+              imageFit === 'none' ? 'object-none' :
+              imageFit === 'fill' ? 'object-fill' :
+              imageFit === 'scale-down' ? 'object-scale-down' :
+              'object-cover'
+            } transition-all duration-500 ${
               isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
             }`}
             priority={priority}
