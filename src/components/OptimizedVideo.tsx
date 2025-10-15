@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 
 interface OptimizedVideoProps {
   src: string
+  webmSrc?: string
   poster?: string
   className?: string
   autoPlay?: boolean
@@ -19,6 +20,7 @@ interface OptimizedVideoProps {
 
 export default function OptimizedVideo({
   src,
+  webmSrc,
   poster,
   className = '',
   autoPlay = false,
@@ -92,6 +94,19 @@ export default function OptimizedVideo({
     }
   }, [priority, isInView])
 
+  // Smoothly autoplay when video becomes visible
+  useEffect(() => {
+    if (!priority && isInView && autoPlay && videoRef.current) {
+      const video = videoRef.current
+      const playPromise = video.play()
+      if (playPromise && typeof playPromise.then === 'function') {
+        playPromise.catch(() => {
+          // Some browsers block autoplay; ignore
+        })
+      }
+    }
+  }, [priority, isInView, autoPlay])
+
   const handleLoad = () => {
     setIsLoaded(true)
     onLoad?.()
@@ -152,9 +167,11 @@ export default function OptimizedVideo({
           onLoadedData={handleLoad}
           onError={handleError}
           style={style}
-          preload={priority ? 'metadata' : 'none'}
+          // Hero videos (priority) use preload="auto" for immediate start; others keep network idle until visible
+          preload={priority ? 'auto' : 'metadata'}
           {...props}
         >
+          {webmSrc && <source src={webmSrc} type="video/webm" />}
           <source src={src} type="video/mp4" />
           Your browser does not support the video tag.
         </video>

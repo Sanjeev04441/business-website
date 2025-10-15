@@ -21,6 +21,7 @@ interface OptimizedImageProps {
   onError?: () => void
   skeletonVariant?: 'rectangular' | 'circular' | 'card'
   imageFit?: 'cover' | 'contain' | 'none' | 'fill' | 'scale-down'
+  fetchPriority?: 'high' | 'low' | 'auto'
 }
 
 export default function OptimizedImage({
@@ -39,6 +40,7 @@ export default function OptimizedImage({
   onError,
   skeletonVariant = 'rectangular',
   imageFit = 'cover',
+  fetchPriority,
   ...props
 }: OptimizedImageProps) {
   const [isLoaded, setIsLoaded] = useState(false)
@@ -151,12 +153,13 @@ export default function OptimizedImage({
               isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
             }`}
             priority={priority}
-            sizes={sizes || (fill ? '100vw' : `${width}px`)}
+            sizes={sizes || (fill ? '(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw' : `${width}px`)}
             quality={quality}
             placeholder={placeholder}
             blurDataURL={defaultBlurDataURL}
             onLoad={handleLoad}
             onError={handleError}
+            fetchPriority={fetchPriority || (priority ? 'high' : 'auto')}
             {...props}
           />
         </motion.div>
