@@ -346,7 +346,7 @@ const NavigationComponent = () => {
           <div className="flex-1"></div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8 mr-8">
+          <div className="hidden lg:flex items-center space-x-6 xl:space-x-8 mr-6 xl:mr-8">
             {menuItems.map((item) => (
               <div key={item.name} className="relative">
                 {item.dropdown ? (
@@ -354,7 +354,7 @@ const NavigationComponent = () => {
                     <div className="flex items-center">
                       <Link
                         href={item.href}
-                        className={`hover:text-red-600 transition-colors duration-200 font-medium drop-shadow-lg relative ${isHomePage || isIndustriesPage || isSoftwaresPage || isHardwaresPage || isConsultancyPage || isContactPage || isProductsPage || isGetQuotationPage ? 'text-white' : 'text-white'}`}
+                        className={`hover:text-red-600 transition-colors duration-200 font-medium drop-shadow-lg relative text-sm xl:text-base ${isHomePage || isIndustriesPage || isSoftwaresPage || isHardwaresPage || isConsultancyPage || isContactPage || isProductsPage || isGetQuotationPage ? 'text-white' : 'text-white'}`}
                         onMouseEnter={() => setActiveDropdown(item.name)}
                         onMouseLeave={() => setActiveDropdown(null)}
                       >
@@ -439,7 +439,7 @@ const NavigationComponent = () => {
                 ) : (
                   <Link
                     href={item.href}
-                    className={`hover:text-red-600 transition-colors duration-200 font-medium drop-shadow-lg relative ${isHomePage || isIndustriesPage || isSoftwaresPage || isHardwaresPage || isConsultancyPage || isContactPage || isProductsPage || isGetQuotationPage ? 'text-white' : 'text-white'}`}
+                    className={`hover:text-red-600 transition-colors duration-200 font-medium drop-shadow-lg relative text-sm xl:text-base ${isHomePage || isIndustriesPage || isSoftwaresPage || isHardwaresPage || isConsultancyPage || isContactPage || isProductsPage || isGetQuotationPage ? 'text-white' : 'text-white'}`}
                   >
                     {item.name}
                     <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-600 transition-all duration-300 hover:w-full"></div>
@@ -450,10 +450,10 @@ const NavigationComponent = () => {
           </div>
 
           {/* Desktop Get Quotation Button */}
-          <div className="hidden lg:flex items-center mr-6">
+          <div className="hidden lg:flex items-center mr-6 xl:mr-6">
             <Link
               href="/get-quotation"
-              className="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-red-600/25 text-base border-2 border-red-500"
+              className="inline-flex items-center justify-center px-4 xl:px-6 py-2 xl:py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-red-600/25 text-sm xl:text-base border-2 border-red-500"
             >
               <TagIcon className="w-4 h-4 mr-2" />
               Get Quote

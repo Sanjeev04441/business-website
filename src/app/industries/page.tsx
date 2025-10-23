@@ -167,16 +167,23 @@ const IndustriesPage = () => {
       <Navigation />
       
       {/* Hero Section with Video Background */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden -mt-20 sm:-mt-24 lg:-mt-28">
+      <section className="relative h-screen flex items-center justify-center overflow-hidden -mt-20 sm:-mt-24 lg:-mt-28" style={{minHeight: '100vh'}}>
         {/* Video Background */}
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 w-full h-full">
           <OptimizedVideo
             src="/videos/Industries_optimized.mp4"
             autoPlay
             muted
             loop
             playsInline
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover min-h-full"
+            style={{
+              minHeight: '100vh',
+              height: '100%',
+              width: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center'
+            }}
             priority
           />
           {/* Dark overlay for text visibility */}
