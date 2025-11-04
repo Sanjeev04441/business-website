@@ -971,6 +971,75 @@ export default function Home() {
         </div>
       </section>
 
+      {/* SEO Content Section */}
+      <section
+        id="sdb-labeling-solutions"
+        className="py-16 lg:py-24 bg-white border-t border-gray-100"
+        aria-labelledby="seo-section-heading"
+      >
+        <div className="container-custom px-4 sm:px-6 lg:px-8 max-w-5xl">
+          <header className="mb-8 lg:mb-10 text-center">
+            <h2
+              id="seo-section-heading"
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight"
+            >
+              Barcode Labels, Holographic Stickers and Premium Labeling Solutions
+            </h2>
+            <p className="mt-4 text-base lg:text-lg text-gray-600 max-w-3xl mx-auto">
+              SDB LABEL delivers end‑to‑end labeling solutions trusted by brands across FMCG, apparel, footwear,
+              pharmaceuticals, automotive and more. From custom sticker labels and barcode printing to
+              anti‑counterfeit holographic stickers and industrial hardware, we help you present products
+              beautifully and track them accurately across the supply chain.
+            </p>
+          </header>
+
+          <div className="space-y-6 text-gray-700 text-base lg:text-lg leading-relaxed">
+            <p>
+              Whether you need durable barcode labels for warehousing, high‑gloss branding labels for retail
+              shelves, or compliant labels for regulated industries, our team tailors materials, adhesives and
+              finishing to your exact application. We work with paper, BOPP, polyester, taffeta and specialty
+              substrates, matched with ribbons and coatings that stand up to heat, moisture and frequent handling.
+              The result is consistent print quality, strong adhesion and a professional finish that elevates your
+              brand.
+            </p>
+            <p>
+              For brands focused on authenticity and customer trust, our holographic stickers provide a highly
+              visible security layer. These labels deter tampering and counterfeiting while enhancing shelf appeal.
+              Combined with serialized barcodes or QR codes, you can enable product verification, warranty
+              activation and post‑purchase engagement with a quick scan from any device.
+            </p>
+            <p>
+              Beyond labels, we supply and integrate the hardware and software that make operations efficient:
+              barcode and RFID printers, handheld and fixed scanners, POS systems and ID card printers. Our
+              technicians help you select the right devices, deploy them on site, and train your team, so printing,
+              scanning and inventory workflows run smoothly from day one. If you’re modernizing your plant or
+              warehouse, we can audit your process and recommend a phased rollout that minimizes downtime.
+            </p>
+            <p>
+              Every industry has unique requirements. FMCG brands often need oil‑ and moisture‑resistant labels for
+              kitchens and cold chains; footwear and apparel prefer tear‑resistant fabric and satin labels; pharma
+              demands clear print legibility for batch, MRP and expiry; automotive requires high‑temperature and
+              solvent‑resistant materials. Our consultants translate these needs into practical specifications,
+              ensuring your labels look great and perform reliably in the field.
+            </p>
+            <p>
+              Choosing SDB LABEL means quick turnarounds, consistent color, and dependable supply. We maintain
+              strict QA checks and use calibrated equipment to keep each batch uniform, whether you order hundreds
+              or hundreds of thousands. If you need help starting a new SKU line, migrating printers, or reducing
+              total labeling costs, our team is ready to advise.
+            </p>
+            <p className="text-gray-800">
+              Explore our full range of <a href="/products" className="text-red-600 hover:underline font-semibold">products</a>,
+              browse solutions by <a href="/industries" className="text-red-600 hover:underline font-semibold">industry</a>, or
+              <a href="/contact" className="text-red-600 hover:underline font-semibold"> contact us</a> for a tailored
+              recommendation. If you already know what you need, request a
+              <a href="/get-quotation" className="text-red-600 hover:underline font-semibold"> quick quotation</a> and we’ll
+              get back promptly with options that balance print quality, durability and cost.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Our Clients Section */}
       <section className="py-16 lg:py-20 bg-white relative overflow-hidden">
         <div className="container-custom px-4 sm:px-6 lg:px-8">
