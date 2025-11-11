@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
-import nodemailer from "nodemailer";
+import { sendMail } from "@/lib/email";
 import { NextResponse } from "next/server";
 
 // Supabase client will be initialized inside the function
@@ -19,6 +19,21 @@ export async function POST(request: Request) {
       budget,
       description,
     } = await request.json();
+
+    // Validate required fields
+    if (!name || !email || !consultancyType) {
+      return NextResponse.json(
+        { success: false, error: "Missing required fields: name, email, consultancyType" },
+        { status: 400 }
+      );
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return NextResponse.json(
+        { success: false, error: "Invalid email format" },
+        { status: 400 }
+      );
+    }
 
     console.log("📤 Received consultancy data:", {
       name,
@@ -113,67 +128,30 @@ export async function POST(request: Request) {
       console.error("⚠️ Form tracking failed (but form was saved):", trackingError);
     }
 
-    // 3. Send email notification (optional - only if credentials are provided)
-    if (process.env.EMAIL_TO && process.env.EMAIL_API_KEY) {
-      try {
-        console.log("📧 Sending consultancy email notification...");
-        const transporter = nodemailer.createTransport({
-          service: "gmail",
-          auth: {
-            user: process.env.EMAIL_TO,
-            pass: process.env.EMAIL_API_KEY,
-          },
-        });
-
-        await transporter.sendMail({
-          from: process.env.EMAIL_TO,
-          to: process.env.EMAIL_TO,
-          subject: `🎯 New Consultancy Request from ${companyName || name}`,
-          html: `
-            <h2>New Consultancy Request</h2>
-            <p><strong>Name:</strong> ${name}</p>
-            <p><strong>Company:</strong> ${companyName}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Phone:</strong> ${phoneNumber}</p>
-            <p><strong>Consultancy Type:</strong> ${consultancyType}</p>
-            <p><strong>Project Scope:</strong> ${projectScope}</p>
-            <p><strong>Timeline:</strong> ${timeline}</p>
-            <p><strong>Budget:</strong> ${budget}</p>
-            <p><strong>Description:</strong> ${description}</p>
-            <p><em>Received at: ${new Date().toLocaleString()}</em></p>
-          `,
-        });
-        console.log("✅ Consultancy email sent successfully");
-      } catch (emailError) {
-        console.error("⚠️ Consultancy email sending failed (but data was saved):", emailError);
-      }
-    } else {
-      console.log("ℹ️ Email notifications not configured for consultancy (optional)");
+    // 3. Send email notification via Zoho utility
+    try {
+      const subject = `New Form Submission – Consultancy`;
+      const html = `
+        <h2>New Consultancy Request</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Company:</strong> ${companyName || ''}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Phone:</strong> ${phoneNumber || ''}</p>
+        <p><strong>Consultancy Type:</strong> ${consultancyType}</p>
+        <p><strong>Project Scope:</strong> ${projectScope || ''}</p>
+        <p><strong>Timeline:</strong> ${timeline || ''}</p>
+        <p><strong>Budget:</strong> ${budget || ''}</p>
+        <p><strong>Description:</strong> ${description || ''}</p>
+        <p><em>Received at: ${new Date().toLocaleString()}</em></p>
+      `;
+      await sendMail(subject, html);
+    } catch (emailError) {
+      console.error("⚠️ Consultancy email sending failed (but data was saved):", emailError);
     }
 
-    return NextResponse.json(
-      {
-        success: true,
-        message: "Consultancy request submitted successfully!",
-        data: data,
-      },
-      { status: 200 }
-    );
+    return NextResponse.json({ success: true }, { status: 200 });
   } catch (error) {
     console.error("❌ Consultancy submission error:", error);
-    console.error("❌ Error stack:", error instanceof Error ? error.stack : 'No stack trace');
-    console.error("❌ Error details:", {
-      name: error instanceof Error ? error.name : 'Unknown',
-      message: error instanceof Error ? error.message : 'Unknown error',
-      cause: error instanceof Error ? error.cause : undefined
-    });
-    return NextResponse.json(
-      {
-        error: "Internal server error",
-        details: error instanceof Error ? error.message : "Unknown error",
-        stack: error instanceof Error ? error.stack : undefined
-      },
-      { status: 500 }
-    );
+    return NextResponse.json({ success: false, error: error instanceof Error ? error.message : "Internal server error" }, { status: 500 });
   }
 }

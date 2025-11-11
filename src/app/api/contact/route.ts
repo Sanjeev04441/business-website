@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
-import nodemailer from "nodemailer";
+import { sendMail } from "@/lib/email";
 import { NextResponse } from "next/server";
 
 // Initialize Supabase client
@@ -13,6 +13,22 @@ export async function POST(request: Request) {
     console.log("🚀 Contact form API called");
     
     const { name, company_name, email, phone, message } = await request.json();
+
+    // Validate required fields
+    if (!name || !email || !message) {
+      return NextResponse.json(
+        { success: false, error: "Missing required fields: name, email, message" },
+        { status: 400 }
+      );
+    }
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return NextResponse.json(
+        { success: false, error: "Invalid email format" },
+        { status: 400 }
+      );
+    }
 
     console.log("📤 Received form data:", { name, company_name, email, phone, message });
 
@@ -63,56 +79,30 @@ export async function POST(request: Request) {
     //   console.error("⚠️ Form tracking failed (but form was saved):", trackingError);
     // }
 
-    // 3. Send email notification (optional - only if credentials are provided)
-    if (process.env.EMAIL_TO && process.env.EMAIL_API_KEY) {
-      try {
-        console.log("📧 Sending email notification...");
-        const transporter = nodemailer.createTransport({
-          service: "gmail",
-          auth: {
-            user: process.env.EMAIL_TO,
-            pass: process.env.EMAIL_API_KEY,
-          },
-        });
-
-        await transporter.sendMail({
-          from: process.env.EMAIL_TO,
-          to: process.env.EMAIL_TO,
-          subject: "📧 New Contact Form Submission",
-          html: `
-            <h2>New Contact Form Submission</h2>
-            <p><strong>Name:</strong> ${name}</p>
-            <p><strong>Company:</strong> ${company_name}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Phone:</strong> ${phone}</p>
-            <p><strong>Message:</strong> ${message}</p>
-            <p><em>Received at: ${new Date().toLocaleString()}</em></p>
-          `,
-        });
-        console.log("✅ Email sent successfully");
-      } catch (emailError) {
-        console.error("⚠️ Email sending failed (but data was saved):", emailError);
-        // Don't throw error for email failure, data is already saved
-      }
-    } else {
-      console.log("ℹ️ Email notifications not configured (optional)");
+    // 3. Send email notification via Zoho utility
+    try {
+      console.log("📧 Sending email notification via Zoho...");
+      const subject = `New Form Submission – Contact`;
+      const html = `
+        <h2>New Contact Form Submission</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Company:</strong> ${company_name || ''}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Phone:</strong> ${phone || ''}</p>
+        <p><strong>Message:</strong> ${message}</p>
+        <p><em>Received at: ${new Date().toLocaleString()}</em></p>
+      `;
+      await sendMail(subject, html);
+    } catch (emailError) {
+      console.error("⚠️ Email sending failed (but data was saved):", emailError);
+      // Do not fail the request due to email issues
     }
 
-    return NextResponse.json(
-      { 
-        success: true, 
-        message: "Form submitted successfully!",
-        data: data 
-      },
-      { status: 200 }
-    );
+    return NextResponse.json({ success: true }, { status: 200 });
   } catch (error) {
     console.error("❌ Submission error:", error);
     return NextResponse.json(
-      { 
-        error: "Internal server error",
-        details: error instanceof Error ? error.message : "Unknown error"
-      },
+      { success: false, error: error instanceof Error ? error.message : "Internal server error" },
       { status: 500 }
     );
   }
