@@ -138,7 +138,7 @@ export default function RootLayout({
               url: 'https://www.sdblabel.com',
               logo: 'https://www.sdblabel.com/images/icon/logo.png?v=2',
               foundingDate: '2011',
-              email: 'salessdbl@gmail.com',
+              email: 'info@sdblabel.com',
               telephone: '+919625520466',
               address: {
                 '@type': 'PostalAddress',
@@ -208,7 +208,7 @@ export default function RootLayout({
               '@id': 'https://www.sdblabel.com',
               url: 'https://www.sdblabel.com',
               telephone: '+919625520466',
-              email: 'salessdbl@gmail.com',
+              email: 'info@sdblabel.com',
               priceRange: '₹₹',
               address: {
                 '@type': 'PostalAddress',

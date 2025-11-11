@@ -116,14 +116,14 @@ Sent from SDB LABEL Website Contact Form`
       title: 'Corporate Office',
       address: '467-483/9 & 10, 2nd Floor Oberoi Compound Near Rajendra Honda Showroom, Dilshad Garden G.T. Road Industrial Area, Pincode: 110095',
       phone: '+91 9654566078',
-      email: 'sdblabel@gmail.com'
+      email: 'info@sdblabel.com'
     },
     {
       icon: BuildingOffice2Icon,
       title: 'Factory Office',
       address: '467-483/9 & 10, 2nd Floor Oberoi Compound Near Rajendra Honda Showroom, Dilshad Garden G.T. Road Industrial Area, Pincode: 110095',
       phone: '+91 9811423374',
-      email: 'sdblabel@gmail.com'
+      email: 'info@sdblabel.com'
     }
   ]
 

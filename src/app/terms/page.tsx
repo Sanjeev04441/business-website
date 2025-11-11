@@ -185,7 +185,7 @@ export default function TermsOfService() {
       content: [
         {
           subtitle: "",
-          text: "For questions about these Terms of Service, please contact us:\n\nSDB LABEL\n467-483/9 & 10, 2nd Floor Oberoi Compound,\nDilshad Garden G.T. Road Industrial Area,\nDelhi 110095, India\n\nEmail: sdblabel@gmail.com\nPhone: +91 9654566078\nBusiness Hours: Monday-Saturday, 9:00 AM - 6:00 PM (IST)"
+          text: "For questions about these Terms of Service, please contact us:\n\nSDB LABEL\n467-483/9 & 10, 2nd Floor Oberoi Compound,\nDilshad Garden G.T. Road Industrial Area,\nDelhi 110095, India\n\nEmail: info@sdblabel.com\nPhone: +91 9654566078\nBusiness Hours: Monday-Saturday, 9:00 AM - 6:00 PM (IST)"
         }
       ]
     }

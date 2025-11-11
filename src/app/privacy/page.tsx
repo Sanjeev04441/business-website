@@ -62,7 +62,7 @@ export default function PrivacyPolicy() {
       content: [
         {
           subtitle: "",
-          text: "Under applicable data protection laws, you have the right to:\n• Access the personal information we hold about you\n• Request correction of inaccurate or incomplete information\n• Request deletion of your personal information\n• Object to or restrict certain processing activities\n• Withdraw consent for marketing communications\n• Data portability (receiving your data in a structured format)\n• Lodge a complaint with supervisory authorities\n\nTo exercise these rights, please contact us at sdblabel@gmail.com"
+          text: "Under applicable data protection laws, you have the right to:\n• Access the personal information we hold about you\n• Request correction of inaccurate or incomplete information\n• Request deletion of your personal information\n• Object to or restrict certain processing activities\n• Withdraw consent for marketing communications\n• Data portability (receiving your data in a structured format)\n• Lodge a complaint with supervisory authorities\n\nTo exercise these rights, please contact us at info@sdblabel.com"
         }
       ]
     },
@@ -116,7 +116,7 @@ export default function PrivacyPolicy() {
       content: [
         {
           subtitle: "",
-          text: "If you have questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:\n\nSDB LABEL\n467-483/9 & 10, 2nd Floor Oberoi Compound,\nDilshad Garden G.T. Road Industrial Area,\nDelhi 110095, India\n\nEmail: sdblabel@gmail.com\nPhone: +91 9654566078\nBusiness Hours: Monday-Saturday, 9:00 AM - 6:00 PM (IST)"
+          text: "If you have questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:\n\nSDB LABEL\n467-483/9 & 10, 2nd Floor Oberoi Compound,\nDilshad Garden G.T. Road Industrial Area,\nDelhi 110095, India\n\nEmail: info@sdblabel.com\nPhone: +91 9654566078\nBusiness Hours: Monday-Saturday, 9:00 AM - 6:00 PM (IST)"
         }
       ]
     }

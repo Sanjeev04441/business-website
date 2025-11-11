@@ -985,11 +985,9 @@ export default function Home() {
             >
               Barcode Labels, Holographic Stickers and Premium Labeling Solutions
             </h2>
-            <p className="mt-4 text-base lg:text-lg text-gray-600 max-w-3xl mx-auto">
-              SDB LABEL delivers end‑to‑end labeling solutions trusted by brands across FMCG, apparel, footwear,
-              pharmaceuticals, automotive and more. From custom sticker labels and barcode printing to
-              anti‑counterfeit holographic stickers and industrial hardware, we help you present products
-              beautifully and track them accurately across the supply chain.
+            <p className="mt-5 text-[15px] sm:text-base lg:text-lg text-gray-700 max-w-3xl mx-auto bg-gray-50 border border-gray-200 rounded-xl px-5 py-4 leading-relaxed shadow-sm">
+              End‑to‑end labeling made simple — custom stickers, barcodes and holographic security with reliable
+              hardware. Present products beautifully and track them accurately across the supply chain.
             </p>
           </header>
 
@@ -1416,7 +1414,7 @@ export default function Home() {
                       </div>
                       <div>
                         <p className="text-sm text-gray-400 uppercase tracking-wider">Email</p>
-                        <a href="mailto:salessdbl@gmail.com" className="font-bold text-white text-lg group-hover/item:text-red-400 transition-colors hover:underline">salessdbl@gmail.com</a>
+                        <a href="mailto:info@sdblabel.com" className="font-bold text-white text-lg group-hover/item:text-red-400 transition-colors hover:underline">info@sdblabel.com</a>
                       </div>
                     </div>
                     <div className="flex items-center gap-4 group/item">

@@ -70,7 +70,7 @@ const Footer = () => {
 
   const socialLinks = [
     { name: 'WhatsApp', href: 'https://wa.me/919654566078', icon: 'whatsapp', color: 'bg-green-600 hover:bg-green-700' },
-    { name: 'Email', href: 'mailto:sdblabel@gmail.com', icon: 'email', color: 'bg-red-600 hover:bg-red-700' },
+    { name: 'Email', href: 'mailto:info@sdblabel.com', icon: 'email', color: 'bg-red-600 hover:bg-red-700' },
     { name: 'Phone', href: 'tel:+919654566078', icon: 'phone', color: 'bg-red-600 hover:bg-red-700' }
   ]
 
@@ -174,7 +174,7 @@ const Footer = () => {
                 transition={{ duration: 0.2 }}
               >
                 <EnvelopeIcon className="w-4 h-4 sm:w-5 sm:h-5 text-red-400 flex-shrink-0" />
-                <span className="text-gray-300 text-xs sm:text-sm">sdblabel@gmail.com</span>
+                <span className="text-gray-300 text-xs sm:text-sm">info@sdblabel.com</span>
               </motion.div>
               <motion.div 
                 className="flex items-center space-x-2 sm:space-x-3"
