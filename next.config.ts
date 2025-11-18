@@ -6,7 +6,6 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   generateEtags: true,
   reactStrictMode: true,
-  // Force port 3000
   env: {
     PORT: '3000',
   },
@@ -14,7 +13,7 @@ const nextConfig: NextConfig = {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 31536000, // 1 year cache
+    minimumCacheTTL: 31536000,
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     unoptimized: false,
@@ -25,15 +24,12 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ['@heroicons/react', 'framer-motion'],
   },
-  // Optimize bundle
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
-  // Optimize CSS
   optimizeFonts: true,
-  // Optimize production build
   productionBrowserSourceMaps: false,
-  // Add headers for better caching
+
   async headers() {
     return [
       {
@@ -71,6 +67,18 @@ const nextConfig: NextConfig = {
             value: 'public, max-age=31536000, immutable',
           },
         ],
+      },
+    ];
+  },
+
+  // ⭐ ADD THIS — FIX 307 REDIRECT ⭐
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'sdblabel.com' }],
+        destination: 'https://www.sdblabel.com/:path*',
+        permanent: true, // IMPORTANT → 301 redirect
       },
     ];
   },
