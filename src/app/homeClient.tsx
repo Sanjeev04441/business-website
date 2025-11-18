@@ -18,7 +18,13 @@ import {
   StarIcon,
   SparklesIcon,
   ShieldCheckIcon,
-  BuildingOfficeIcon
+  BuildingOfficeIcon,
+  CheckBadgeIcon,
+  RocketLaunchIcon,
+  WrenchScrewdriverIcon,
+  SquaresPlusIcon,
+  BuildingStorefrontIcon,
+  ChatBubbleLeftRightIcon
 } from '@heroicons/react/24/outline'
 
 export default function Home() {
@@ -971,69 +977,102 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SEO Content Section */}
+      {/* Features Grid (replaces previous SEO copy block) */}
       <section
         id="sdb-labeling-solutions"
         className="py-16 lg:py-24 bg-white border-t border-gray-100"
-        aria-labelledby="seo-section-heading"
+        aria-labelledby="features-section-heading"
       >
-        <div className="container-custom px-4 sm:px-6 lg:px-8 max-w-5xl">
-          <header className="mb-8 lg:mb-10 text-center">
+        <div className="relative container-custom px-4 sm:px-6 lg:px-8">
+          {/* Decorative background for section header */}
+          <div className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 w-[720px] h-[220px] bg-gradient-to-r from-rose-200/40 via-red-200/40 to-rose-200/40 blur-3xl rounded-full"></div>
+
+          <header className="relative z-10 mb-12 text-center">
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-red-600 to-rose-600 text-white text-xs sm:text-sm font-semibold shadow-md">
+              <SparklesIcon className="w-4 h-4" />
+              Why Choose Us
+            </div>
             <h2
-              id="seo-section-heading"
-              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight"
+              id="features-section-heading"
+              className="mt-4 text-3xl sm:text-4xl lg:text-6xl font-extrabold leading-tight tracking-tight"
             >
-              Barcode Labels, Holographic Stickers and Premium Labeling Solutions
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-900 via-red-700 to-gray-900 drop-shadow-sm">Why Choose Our</span>
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-rose-600 to-red-700">Labeling Solutions</span>
             </h2>
-            <p className="mt-5 text-[15px] sm:text-base lg:text-lg text-gray-700 max-w-3xl mx-auto bg-gray-50 border border-gray-200 rounded-xl px-5 py-4 leading-relaxed shadow-sm">
-              End‑to‑end labeling made simple — custom stickers, barcodes and holographic security with reliable
-              hardware. Present products beautifully and track them accurately across the supply chain.
+            <div className="mx-auto mt-4 h-1.5 w-24 sm:w-32 bg-gradient-to-r from-red-600 via-rose-500 to-red-600 rounded-full shadow-sm"></div>
+            <p className="mt-5 text-[15px] sm:text-base lg:text-lg text-gray-700 max-w-3xl mx-auto">
+              Six reasons customers trust us for premium stickers, barcodes and complete labeling systems.
             </p>
           </header>
 
-          <div className="space-y-6 text-gray-700 text-base lg:text-lg leading-relaxed">
-            <p>
-              Whether you need durable barcode labels for warehousing, high‑gloss branding labels for retail
-              shelves, or compliant labels for regulated industries, our team tailors materials, adhesives and
-              finishing to your exact application. We work with paper, BOPP, polyester, taffeta and specialty
-              substrates, matched with ribbons and coatings that stand up to heat, moisture and frequent handling.
-              The result is consistent print quality, strong adhesion and a professional finish that elevates your
-              brand.
-            </p>
-            <p>
-              For brands focused on authenticity and customer trust, our holographic stickers provide a highly
-              visible security layer. These labels deter tampering and counterfeiting while enhancing shelf appeal.
-              Combined with serialized barcodes or QR codes, you can enable product verification, warranty
-              activation and post‑purchase engagement with a quick scan from any device.
-            </p>
-            <p>
-              Beyond labels, we supply and integrate the hardware and software that make operations efficient:
-              barcode and RFID printers, handheld and fixed scanners, POS systems and ID card printers. Our
-              technicians help you select the right devices, deploy them on site, and train your team, so printing,
-              scanning and inventory workflows run smoothly from day one. If you’re modernizing your plant or
-              warehouse, we can audit your process and recommend a phased rollout that minimizes downtime.
-            </p>
-            <p>
-              Every industry has unique requirements. FMCG brands often need oil‑ and moisture‑resistant labels for
-              kitchens and cold chains; footwear and apparel prefer tear‑resistant fabric and satin labels; pharma
-              demands clear print legibility for batch, MRP and expiry; automotive requires high‑temperature and
-              solvent‑resistant materials. Our consultants translate these needs into practical specifications,
-              ensuring your labels look great and perform reliably in the field.
-            </p>
-            <p>
-              Choosing SDB LABEL means quick turnarounds, consistent color, and dependable supply. We maintain
-              strict QA checks and use calibrated equipment to keep each batch uniform, whether you order hundreds
-              or hundreds of thousands. If you need help starting a new SKU line, migrating printers, or reducing
-              total labeling costs, our team is ready to advise.
-            </p>
-            <p className="text-gray-800">
-              Explore our full range of <a href="/products" className="text-red-600 hover:underline font-semibold">products</a>,
-              browse solutions by <a href="/industries" className="text-red-600 hover:underline font-semibold">industry</a>, or
-              <a href="/contact" className="text-red-600 hover:underline font-semibold"> contact us</a> for a tailored
-              recommendation. If you already know what you need, request a
-              <a href="/get-quotation" className="text-red-600 hover:underline font-semibold"> quick quotation</a> and we’ll
-              get back promptly with options that balance print quality, durability and cost.
-            </p>
+          <div className="grid gap-14 sm:grid-cols-2 lg:grid-cols-3">
+            {/* 1. Premium Quality, Industry-Grade Labels */}
+            <article className="h-full text-left flex flex-col items-start">
+              <div className="mb-4 w-24 h-24 rounded-full bg-red-50 ring-2 ring-red-100 flex items-center justify-center text-red-600">
+                <CheckBadgeIcon className="w-16 h-16" />
+              </div>
+              <h3 className="text-lg sm:text-xl font-extrabold tracking-wide text-red-600 uppercase">Premium Quality, Industry-Grade Labels</h3>
+              <p className="mt-2 font-semibold text-gray-900 max-w-[36ch] text-[17px]">Crisp print, strong adhesion, made to perform.</p>
+              <p className="mt-2 text-gray-700 leading-relaxed max-w-[58ch] text-[15px] sm:text-base">Durable materials and calibrated print deliver crisp barcodes and vibrant branding that withstand heat, moisture and constant handling, in demanding environments.</p>
+            </article>
+
+            {/* 2. Fast Turnaround & On-Time Delivery */}
+            <article className="h-full text-left flex flex-col items-start">
+              <div className="mb-4 w-24 h-24 rounded-full bg-red-50 ring-2 ring-red-100 flex items-center justify-center text-red-600">
+                <RocketLaunchIcon className="w-16 h-16" />
+              </div>
+              <h3 className="text-lg sm:text-xl font-extrabold tracking-wide text-red-600 uppercase">Fast Turnaround & On-Time Delivery</h3>
+              <p className="mt-2 font-semibold text-gray-900 max-w-[36ch] text-[17px]">Tight deadlines, reliably met.</p>
+              <p className="mt-2 text-gray-700 leading-relaxed max-w-[58ch] text-[15px] sm:text-base">Streamlined prepress and production with reliable logistics to meet urgent launches and recurring schedules—without compromising quality, even during peak seasons.</p>
+            </article>
+
+            {/* 3. Complete Customization for Every Product */}
+            <article className="h-full text-left flex flex-col items-start">
+              <div className="mb-4 w-24 h-24 rounded-full bg-red-50 ring-2 ring-red-100 flex items-center justify-center text-red-600">
+                <WrenchScrewdriverIcon className="w-16 h-16" />
+              </div>
+              <h3 className="text-lg sm:text-xl font-extrabold tracking-wide text-red-600 uppercase">Complete Customization for Every Product</h3>
+              <p className="mt-2 font-semibold text-gray-900 max-w-[36ch] text-[17px]">Built to your exact spec.</p>
+              <p className="mt-2 text-gray-700 leading-relaxed max-w-[58ch] text-[15px] sm:text-base">Shapes, sizes, adhesives, finishes and security features tailored to your application—retail, industrial, pharma, automotive and more, without design compromises.</p>
+            </article>
+
+            {/* 4. Wide Range of Materials & Printing Options */}
+            <article className="h-full text-left flex flex-col items-start">
+              <div className="mb-4 w-24 h-24 rounded-full bg-red-50 ring-2 ring-red-100 flex items-center justify-center text-red-600">
+                <SquaresPlusIcon className="w-16 h-16" />
+              </div>
+              <h3 className="text-lg sm:text-xl font-extrabold tracking-wide text-red-600 uppercase">Wide Range of Materials & Printing Options</h3>
+              <p className="mt-2 font-semibold text-gray-900 max-w-[36ch] text-[17px]">The right stock for every job.</p>
+              <p className="mt-2 text-gray-700 leading-relaxed max-w-[58ch] text-[15px] sm:text-base">Paper, BOPP, polyester, satin/taffeta and specialty stocks with resin/wax ribbons, foil, matte, gloss and holographic effects, matched to your application.</p>
+            </article>
+
+            {/* 5. One-Stop Solution: Labels, Printers & Scanners */}
+            <article className="h-full text-left flex flex-col items-start">
+              <div className="mb-4 w-24 h-24 rounded-full bg-red-50 ring-2 ring-red-100 flex items-center justify-center text-red-600">
+                <BuildingStorefrontIcon className="w-16 h-16" />
+              </div>
+              <h3 className="text-lg sm:text-xl font-extrabold tracking-wide text-red-600 uppercase">One-Stop Solution: Labels, Printers & Scanners</h3>
+              <p className="mt-2 font-semibold text-gray-900 max-w-[36ch] text-[17px]">Products, hardware and support together.</p>
+              <p className="mt-2 text-gray-700 leading-relaxed max-w-[58ch] text-[15px] sm:text-base">Source everything you need from a single partner—consumables, barcode/RFID printers, handheld scanners, POS and accessories, with simplified procurement.</p>
+            </article>
+
+            {/* 6. Dedicated Support & After‑Sales Service */}
+            <article className="h-full text-left flex flex-col items-start">
+              <div className="mb-4 w-24 h-24 rounded-full bg-red-50 ring-2 ring-red-100 flex items-center justify-center text-red-600">
+                <ChatBubbleLeftRightIcon className="w-16 h-16" />
+              </div>
+              <h3 className="text-lg sm:text-xl font-extrabold tracking-wide text-red-600 uppercase">Dedicated Support & After‑Sales Service</h3>
+              <p className="mt-2 font-semibold text-gray-900 max-w-[36ch] text-[17px]">Help when and where you need it.</p>
+              <p className="mt-2 text-gray-700 leading-relaxed max-w-[58ch] text-[15px] sm:text-base">Pre‑sale consultation, on‑site setup and responsive service keep your printing and scanning operations running smoothly, backed by trained engineers.</p>
+            </article>
+          </div>
+
+          {/* Small CTA under grid */}
+          <div className="text-center mt-10">
+            <a href="/get-quotation" className="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg font-semibold shadow hover:shadow-md hover:from-red-700 hover:to-red-800 transition-all">
+              <TagIcon className="w-5 h-5 mr-2" />
+              Get a Quick Quote
+            </a>
           </div>
         </div>
       </section>
