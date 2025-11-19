@@ -46,6 +46,9 @@ const NavigationComponent = () => {
   const [isNavHidden, setIsNavHidden] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
+  // On homepage before scroll, navbar background is transparent over (likely) light hero.
+  // Use this flag to ensure mobile hamburger is visible (dark icon on light bg).
+  const onTransparentHero = isHomePage && !isScrolled
   
   useEffect(() => {
     setIsMounted(true)
@@ -466,8 +469,8 @@ const NavigationComponent = () => {
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsOpen(!isOpen)}
               className={`p-2 rounded-lg transition-colors duration-200 ${
-                isHomePage || isIndustriesPage || isSoftwaresPage || isHardwaresPage || isConsultancyPage || isContactPage || isProductsPage || isGetQuotationPage 
-                  ? 'text-white hover:bg-white/10' 
+                onTransparentHero
+                  ? 'text-black hover:bg-black/10'
                   : 'text-white hover:bg-white/10'
               }`}
               aria-label="Toggle mobile menu"

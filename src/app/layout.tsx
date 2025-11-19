@@ -247,7 +247,7 @@ export default function RootLayout({
           `
         }} />
       </head>
-      <body className="antialiased poppins-font">
+      <body className="antialiased poppins-font overflow-x-hidden">
         {children}
         <FloatingPriceCalculator />
       </body>
