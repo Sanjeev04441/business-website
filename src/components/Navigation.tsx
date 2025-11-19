@@ -470,7 +470,7 @@ const NavigationComponent = () => {
               onClick={() => setIsOpen(!isOpen)}
               className={`p-2 rounded-lg transition-colors duration-200 ${
                 onTransparentHero
-                  ? 'text-black hover:bg-black/10'
+                  ? 'text-red-600 hover:bg-red-600/10'
                   : 'text-white hover:bg-white/10'
               }`}
               aria-label="Toggle mobile menu"
