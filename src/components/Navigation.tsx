@@ -190,6 +190,12 @@ const NavigationComponent = () => {
     {
       name: 'SOFTWARES',
       href: '/softwares',
+      dropdown: [
+        { name: 'INVENTORY MANAGEMENT', href: '/softwares#inventory-management' },
+        { name: 'ASSET MANAGEMENT', href: '/softwares#asset-management' },
+        { name: 'PRODUCT MANAGEMENT', href: '/softwares#product-management' },
+        { name: 'ERP SYSTEM', href: '/softwares#erp-system' },
+      ],
     },
     {
       name: 'CONSULTANCY',
