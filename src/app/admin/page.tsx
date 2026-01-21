@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@supabase/supabase-js';
+import Link from 'next/link';
 import { 
   ChartBarIcon, 
   UserGroupIcon, 
@@ -15,7 +16,9 @@ import {
   BellIcon,
   CogIcon,
   ArrowPathIcon,
-  XMarkIcon
+  XMarkIcon,
+  PencilIcon,
+  ArrowRightIcon
 } from '@heroicons/react/24/outline';
 import '../../styles/admin-colors.css';
 
@@ -402,6 +405,26 @@ export default function AdminPage() {
                   </div>
                 </div>
               </div>
+
+              {/* Blog Management Card */}
+              <Link href="/admin/blogs" className="block group">
+                <div className="bg-gradient-to-br from-red-600 to-red-800 rounded-2xl p-6 shadow-lg transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-red-500/25 border border-red-500/50">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-medium text-red-100">Content</p>
+                      <p className="text-xl font-bold text-white mt-1">Manage Blogs</p>
+                    </div>
+                    <div className="h-12 w-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm group-hover:bg-white/30 transition-colors">
+                      <PencilIcon className="h-6 w-6 text-white" />
+                    </div>
+                  </div>
+                  <div className="mt-4 flex items-center text-red-100 text-sm font-medium group-hover:text-white">
+                    <span>Go to editor</span>
+                    <ArrowRightIcon className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
+              </Link>
+
         </div>
 
         {/* Controls */}
