@@ -9,7 +9,7 @@ import {
   CloudArrowUpIcon,
   PhotoIcon 
 } from '@heroicons/react/24/outline';
-import '../../../../styles/admin-colors.css';
+//import '../../../../styles/admin-colors.css';
 
 // Initialize Supabase client
 const supabase = createClient(
