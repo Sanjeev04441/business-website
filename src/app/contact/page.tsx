@@ -380,7 +380,7 @@ Sent from SDB LABEL Website Contact Form`
           
           <div className="w-full h-96 rounded-lg overflow-hidden border border-gray-200 shadow-sm">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.1234567890123!2d77.31234567890123!3d28.67890123456789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd1b6b5a5a5a%3A0x1234567890abcdef!2sOberoi%20Compound%2C%20Dilshad%20Garden%2C%20Delhi%2C%20Delhi%20110095!5e0!3m2!1sen!2sin!4v1645000000000!5m2!1sen!2sin"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.419755304306!2d77.31760607571204!3d28.6770876756404!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfb6dfea006d3%3A0x532b5f0fb8628eef!2sSDB%20LABEL%20%7C%20Product%2FBarcode%20Sticker%20%26%20Label%20Printing%20Solutions%20Across%20India!5e0!3m2!1sen!2sin!4v1771928701085!5m2!1sen!2sin"
               width="100%"
               height="100%"
               style={{ border: 0 }}

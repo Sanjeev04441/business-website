@@ -94,6 +94,38 @@ Retail environments benefit from our barcode labels for product pricing and inve
       href: '/products/sticker-labels/barcode-label'
     },
     {
+      id: 'dt-shipping-labels',
+      title: 'DT/Shipping Labels',
+      description: 'Direct thermal shipping labels built for fast, reliable printing across logistics, e-commerce, and fulfillment workflows.',
+      image: '/images/products/dt-shipping.jpg',
+      hasImage: true,
+      icon: TagIcon,
+      article: `Direct thermal (DT) shipping labels are the backbone of modern fulfillment operations. Designed to print without ribbons or ink, these labels deliver crisp, high-contrast barcodes and text at high speeds—perfect for fast-paced warehouses, couriers, and e-commerce shipping lines.
+
+Our DT shipping labels use premium thermal-coated face stock and dependable adhesives that bond securely to corrugated cartons, poly mailers, and shipping sleeves. They are optimized for common 4" x 6" formats while also supporting a wide range of custom sizes for specialized workflows. Each label is engineered for scan reliability, smudge resistance, and consistent adhesion during transit.
+
+Operational Advantages:
+• High-speed, ribbon-free printing for lower operating costs
+• Sharp, scannable output for barcode accuracy
+• Strong permanent adhesives for secure shipment handling
+• Smudge and fade resistance under typical shipping conditions
+• Compatibility with leading direct thermal printers
+• Multiple sizes and roll configurations available
+
+Applications:
+DT labels are widely used for shipping labels, return labels, inventory movement, carton identification, and route sorting. They help reduce printing downtime while maintaining clear readability across the entire logistics chain.`,
+      features: [
+        'Direct thermal compatible',
+        'High-contrast scannable output',
+        'Strong permanent adhesive',
+        'Smudge-resistant coating',
+        'High-speed print performance',
+        'Multiple size options'
+      ],
+      applications: ['Shipping & Logistics', 'E-commerce', 'Fulfillment Centers', 'Couriers', 'Returns Management'],
+      href: '/products/sticker-labels/dt-shipping-labels'
+    },
+    {
       id: 'billing-rolls',
       title: 'Billing Rolls',
       description: 'Premium thermal paper rolls for POS systems, ensuring clear, long-lasting receipts for all your billing needs.',
@@ -300,29 +332,7 @@ Every printed label undergoes rigorous quality inspection using automated vision
           icon: <StarIcon className="w-4 h-4 text-red-600" />
         }}
       />
-      {/* Hero Section */}
-      <div className="relative bg-gradient-to-r from-blue-900 via-blue-800 to-purple-800 text-white py-24 lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-black/30"></div>
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-32 h-32 bg-blue-400/20 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-48 h-48 bg-purple-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <div className="flex justify-center mb-6">
-              <div className="bg-white/20 backdrop-blur-sm rounded-full p-4">
-                <TagIcon className="w-16 h-16 text-white" />
-              </div>
-            </div>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight">
-              Sticker <span className="text-blue-300">Labels</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
-              Comprehensive range of high-quality sticker labels for every application and industry
-            </p>
-          </div>
-        </div>
-      </div>
+      {/* Hero Section removed as requested */}
 
       {/* Tab Navigation */}
       <div className="bg-gray-100 py-8">

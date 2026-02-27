@@ -75,6 +75,30 @@ export default function ProductsPage() {
       ],
     },
     {
+      id: "dt-shipping-labels",
+      title: "DT/Shipping Labels",
+      description:
+        "Direct thermal shipping labels engineered for fast, reliable printing across logistics, e-commerce, and fulfillment operations.",
+      image: "/images/products/Products1.jpg",
+      hasImage: false,
+      icon: TagIcon,
+      features: [
+        "Direct thermal compatible",
+        "Sharp, high-contrast output",
+        "Strong permanent adhesive",
+        "Smudge and fade resistant",
+        "Multiple sizes available",
+        "High-speed print performance",
+      ],
+      applications: [
+        "Shipping & Logistics",
+        "E-commerce Fulfillment",
+        "Warehousing",
+        "Courier Services",
+        "Returns Management",
+      ],
+    },
+    {
       id: "billing-rolls",
       title: "Billing Rolls",
       description:
@@ -199,6 +223,19 @@ export default function ProductsPage() {
       article:
         "High-contrast, scannable labels for reliable inventory and POS operations.",
       href: "/products/sticker-labels#barcode-labels",
+    },
+    {
+      id: "dt-shipping-labels",
+      name: "DT/SHIPPING LABELS",
+      fullName: "Direct Thermal Shipping Labels",
+      icon: TagIcon,
+      image: "/images/products/dt-shipping.jpg",
+      hasImage: true,
+      description:
+        "Direct thermal labels optimized for shipping, logistics, and e-commerce with crisp, fast printing.",
+      article:
+        "Direct thermal shipping labels designed for speed, clarity, and dependable adhesion in high-volume fulfillment workflows.",
+      href: "/products/sticker-labels#dt-shipping-labels",
     },
     {
       id: "billing-rolls",
@@ -394,6 +431,7 @@ export default function ProductsPage() {
       features: [
         "Product Labels",
         "Barcode Labels",
+        "DT/Shipping Labels",
         "Billing Rolls",
         "Hologram Labels",
         "RFID Labels",

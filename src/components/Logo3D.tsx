@@ -84,8 +84,8 @@ export default function Logo3D() {
                 fetchPriority="high"
                 decoding="sync"
                 onError={(e) => {
-                  console.log('Image failed to load:', src);
-                  e.currentTarget.style.display = 'none';
+                  console.log('Image failed to load:', src)
+                  e.currentTarget.style.display = 'none'
                 }}
               />
             </div>

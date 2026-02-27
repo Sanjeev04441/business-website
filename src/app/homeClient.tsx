@@ -24,12 +24,15 @@ import {
   WrenchScrewdriverIcon,
   SquaresPlusIcon,
   BuildingStorefrontIcon,
-  ChatBubbleLeftRightIcon
+  ChatBubbleLeftRightIcon,
+  ChevronDownIcon
 } from '@heroicons/react/24/outline'
 
 export default function Home() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [currentTestimonialSet, setCurrentTestimonialSet] = useState(0)
+  const fullHeroTitle = 'SDB LABEL Barcode & Thermal Label Manufacturer in India'
+  const [typedHeroTitle, setTypedHeroTitle] = useState('')
 
   // Testimonials data
   const testimonials = [
@@ -90,6 +93,40 @@ export default function Home() {
       initial: "L"
     }
   ]
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (prefersReducedMotion) {
+      setTypedHeroTitle(fullHeroTitle)
+      return
+    }
+
+    let index = 0
+    let intervalId: number | null = null
+    let restartTimeoutId: number | null = null
+
+    const startTyping = () => {
+      index = 0
+      setTypedHeroTitle('')
+      intervalId = window.setInterval(() => {
+        index += 1
+        setTypedHeroTitle(fullHeroTitle.slice(0, index))
+        if (index >= fullHeroTitle.length && intervalId) {
+          window.clearInterval(intervalId)
+          intervalId = null
+          restartTimeoutId = window.setTimeout(startTyping, 8000)
+        }
+      }, 40)
+    }
+
+    startTyping()
+
+    return () => {
+      if (intervalId) window.clearInterval(intervalId)
+      if (restartTimeoutId) window.clearTimeout(restartTimeoutId)
+    }
+  }, [fullHeroTitle])
 
   const [currentTestimonialIndex, setCurrentTestimonialIndex] = useState(0)
 
@@ -227,13 +264,17 @@ export default function Home() {
         {/* Content */}
         <div className="relative z-20 text-center px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
           <div className="mb-8">
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-              Premium{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-300 to-rose-300">
-                Labeling Solutions
+            <h1
+              className="text-3xl sm:text-4xl lg:text-6xl font-extrabold font-saira mb-6 leading-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-red-100 to-rose-200 drop-shadow-[0_6px_24px_rgba(0,0,0,0.45)] tracking-[0.01em]"
+              aria-label={fullHeroTitle}
+            >
+              <span className="sr-only">{fullHeroTitle}</span>
+              <span aria-hidden="true">
+                {typedHeroTitle}
+                <span className="typing-cursor text-white"></span>
               </span>
             </h1>
-            <p className="text-xl lg:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg sm:text-xl lg:text-2xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed drop-shadow-[0_4px_16px_rgba(0,0,0,0.45)]">
               Transform your business with our cutting-edge labeling technology, 
               premium materials, and expert solutions tailored to your industry needs.
             </p>
@@ -258,53 +299,140 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Brand Authority Section */}
+      <section className="py-14 sm:py-16 lg:py-20 bg-[#f8fafc] relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="work-showcase-bg"></div>
+          <div className="work-grid-overlay"></div>
+          <div className="absolute -top-32 left-[-8%] h-[420px] w-[420px] rounded-full bg-gradient-to-br from-red-200/35 via-rose-200/25 to-transparent blur-3xl"></div>
+          <div className="absolute -bottom-32 right-[-6%] h-[420px] w-[420px] rounded-full bg-gradient-to-br from-orange-200/25 via-red-200/20 to-transparent blur-3xl"></div>
+        </div>
+        <div className="container-custom px-4 sm:px-6 lg:px-8 relative z-10">
+          <header className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-red-600 to-red-700 text-white px-5 py-2 rounded-full text-xs sm:text-sm font-semibold mb-4 shadow-md">
+              Brand Authority
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+              Trusted Label Manufacturing at Scale
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 leading-relaxed">
+              Built for consistency, compliance, and nationwide delivery.
+            </p>
+          </header>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <article className="group rounded-2xl border border-red-100 bg-gradient-to-br from-red-50 to-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-600 to-rose-600 text-white flex items-center justify-center text-sm font-bold mb-4">01</div>
+              <h3 className="text-lg font-semibold text-gray-900">Trusted since 2011</h3>
+              <p className="mt-2 text-sm text-gray-600">
+                Over a decade of dependable label manufacturing for Indian businesses.
+              </p>
+            </article>
+            <article className="group rounded-2xl border border-red-100 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-600 to-rose-600 text-white flex items-center justify-center text-sm font-bold mb-4">02</div>
+              <h3 className="text-lg font-semibold text-gray-900">Industries Served</h3>
+              <p className="mt-2 text-sm text-gray-600">
+                Automotive, FMCG, Food, and Logistics.
+              </p>
+            </article>
+            <article className="group rounded-2xl border border-red-100 bg-gradient-to-br from-white to-red-50 p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-600 to-rose-600 text-white flex items-center justify-center text-sm font-bold mb-4">03</div>
+              <h3 className="text-lg font-semibold text-gray-900">High-Volume Manufacturing</h3>
+              <p className="mt-2 text-sm text-gray-600">
+                Scalable production capacity to meet large and recurring orders.
+              </p>
+            </article>
+            <article className="group rounded-2xl border border-red-100 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-600 to-rose-600 text-white flex items-center justify-center text-sm font-bold mb-4">04</div>
+              <h3 className="text-lg font-semibold text-gray-900">Quality Testing & Durability</h3>
+              <p className="mt-2 text-sm text-gray-600">
+                Rigorous testing for adhesion, print clarity, and long-term performance.
+              </p>
+            </article>
+            <article className="group rounded-2xl border border-red-100 bg-gradient-to-br from-red-50 to-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-600 to-rose-600 text-white flex items-center justify-center text-sm font-bold mb-4">05</div>
+              <h3 className="text-lg font-semibold text-gray-900">Fast Delivery Across India</h3>
+              <p className="mt-2 text-sm text-gray-600">
+                Reliable dispatches to keep your supply chain moving.
+              </p>
+            </article>
+            <article className="group rounded-2xl border border-red-100 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-600 to-rose-600 text-white flex items-center justify-center text-sm font-bold mb-4">06</div>
+              <h3 className="text-lg font-semibold text-gray-900">Process-Ready Compliance</h3>
+              <p className="mt-2 text-sm text-gray-600">
+                Documentation and consistency built for regulated industries.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
 
 
       {/* Showcase Section */}
-      <section className="py-16 lg:py-24 bg-gradient-to-br from-gray-50 via-white to-red-50 relative overflow-hidden">
+      <section className="py-16 lg:py-28 bg-[#f8fafc] relative overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-br from-red-400/20 to-rose-500/20 rounded-full blur-3xl animate-float-slow"></div>
-          <div className="absolute bottom-20 right-20 w-40 h-40 bg-gradient-to-br from-rose-400/20 to-red-500/20 rounded-full blur-3xl animate-float-medium"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-gradient-to-br from-red-300/10 to-rose-400/10 rounded-full blur-3xl animate-float-fast"></div>
+          <div className="work-showcase-bg"></div>
+          <div className="work-grid-overlay"></div>
+          <div className="absolute -top-40 left-[-10%] h-[520px] w-[520px] rounded-full bg-gradient-to-br from-red-200/40 via-rose-200/30 to-transparent blur-3xl"></div>
+          <div className="absolute -bottom-40 right-[-5%] h-[520px] w-[520px] rounded-full bg-gradient-to-br from-orange-200/30 via-red-200/20 to-transparent blur-3xl"></div>
+          <div className="absolute top-1/3 right-[10%] h-[260px] w-[260px] rounded-full bg-gradient-to-br from-sky-200/40 via-blue-200/20 to-transparent blur-3xl"></div>
         </div>
 
         <div className="container-custom px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Section Header */}
           <div className="text-center mb-12 lg:mb-16">
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-3 rounded-full text-sm font-semibold mb-6 shadow-lg">
-              <SparklesIcon className="w-4 h-4" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-red-200 bg-white px-6 py-3 text-sm font-semibold text-red-700 shadow-[0_10px_30px_rgba(15,23,42,0.08)]">
+              <SparklesIcon className="w-4 h-4 text-red-600" />
               Our Work
             </div>
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
-              Showcasing{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-red-700 to-red-800">
-                Excellence
+            <h2 className="mt-6 text-4xl sm:text-5xl lg:text-6xl font-semibold text-gray-900 leading-tight mb-6">
+              Portfolio That Feels{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-rose-600 to-orange-500">
+                Premium
               </span>
             </h2>
-            <p className="text-xl lg:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-light">
-              Discover our portfolio of premium labeling solutions and innovative projects that have transformed businesses across industries.
+            <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Signature labeling, hardware, and accessory programs crafted to elevate brands with clarity, precision, and striking shelf impact.
             </p>
           </div>
 
           {/* Three Stacked Marquee Galleries */}
           <div className="space-y-16">
             {/* Marquee 1 - Sticker Labels */}
-            <div className="relative min-h-[400px] bg-gray-900 rounded-3xl overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"></div>
-              <div className="relative z-10 p-8">
+            <div className="work-marquee-shell">
+              <div className="work-marquee-inner min-h-[420px]">
+                <div className="relative z-10 p-8 lg:p-10">
                 <div className="text-center mb-8">
-                  <h3 className="text-3xl font-bold text-white mb-2">Sticker Labels</h3>
-                  <p className="text-gray-300">Premium labeling solutions for all your needs</p>
+                <p className="text-xs uppercase tracking-[0.4em] text-gray-500 mb-3">Category 01</p>
+                <h3 className="text-3xl font-semibold text-gray-900 mb-2">
+                  <a
+                    href="/products/sticker-labels"
+                    className="hover:text-red-600 transition-colors"
+                  >
+                    Sticker Labels
+                  </a>
+                </h3>
+                <p className="text-gray-600">
+                  Premium labeling solutions for all your needs. Explore{' '}
+                  <a
+                    href="/products/sticker-labels"
+                    className="text-red-600 hover:text-red-700 underline underline-offset-4"
+                  >
+                    Sticker Labels
+                  </a>{' '}
+                  and barcode labels.
+                </p>
                 </div>
                 <div className="marquee-container-simple">
                   <div className="marquee-track-simple">
                     {/* Sticker Labels Images */}
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/Sticker_L/HomeG1.jpg"
-                          alt="Sticker Labels"
+                          alt="Custom barcode label rolls for product packaging"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -313,10 +441,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/Sticker_L/HomeG2.jpg"
-                          alt="Sticker Labels"
+                          alt="Thermal transfer barcode labels on rolls"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -325,10 +453,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/Sticker_L/Phero122.jpg"
-                          alt="Sticker Labels"
+                          alt="Hologram security labels for brand protection"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -337,10 +465,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/Sticker_L/Chrome.jpg"
-                          alt="Sticker Labels"
+                          alt="Chrome paper product labels with glossy finish"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -349,10 +477,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/Sticker_L/Polyster.jpg"
-                          alt="Sticker Labels"
+                          alt="Polyester labels for durable applications"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -361,10 +489,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/Sticker_L/BillingRolls.jpg"
-                          alt="Sticker Labels"
+                          alt="Direct thermal billing rolls for POS systems"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -373,10 +501,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/Sticker_L/Taffeta.jpg"
-                          alt="Sticker Labels"
+                          alt="Taffeta labels for garment care and branding"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -386,10 +514,10 @@ export default function Home() {
                     </div>
                     {/* Duplicate Set */}
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/Sticker_L/HomeG1.jpg"
-                          alt="Sticker Labels"
+                          alt="Custom barcode label rolls for product packaging"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -398,10 +526,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/Sticker_L/HomeG2.jpg"
-                          alt="Sticker Labels"
+                          alt="Thermal transfer barcode labels on rolls"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -410,10 +538,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/Sticker_L/Phero122.jpg"
-                          alt="Sticker Labels"
+                          alt="Hologram security labels for brand protection"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -422,10 +550,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/Sticker_L/Chrome.jpg"
-                          alt="Sticker Labels"
+                          alt="Chrome paper product labels with glossy finish"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -434,10 +562,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/Sticker_L/Polyster.jpg"
-                          alt="Sticker Labels"
+                          alt="Polyester labels for durable applications"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -446,10 +574,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/Sticker_L/BillingRolls.jpg"
-                          alt="Sticker Labels"
+                          alt="Direct thermal billing rolls for POS systems"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -458,10 +586,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/Sticker_L/Taffeta.jpg"
-                          alt="Sticker Labels"
+                          alt="Taffeta labels for garment care and branding"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -470,26 +598,44 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
+                </div>
                 </div>
               </div>
             </div>
 
             {/* Marquee 2 - Hardware Solutions */}
-            <div className="relative min-h-[400px] bg-gray-900 rounded-3xl overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"></div>
-              <div className="relative z-10 p-8">
+            <div className="work-marquee-shell">
+              <div className="work-marquee-inner min-h-[420px]">
+                <div className="relative z-10 p-8 lg:p-10">
                 <div className="text-center mb-8">
-                  <h3 className="text-3xl font-bold text-white mb-2">Hardware Solutions</h3>
-                  <p className="text-gray-300">Cutting-edge hardware for all your business needs</p>
+                <p className="text-xs uppercase tracking-[0.4em] text-gray-500 mb-3">Category 02</p>
+                <h3 className="text-3xl font-semibold text-gray-900 mb-2">
+                  <a
+                    href="/hardwares"
+                    className="hover:text-red-600 transition-colors"
+                  >
+                    Hardware Solutions
+                  </a>
+                </h3>
+                <p className="text-gray-600">
+                  Cutting-edge hardware for all your business needs. See our{' '}
+                  <a
+                    href="/hardwares"
+                    className="text-red-600 hover:text-red-700 underline underline-offset-4"
+                  >
+                    Hardwares
+                  </a>
+                  .
+                </p>
                 </div>
                 <div className="marquee-container-simple">
                   <div className="marquee-track-simple">
                     {/* Hardware Images */}
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/Hardwares/2Dscanner.jpg"
-                          alt="Hardware Solutions"
+                          alt="2D barcode scanner for inventory and retail"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -498,10 +644,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/Hardwares/IndustrialP.jpeg"
-                          alt="Hardware Solutions"
+                          alt="Industrial barcode printer for high-volume labeling"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -510,10 +656,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/Hardwares/idcardPrinter.jpeg"
-                          alt="Hardware Solutions"
+                          alt="ID card printer for access control and IDs"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -522,10 +668,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/Hardwares/POS.jpeg"
-                          alt="Hardware Solutions"
+                          alt="POS system for retail billing and labeling"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -534,10 +680,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/Hardwares/Original.jpg"
-                          alt="Hardware Solutions"
+                          alt="Desktop barcode printer for office labeling"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -546,10 +692,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/Hardwares/scanner1.jpg"
-                          alt="Hardware Solutions"
+                          alt="Handheld barcode scanner for logistics"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -558,10 +704,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/Hardwares/barcodeP.jpg"
-                          alt="Hardware Solutions"
+                          alt="Barcode printer for shipping and warehouse labels"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -571,10 +717,10 @@ export default function Home() {
                     </div>
                     {/* Duplicate Set */}
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/Hardwares/2Dscanner.jpg"
-                          alt="Hardware Solutions"
+                          alt="2D barcode scanner for inventory and retail"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -583,10 +729,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/Hardwares/IndustrialP.jpeg"
-                          alt="Hardware Solutions"
+                          alt="Industrial barcode printer for high-volume labeling"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -595,10 +741,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/Hardwares/idcardPrinter.jpeg"
-                          alt="Hardware Solutions"
+                          alt="ID card printer for access control and IDs"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -607,10 +753,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/Hardwares/POS.jpeg"
-                          alt="Hardware Solutions"
+                          alt="POS system for retail billing and labeling"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -619,10 +765,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/Hardwares/Original.jpg"
-                          alt="Hardware Solutions"
+                          alt="Desktop barcode printer for office labeling"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -631,10 +777,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/Hardwares/scanner1.jpg"
-                          alt="Hardware Solutions"
+                          alt="Handheld barcode scanner for logistics"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -643,10 +789,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/Hardwares/barcodeP.jpg"
-                          alt="Hardware Solutions"
+                          alt="Barcode printer for shipping and warehouse labels"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -655,26 +801,44 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
+                </div>
                 </div>
               </div>
             </div>
 
             {/* Marquee 3 - Accessories */}
-            <div className="relative min-h-[400px] bg-gray-900 rounded-3xl overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"></div>
-              <div className="relative z-10 p-8">
+            <div className="work-marquee-shell">
+              <div className="work-marquee-inner min-h-[420px]">
+                <div className="relative z-10 p-8 lg:p-10">
                 <div className="text-center mb-8">
-                  <h3 className="text-3xl font-bold text-white mb-2">Accessories</h3>
-                  <p className="text-gray-300">Essential accessories to complete your setup</p>
+                <p className="text-xs uppercase tracking-[0.4em] text-gray-500 mb-3">Category 03</p>
+                <h3 className="text-3xl font-semibold text-gray-900 mb-2">
+                  <a
+                    href="/products/ribbons"
+                    className="hover:text-red-600 transition-colors"
+                  >
+                    Accessories
+                  </a>
+                </h3>
+                <p className="text-gray-600">
+                  Essential accessories to complete your setup. Browse{' '}
+                  <a
+                    href="/products/ribbons"
+                    className="text-red-600 hover:text-red-700 underline underline-offset-4"
+                  >
+                    Accessories
+                  </a>
+                  .
+                </p>
                 </div>
                 <div className="marquee-container-simple">
                   <div className="marquee-track-simple">
                     {/* Accessories Images */}
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/accessories/Resin.jpg"
-                          alt="Accessories"
+                          alt="Resin ribbon for durable thermal transfer labels"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -683,10 +847,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/accessories/Misc.jpg"
-                          alt="Accessories"
+                          alt="Labeling accessories and printer supplies"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -695,10 +859,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/accessories/RFID2.jpeg"
-                          alt="Accessories"
+                          alt="RFID labels for asset tracking"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -707,10 +871,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/accessories/RFID1.jpeg"
-                          alt="Accessories"
+                          alt="RFID tags for inventory management"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -719,10 +883,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/accessories/BillingRolls.jpg"
-                          alt="Accessories"
+                          alt="Thermal paper rolls for billing and receipts"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -731,10 +895,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/accessories/HomeG5.jpg"
-                          alt="Accessories"
+                          alt="Label materials for product and barcode labels"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -744,10 +908,10 @@ export default function Home() {
                     </div>
                     {/* Duplicate Set */}
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/accessories/Resin.jpg"
-                          alt="Accessories"
+                          alt="Resin ribbon for durable thermal transfer labels"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -756,10 +920,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/accessories/Misc.jpg"
-                          alt="Accessories"
+                          alt="Labeling accessories and printer supplies"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -768,10 +932,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/accessories/RFID2.jpeg"
-                          alt="Accessories"
+                          alt="RFID labels for asset tracking"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -780,10 +944,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/accessories/RFID1.jpeg"
-                          alt="Accessories"
+                          alt="RFID tags for inventory management"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -792,10 +956,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/accessories/BillingRolls.jpg"
-                          alt="Accessories"
+                          alt="Thermal paper rolls for billing and receipts"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -804,10 +968,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="marquee-slide-simple">
-                      <div className="group relative h-[300px] w-[400px] overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-105">
+                      <div className="work-image-card group relative h-[300px] w-[400px] overflow-hidden">
                         <OptimizedImage
                           src="/images/Homepage/accessories/HomeG5.jpg"
-                          alt="Accessories"
+                          alt="Label materials for product and barcode labels"
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="400px"
@@ -816,6 +980,7 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
+                </div>
                 </div>
               </div>
             </div>
@@ -823,13 +988,13 @@ export default function Home() {
 
           {/* Call to Action */}
           <div className="text-center mt-12 lg:mt-16">
-            <p className="text-lg text-gray-600 mb-6">Ready to see what we can do for your business?</p>
+            <p className="text-lg text-gray-700 mb-6">Ready to see what we can do for your business?</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/products" className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-red-600/25">
+              <a href="/products" className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-[1.02] shadow-[0_18px_40px_rgba(239,68,68,0.3)]">
                 <TagIcon className="w-5 h-5 mr-2" />
                 Explore Our Products
               </a>
-              <a href="/contact" className="inline-flex items-center justify-center px-8 py-4 bg-white border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
+              <a href="/contact" className="inline-flex items-center justify-center px-8 py-4 bg-white border border-gray-200 text-gray-700 hover:border-red-200 hover:text-red-700 font-semibold rounded-full transition-all duration-300 transform hover:scale-[1.02] shadow-[0_12px_30px_rgba(15,23,42,0.08)]">
                 <ArrowRightIcon className="w-5 h-5 mr-2" />
                 Get In Touch
               </a>
@@ -877,7 +1042,23 @@ export default function Home() {
                   </span>
                 </h3>
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  Established in 2011, SDB LABEL has been at the forefront of providing comprehensive business solutions across India. We specialize in premium labels, cutting-edge hardware, innovative software, and expert consultancy services.
+                  Established in 2011, SDB LABEL has been at the forefront of providing comprehensive business solutions across India. We specialize in{' '}
+                  <a href="/products" className="text-red-600 font-semibold hover:text-red-700 underline underline-offset-4">
+                    premium label manufacturing
+                  </a>
+                  ,{' '}
+                  <a href="/hardwares" className="text-red-600 font-semibold hover:text-red-700 underline underline-offset-4">
+                    barcode printing hardware
+                  </a>
+                  ,{' '}
+                  <a href="/softwares" className="text-red-600 font-semibold hover:text-red-700 underline underline-offset-4">
+                    labeling software
+                  </a>
+                  , and{' '}
+                  <a href="/consultancy" className="text-red-600 font-semibold hover:text-red-700 underline underline-offset-4">
+                    consultancy services
+                  </a>
+                  .
                 </p>
                 <p className="text-lg text-gray-600 leading-relaxed">
                   Our commitment to quality, innovation, and customer satisfaction has made us a trusted partner for businesses of all sizes, from startups to large enterprises.
@@ -941,7 +1122,7 @@ export default function Home() {
               <div className="relative h-[500px] lg:h-[600px] rounded-3xl overflow-hidden shadow-2xl">
                 <OptimizedImage
                   src="/images/Homepage/About.jpg"
-                  alt="SDB LABEL Team - About Us"
+                  alt="SDB Label manufacturing team and quality control facility"
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 50vw"
@@ -1073,6 +1254,176 @@ export default function Home() {
               <TagIcon className="w-5 h-5 mr-2" />
               Get a Quick Quote
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Industries We Serve */}
+      <section className="py-16 lg:py-20 bg-gradient-to-br from-white via-red-50/30 to-white">
+        <div className="container-custom px-4 sm:px-6 lg:px-8">
+          <header className="text-center max-w-3xl mx-auto mb-10 lg:mb-12">
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-red-600 to-red-700 text-white px-5 py-2 rounded-full text-xs sm:text-sm font-semibold mb-4 shadow-md">
+              Industries We Serve
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+              Industry-Specific Barcode, Thermal &amp; Hologram Labels
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600 leading-relaxed">
+              Trusted label manufacturing for high-compliance and high-volume sectors across India.
+            </p>
+          </header>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <a
+              href="/industries/automotive"
+              className="group rounded-2xl border border-red-100 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+            >
+              <h3 className="text-lg font-semibold text-gray-900 group-hover:text-red-700 transition-colors">
+                Barcode labels for automotive manufacturing
+              </h3>
+              <p className="mt-2 text-sm text-gray-600">
+                Durable labels for parts traceability and supply-chain compliance.
+              </p>
+            </a>
+            <a
+              href="/industries/fmcg"
+              className="group rounded-2xl border border-red-100 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+            >
+              <h3 className="text-lg font-semibold text-gray-900 group-hover:text-red-700 transition-colors">
+                FMCG product labels and packaging solutions
+              </h3>
+              <p className="mt-2 text-sm text-gray-600">
+                High-clarity print for fast-moving consumer goods.
+              </p>
+            </a>
+            <a
+              href="/industries#food-beverages"
+              className="group rounded-2xl border border-red-100 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+            >
+              <h3 className="text-lg font-semibold text-gray-900 group-hover:text-red-700 transition-colors">
+                Food &amp; beverage labels with safety compliance
+              </h3>
+              <p className="mt-2 text-sm text-gray-600">
+                Thermal and barcode labels built for cold-chain and packaging.
+              </p>
+            </a>
+            <a
+              href="/industries#logistics"
+              className="group rounded-2xl border border-red-100 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+            >
+              <h3 className="text-lg font-semibold text-gray-900 group-hover:text-red-700 transition-colors">
+                Logistics labels for tracking and distribution
+              </h3>
+              <p className="mt-2 text-sm text-gray-600">
+                Scan-ready labels for warehouses, shipping, and delivery.
+              </p>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Action CTAs */}
+      <section className="py-16 lg:py-20 bg-gradient-to-br from-rose-50 via-white to-red-100">
+        <div className="container-custom px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-10 lg:mb-12">
+            <div className="inline-flex items-center gap-2 bg-red-600 text-white px-5 py-2 rounded-full text-xs sm:text-sm font-semibold shadow-md">
+              Fast Action
+            </div>
+            <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+              Get Expert Help for Barcode &amp; Labeling Challenges
+            </h2>
+            <p className="mt-3 text-gray-600 text-base sm:text-lg">
+              Quick, practical support from the SDB Label team — across India.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            <div className="bg-white rounded-2xl p-6 shadow-lg border border-red-100">
+              <h3 className="text-xl font-bold text-gray-900">Request a Free Label Audit</h3>
+              <p className="mt-2 text-sm text-gray-600">
+                Identify print, material, and adhesion issues before they impact production.
+              </p>
+              <div className="mt-4 flex flex-col gap-3">
+                <a
+                  href="/contact?utm_source=homepage&utm_medium=cta&utm_campaign=free-label-audit"
+                  className="inline-flex items-center justify-center px-4 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-colors"
+                >
+                  Request Audit
+                </a>
+                <div className="flex gap-3">
+                  <a
+                    href="https://wa.me/919654566078?text=I%20want%20a%20free%20label%20audit.%20utm_source%3Dhomepage%26utm_medium%3Dcta%26utm_campaign%3Dfree-label-audit"
+                    className="flex-1 inline-flex items-center justify-center px-3 py-2 border border-red-200 text-red-700 font-semibold rounded-lg hover:bg-red-50 transition-colors"
+                  >
+                    WhatsApp
+                  </a>
+                  <a
+                    href="tel:+919654566078"
+                    className="flex-1 inline-flex items-center justify-center px-3 py-2 border border-red-200 text-red-700 font-semibold rounded-lg hover:bg-red-50 transition-colors"
+                  >
+                    Call Now
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-2xl p-6 shadow-lg border border-red-100">
+              <h3 className="text-xl font-bold text-gray-900">Fix Barcode Scan Failures</h3>
+              <p className="mt-2 text-sm text-gray-600">
+                Improve scan rates with the right material, print quality, and barcode specs.
+              </p>
+              <div className="mt-4 flex flex-col gap-3">
+                <a
+                  href="/contact?utm_source=homepage&utm_medium=cta&utm_campaign=barcode-scan-fix"
+                  className="inline-flex items-center justify-center px-4 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-colors"
+                >
+                  Get Scan Fix
+                </a>
+                <div className="flex gap-3">
+                  <a
+                    href="https://wa.me/919654566078?text=We%20have%20barcode%20scan%20failures.%20utm_source%3Dhomepage%26utm_medium%3Dcta%26utm_campaign%3Dbarcode-scan-fix"
+                    className="flex-1 inline-flex items-center justify-center px-3 py-2 border border-red-200 text-red-700 font-semibold rounded-lg hover:bg-red-50 transition-colors"
+                  >
+                    WhatsApp
+                  </a>
+                  <a
+                    href="tel:+919654566078"
+                    className="flex-1 inline-flex items-center justify-center px-3 py-2 border border-red-200 text-red-700 font-semibold rounded-lg hover:bg-red-50 transition-colors"
+                  >
+                    Call Now
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-2xl p-6 shadow-lg border border-red-100">
+              <h3 className="text-xl font-bold text-gray-900">Get a Quote in 30 Minutes</h3>
+              <p className="mt-2 text-sm text-gray-600">
+                Fast pricing for barcode labels, thermal rolls, and hologram security labels.
+              </p>
+              <div className="mt-4 flex flex-col gap-3">
+                <a
+                  href="/get-quotation?utm_source=homepage&utm_medium=cta&utm_campaign=quote-30-min"
+                  className="inline-flex items-center justify-center px-4 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-colors"
+                >
+                  Get 30‑Min Quote
+                </a>
+                <div className="flex gap-3">
+                  <a
+                    href="https://wa.me/919654566078?text=Please%20share%20a%2030%20minute%20quote.%20utm_source%3Dhomepage%26utm_medium%3Dcta%26utm_campaign%3Dquote-30-min"
+                    className="flex-1 inline-flex items-center justify-center px-3 py-2 border border-red-200 text-red-700 font-semibold rounded-lg hover:bg-red-50 transition-colors"
+                  >
+                    WhatsApp
+                  </a>
+                  <a
+                    href="tel:+919654566078"
+                    className="flex-1 inline-flex items-center justify-center px-3 py-2 border border-red-200 text-red-700 font-semibold rounded-lg hover:bg-red-50 transition-colors"
+                  >
+                    Call Now
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -1228,281 +1579,195 @@ export default function Home() {
       </section>
 
       {/* Professional Get In Touch Section */}
-      <section className="relative py-20 lg:py-32 overflow-hidden">
-        {/* Sophisticated Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black">
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.02%22%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2230%22%20r%3D%221%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-red-600/5 via-transparent to-red-800/5"></div>
-        </div>
-
-        {/* Subtle Floating Elements */}
+      <section className="relative py-20 lg:py-28 bg-gradient-to-br from-white via-red-50/40 to-white">
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-r from-red-600/10 to-red-800/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 right-20 w-80 h-80 bg-gradient-to-r from-red-800/8 to-red-900/8 rounded-full blur-3xl"></div>
+          <div className="absolute top-16 left-10 w-72 h-72 bg-gradient-to-br from-red-200/40 to-rose-200/40 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-16 right-10 w-80 h-80 bg-gradient-to-br from-rose-200/30 to-red-200/30 rounded-full blur-3xl"></div>
         </div>
 
         <div className="container-custom px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Header Section */}
-          <div className="text-center mb-16 lg:mb-20">
-            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-red-600 to-red-700 text-white px-8 py-4 rounded-full text-sm font-bold mb-8 shadow-2xl shadow-red-600/25 backdrop-blur-sm border border-red-500/20">
-              <SparklesIcon className="w-5 h-5" />
-              Get In Touch
-            </div>
-            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-tight mb-8">
-              Let's{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-600">
-                Work Together
-              </span>
-            </h2>
-            <p className="text-xl lg:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed font-light">
-              Ready to transform your business with premium labeling solutions? 
-              <br className="hidden sm:block" />
-              Get in touch with our experts today and experience the difference.
-            </p>
-          </div>
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+            {/* Intro + Contact Methods */}
+            <div>
+              <div className="inline-flex items-center gap-2 bg-red-600 text-white px-5 py-2 rounded-full text-xs sm:text-sm font-semibold shadow-md mb-6">
+                Get In Touch
+              </div>
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+                Talk to a Labeling Specialist
+              </h2>
+              <p className="mt-4 text-lg text-gray-600 leading-relaxed">
+                Tell us your application, environment, and volume needs. We’ll recommend the right material, print method, and finishing.
+              </p>
 
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-            {/* Professional Contact Form */}
-            <div className="group relative">
-              <div className="absolute -inset-1 bg-gradient-to-r from-red-600 to-red-800 rounded-3xl blur opacity-50 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
-              <div className="relative bg-black/80 backdrop-blur-xl rounded-3xl p-8 lg:p-12 border border-red-500/20 shadow-2xl">
-                <div className="flex items-center gap-3 mb-8">
-                  <div className="w-12 h-12 bg-gradient-to-r from-red-600 to-red-700 rounded-xl flex items-center justify-center">
-                    <span className="text-white text-xl">💬</span>
-                  </div>
-                  <h3 className="text-3xl lg:text-4xl font-bold text-white">
-                    Send us a Message
-                  </h3>
+              <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                <div className="rounded-2xl border border-red-100 bg-white p-5 shadow-sm">
+                  <p className="text-xs uppercase tracking-widest text-gray-400">Email</p>
+                  <a href="mailto:info@sdblabel.com" className="mt-2 block text-base font-semibold text-gray-900 hover:text-red-700">
+                    info@sdblabel.com
+                  </a>
                 </div>
-                
-                <form ref={homepageFormRef} onSubmit={handleHomepageSubmit} className="space-y-6">
-                  <div className="grid sm:grid-cols-2 gap-6">
-                    <div className="group">
-                      <label htmlFor="firstName" className="block text-sm font-semibold text-white mb-3 group-focus-within:text-red-400 transition-colors">
-                        First Name
-                      </label>
-                      <input
-                        type="text"
-                        id="firstName"
-                        name="firstName"
-                        value={homepageFormData.firstName}
-                        onChange={handleHomepageInputChange}
-                        required
-                        className="w-full px-6 py-4 bg-white border border-gray-300 rounded-2xl focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 text-gray-700 placeholder-gray-400 hover:bg-gray-50"
-                        placeholder="Enter your first name"
-                      />
-                    </div>
-                    <div className="group">
-                      <label htmlFor="lastName" className="block text-sm font-semibold text-white mb-3 group-focus-within:text-red-400 transition-colors">
-                        Last Name
-                      </label>
-                      <input
-                        type="text"
-                        id="lastName"
-                        name="lastName"
-                        value={homepageFormData.lastName}
-                        onChange={handleHomepageInputChange}
-                        required
-                        className="w-full px-6 py-4 bg-white border border-gray-300 rounded-2xl focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 text-gray-700 placeholder-gray-400 hover:bg-gray-50"
-                        placeholder="Enter your last name"
-                      />
-                    </div>
-                  </div>
-                  
-                  <div className="group">
-                    <label htmlFor="email" className="block text-sm font-semibold text-white mb-3 group-focus-within:text-red-400 transition-colors">
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={homepageFormData.email}
-                      onChange={handleHomepageInputChange}
-                      required
-                      className="w-full px-6 py-4 bg-white border border-gray-300 rounded-2xl focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 text-gray-700 placeholder-gray-400 hover:bg-gray-50"
-                      placeholder="your.email@company.com"
-                    />
-                  </div>
-                  
-                  <div className="group">
-                    <label htmlFor="phone" className="block text-sm font-semibold text-white mb-3 group-focus-within:text-red-400 transition-colors">
-                      Phone Number
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      value={homepageFormData.phone}
-                      onChange={handleHomepageInputChange}
-                      required
-                      className="w-full px-6 py-4 bg-white border border-gray-300 rounded-2xl focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 text-gray-700 placeholder-gray-400 hover:bg-gray-50"
-                      placeholder="+91 98765 43210"
-                    />
-                  </div>
-                  
-                  <div className="group">
-                    <label htmlFor="company" className="block text-sm font-semibold text-white mb-3 group-focus-within:text-red-400 transition-colors">
-                      Company Name
+                <div className="rounded-2xl border border-red-100 bg-white p-5 shadow-sm">
+                  <p className="text-xs uppercase tracking-widest text-gray-400">Phone</p>
+                  <a href="tel:+919625520466" className="mt-2 block text-base font-semibold text-gray-900 hover:text-red-700">
+                    +91 96255 20466
+                  </a>
+                </div>
+                <div className="rounded-2xl border border-red-100 bg-white p-5 shadow-sm">
+                  <p className="text-xs uppercase tracking-widest text-gray-400">WhatsApp</p>
+                  <a href="https://wa.me/919654566078" className="mt-2 block text-base font-semibold text-gray-900 hover:text-red-700">
+                    Chat on WhatsApp
+                  </a>
+                </div>
+                <div className="rounded-2xl border border-red-100 bg-white p-5 shadow-sm">
+                  <p className="text-xs uppercase tracking-widest text-gray-400">Location</p>
+                  <p className="mt-2 text-base font-semibold text-gray-900">Delhi, India</p>
+                </div>
+              </div>
+
+              <div className="mt-10 rounded-2xl border border-red-100 bg-white p-6 shadow-sm">
+                <h3 className="text-lg font-semibold text-gray-900">Why companies choose SDB LABEL</h3>
+                <ul className="mt-4 space-y-3 text-sm text-gray-600">
+                  <li className="flex items-start gap-3">
+                    <span className="mt-1 h-2 w-2 rounded-full bg-red-500"></span>
+                    Premium materials, tested for durability and scan accuracy.
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="mt-1 h-2 w-2 rounded-full bg-red-500"></span>
+                    Fast production with consistent quality control.
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="mt-1 h-2 w-2 rounded-full bg-red-500"></span>
+                    Support for barcode, thermal, RFID, and hologram labels.
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Contact Form */}
+            <div className="bg-white rounded-3xl p-8 lg:p-10 border border-red-100 shadow-xl">
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-10 h-10 bg-gradient-to-r from-red-600 to-red-700 rounded-xl flex items-center justify-center">
+                  <ChatBubbleLeftRightIcon className="w-5 h-5 text-white" />
+                </div>
+                <h3 className="text-2xl lg:text-3xl font-bold text-gray-900">
+                  Send a Quick Request
+                </h3>
+              </div>
+
+              <form ref={homepageFormRef} onSubmit={handleHomepageSubmit} className="space-y-5">
+                <div className="grid sm:grid-cols-2 gap-5">
+                  <div>
+                    <label htmlFor="firstName" className="block text-sm font-semibold text-gray-700 mb-2">
+                      First Name
                     </label>
                     <input
                       type="text"
-                      id="company"
-                      name="company"
-                      value={homepageFormData.company}
-                      onChange={handleHomepageInputChange}
-                      className="w-full px-6 py-4 bg-white border border-gray-300 rounded-2xl focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 text-gray-700 placeholder-gray-400 hover:bg-gray-50"
-                      placeholder="Your company name"
-                    />
-                  </div>
-                  
-                  <div className="group">
-                    <label htmlFor="message" className="block text-sm font-semibold text-white mb-3 group-focus-within:text-red-400 transition-colors">
-                      Your Message
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={homepageFormData.message}
+                      id="firstName"
+                      name="firstName"
+                      value={homepageFormData.firstName}
                       onChange={handleHomepageInputChange}
                       required
-                      rows={5}
-                      className="w-full px-6 py-4 bg-white border border-gray-300 rounded-2xl focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 text-gray-700 placeholder-gray-400 resize-none hover:bg-gray-50"
-                      placeholder="Tell us about your project requirements..."
+                      className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all text-gray-800 placeholder-gray-400"
+                      placeholder="Enter your first name"
                     />
                   </div>
-                  
-                  <button
-                    type="submit"
-                    disabled={isHomepageSubmitting}
-                    className="group relative w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold py-5 px-8 rounded-2xl transition-all duration-500 transform hover:scale-105 shadow-2xl shadow-red-600/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none overflow-hidden"
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <span className="relative flex items-center justify-center gap-3">
-                      {isHomepageSubmitting ? (
-                        <>
-                          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                          Sending Message...
-                        </>
-                      ) : (
-                        <>
-                          Send Message
-                        </>
-                      )}
-                    </span>
-                  </button>
-                </form>
-              </div>
-            </div>
-
-            {/* Stunning Contact Information */}
-            <div className="space-y-8">
-              {/* Why Choose Us Card */}
-              <div className="group relative">
-                <div className="absolute -inset-1 bg-gradient-to-r from-red-600 to-red-800 rounded-2xl blur opacity-50 group-hover:opacity-75 transition duration-1000"></div>
-                <div className="relative bg-black/80 backdrop-blur-xl rounded-2xl p-8 border border-red-500/20 shadow-2xl">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-10 h-10 bg-gradient-to-r from-red-600 to-red-700 rounded-xl flex items-center justify-center">
-                      <ShieldCheckIcon className="w-6 h-6 text-white" />
-                    </div>
-                    <h4 className="text-2xl font-bold text-white">Why Choose Us?</h4>
-                  </div>
-                  <ul className="space-y-4">
-                    <li className="flex items-start gap-4 group/item">
-                      <div className="w-6 h-6 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center mt-1 flex-shrink-0 group-hover/item:scale-110 transition-transform">
-                        <CheckCircleIcon className="w-4 h-4 text-white" />
-                      </div>
-                      <span className="text-gray-300 group-hover/item:text-white transition-colors">Premium quality materials and cutting-edge technology</span>
-                    </li>
-                    <li className="flex items-start gap-4 group/item">
-                      <div className="w-6 h-6 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center mt-1 flex-shrink-0 group-hover/item:scale-110 transition-transform">
-                        <CheckCircleIcon className="w-4 h-4 text-white" />
-                      </div>
-                      <span className="text-gray-300 group-hover/item:text-white transition-colors">Custom solutions tailored to your industry needs</span>
-                    </li>
-                    <li className="flex items-start gap-4 group/item">
-                      <div className="w-6 h-6 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center mt-1 flex-shrink-0 group-hover/item:scale-110 transition-transform">
-                        <CheckCircleIcon className="w-4 h-4 text-white" />
-                      </div>
-                      <span className="text-gray-300 group-hover/item:text-white transition-colors">Expert consultation and ongoing support</span>
-                    </li>
-                    <li className="flex items-start gap-4 group/item">
-                      <div className="w-6 h-6 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center mt-1 flex-shrink-0 group-hover/item:scale-110 transition-transform">
-                        <CheckCircleIcon className="w-4 h-4 text-white" />
-                      </div>
-                      <span className="text-gray-300 group-hover/item:text-white transition-colors">Fast turnaround times and reliable delivery</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* Quick Contact Card */}
-              <div className="group relative">
-                <div className="absolute -inset-1 bg-gradient-to-r from-red-700 to-red-900 rounded-2xl blur opacity-50 group-hover:opacity-75 transition duration-1000"></div>
-                <div className="relative bg-black/80 backdrop-blur-xl rounded-2xl p-8 border border-red-500/20 shadow-2xl">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-10 h-10 bg-gradient-to-r from-red-600 to-red-700 rounded-xl flex items-center justify-center">
-                      <span className="text-white text-xl">📞</span>
-                    </div>
-                    <h4 className="text-2xl font-bold text-white">Quick Contact</h4>
-                  </div>
-                  <div className="space-y-6">
-                    <div className="flex items-center gap-4 group/item">
-                      <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-red-600 rounded-xl flex items-center justify-center group-hover/item:scale-110 transition-transform">
-                        <span className="text-white text-lg">📧</span>
-                      </div>
-                      <div>
-                        <p className="text-sm text-gray-400 uppercase tracking-wider">Email</p>
-                        <a href="mailto:info@sdblabel.com" className="font-bold text-white text-lg group-hover/item:text-red-400 transition-colors hover:underline">info@sdblabel.com</a>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-4 group/item">
-                      <div className="w-12 h-12 bg-gradient-to-r from-red-600 to-red-700 rounded-xl flex items-center justify-center group-hover/item:scale-110 transition-transform">
-                        <span className="text-white text-lg">📞</span>
-                      </div>
-                      <div>
-                        <p className="text-sm text-gray-400 uppercase tracking-wider">Phone</p>
-                        <a href="tel:+919625520466" className="font-bold text-white text-lg group-hover/item:text-red-400 transition-colors hover:underline">+91 96255 20466</a>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-4 group/item">
-                      <div className="w-12 h-12 bg-gradient-to-r from-red-700 to-red-800 rounded-xl flex items-center justify-center group-hover/item:scale-110 transition-transform">
-                        <span className="text-white text-lg">📍</span>
-                      </div>
-                      <div>
-                        <p className="text-sm text-gray-400 uppercase tracking-wider">Location</p>
-                        <p className="font-bold text-white text-lg group-hover/item:text-red-400 transition-colors">Delhi, India</p>
-                      </div>
-                    </div>
+                  <div>
+                    <label htmlFor="lastName" className="block text-sm font-semibold text-gray-700 mb-2">
+                      Last Name
+                    </label>
+                    <input
+                      type="text"
+                      id="lastName"
+                      name="lastName"
+                      value={homepageFormData.lastName}
+                      onChange={handleHomepageInputChange}
+                      required
+                      className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all text-gray-800 placeholder-gray-400"
+                      placeholder="Enter your last name"
+                    />
                   </div>
                 </div>
-              </div>
 
-              {/* Response Time Card */}
-              <div className="group relative">
-                <div className="absolute -inset-1 bg-gradient-to-r from-red-800 to-red-900 rounded-2xl blur opacity-50 group-hover:opacity-75 transition duration-1000"></div>
-                <div className="relative bg-black/80 backdrop-blur-xl rounded-2xl p-8 border border-red-500/20 shadow-2xl">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 bg-gradient-to-r from-red-600 to-red-700 rounded-xl flex items-center justify-center">
-                      <span className="text-white text-xl">⚡</span>
-                    </div>
-                    <h4 className="text-2xl font-bold text-white">Lightning Fast Response</h4>
-                  </div>
-                  <p className="text-gray-300 text-lg mb-6">
-                    Get a response within <span className="text-red-400 font-bold">2 hours</span> during business hours. 
-                    We're committed to providing exceptional service.
-                  </p>
-                  <a 
-                    href="/contact" 
-                    className="inline-flex items-center justify-center w-full px-6 py-4 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-red-600/25"
-                  >
-                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                    Contact Us Now
-                  </a>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={homepageFormData.email}
+                    onChange={handleHomepageInputChange}
+                    required
+                    className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all text-gray-800 placeholder-gray-400"
+                    placeholder="your.email@company.com"
+                  />
                 </div>
-              </div>
+
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
+                    Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={homepageFormData.phone}
+                    onChange={handleHomepageInputChange}
+                    required
+                    className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all text-gray-800 placeholder-gray-400"
+                    placeholder="+91 98765 43210"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="company" className="block text-sm font-semibold text-gray-700 mb-2">
+                    Company Name
+                  </label>
+                  <input
+                    type="text"
+                    id="company"
+                    name="company"
+                    value={homepageFormData.company}
+                    onChange={handleHomepageInputChange}
+                    className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all text-gray-800 placeholder-gray-400"
+                    placeholder="Your company name"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
+                    Your Message
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={homepageFormData.message}
+                    onChange={handleHomepageInputChange}
+                    required
+                    rows={5}
+                    className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all text-gray-800 placeholder-gray-400 resize-none"
+                    placeholder="Tell us about your label requirements..."
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isHomepageSubmitting}
+                  className="group relative w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                >
+                  <span className="relative flex items-center justify-center gap-3">
+                    {isHomepageSubmitting ? (
+                      <>
+                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                        Sending Message...
+                      </>
+                    ) : (
+                      <>Send Message</>
+                    )}
+                  </span>
+                </button>
+              </form>
             </div>
           </div>
         </div>

@@ -38,6 +38,7 @@ const NavigationComponent = () => {
   const isHardwaresPage = pathname === '/hardwares'
   const isConsultancyPage = pathname === '/consultancy'
   const isIndustriesPage = pathname === '/industries'
+  const isIndustriesDetailPage = pathname.startsWith('/industries/') && pathname !== '/industries'
   const isProductsPage = pathname.startsWith('/products')
   const isGetQuotationPage = pathname === '/get-quotation'
 
@@ -49,6 +50,8 @@ const NavigationComponent = () => {
   // On homepage before scroll, navbar background is transparent over (likely) light hero.
   // Use this flag to ensure mobile hamburger is visible (dark icon on light bg).
   const onTransparentHero = isHomePage && !isScrolled
+  const useLightNav = isIndustriesDetailPage
+  const navTextClass = useLightNav ? 'text-gray-900' : 'text-white'
   
   useEffect(() => {
     setIsMounted(true)
@@ -112,6 +115,7 @@ const NavigationComponent = () => {
           subItems: [
             { name: 'PRODUCT LABELS', href: '/products#product-labels' },
             { name: 'BARCODE LABEL', href: '/products#barcode-labels' },
+            { name: 'DT/SHIPPING LABELS', href: '/products#dt-shipping-labels' },
             { name: 'BILLING ROLLS', href: '/products#billing-rolls' },
             { name: 'HOLOGRAM', href: '/products#hologram-labels' },
             { name: 'RFIDS', href: '/products#rfid-labels' },
@@ -198,8 +202,8 @@ const NavigationComponent = () => {
       ],
     },
     {
-      name: 'CONSULTANCY',
-      href: '/consultancy',
+      name: 'BLOGS',
+      href: '/blogs',
     },
     {
       name: 'CONTACT US',
@@ -215,7 +219,9 @@ const NavigationComponent = () => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isNavHidden ? '-translate-y-full' : 'translate-y-0'
       } ${
-        isMounted && isScrolled 
+        useLightNav
+          ? 'bg-white/95 backdrop-blur-xl border-b border-gray-200 shadow-lg'
+          : isMounted && isScrolled 
           ? 'bg-black/80 backdrop-blur-xl border-b border-white/10 shadow-2xl' 
           : 'bg-transparent'
       } ${
@@ -237,7 +243,11 @@ const NavigationComponent = () => {
             <Link href="/" className="flex items-center space-x-3 sm:space-x-4 group relative">
               {/* Animated Background Glow */}
               <motion.div 
-                className="absolute inset-0 bg-gradient-to-r from-red-500/20 via-red-600/30 to-red-700/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500"
+                className={`absolute inset-0 rounded-2xl blur-xl opacity-0 transition-all duration-500 ${
+                  useLightNav
+                    ? 'bg-red-200/40'
+                    : 'bg-gradient-to-r from-red-500/20 via-red-600/30 to-red-700/20'
+                } group-hover:opacity-100`}
                 animate={{ 
                   scale: [1, 1.1, 1],
                   opacity: [0, 0.3, 0]
@@ -250,7 +260,13 @@ const NavigationComponent = () => {
               />
               
               {/* Main Logo Container with Enhanced Glassmorphism */}
-              <div className="relative flex items-center justify-center bg-gradient-to-br from-white/20 via-white/30 to-white/10 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-2 sm:p-3 shadow-2xl border border-white/30 group-hover:border-red-400/50 group-hover:shadow-red-500/25 transition-all duration-500 w-14 h-14 sm:w-18 sm:h-18 lg:w-22 lg:h-22 overflow-hidden">
+              <div
+                className={`relative flex items-center justify-center rounded-2xl sm:rounded-3xl p-2 sm:p-3 shadow-2xl border transition-all duration-500 w-14 h-14 sm:w-18 sm:h-18 lg:w-22 lg:h-22 overflow-hidden ${
+                  useLightNav
+                    ? 'bg-white border-gray-200'
+                    : 'bg-gradient-to-br from-white/20 via-white/30 to-white/10 backdrop-blur-xl border-white/30 group-hover:border-red-400/50 group-hover:shadow-red-500/25'
+                }`}
+              >
                 {/* Animated Border Ring */}
                 <motion.div 
                   className="absolute inset-1 rounded-2xl sm:rounded-3xl border-2 border-transparent bg-gradient-to-r from-red-500 via-red-600 to-red-700 opacity-0 group-hover:opacity-100"
@@ -312,7 +328,11 @@ const NavigationComponent = () => {
               <div className="flex flex-col relative">
                 {/* Company Name with Gradient Text */}
                 <motion.span 
-                  className="font-bold bg-gradient-to-r from-red-300 via-white to-red-300 bg-clip-text text-transparent transition-all duration-500 drop-shadow-lg text-xl sm:text-2xl lg:text-3xl"
+                  className={`font-sagittaMont font-extrabold uppercase tracking-[0.2em] -skew-x-6 transition-all duration-500 drop-shadow-lg text-xl sm:text-2xl lg:text-3xl ${
+                    useLightNav
+                      ? 'text-red-700'
+                      : 'bg-gradient-to-r from-red-300 via-white to-red-300 bg-clip-text text-transparent'
+                  }`}
                   whileHover={{ scale: 1.01 }}
                 >
                   SDB LABEL
@@ -320,7 +340,11 @@ const NavigationComponent = () => {
                 
                 {/* Tagline with Enhanced Styling */}
                 <motion.span 
-                  className="font-medium tracking-wide uppercase hidden sm:block bg-gradient-to-r from-red-200 via-red-300 to-red-200 bg-clip-text text-transparent group-hover:from-red-400 group-hover:via-white group-hover:to-red-400 transition-all duration-500 drop-shadow-md text-xs sm:text-xs lg:text-sm"
+                  className={`font-medium tracking-wide uppercase hidden sm:block transition-all duration-500 drop-shadow-md text-xs sm:text-xs lg:text-sm ${
+                    useLightNav
+                      ? 'text-gray-600'
+                      : 'bg-gradient-to-r from-red-200 via-red-300 to-red-200 bg-clip-text text-transparent group-hover:from-red-400 group-hover:via-white group-hover:to-red-400'
+                  }`}
                   whileHover={{ scale: 1.005 }}
                 >
                   Build To Stick
@@ -363,7 +387,7 @@ const NavigationComponent = () => {
                     <div className="flex items-center">
                       <Link
                         href={item.href}
-                        className={`hover:text-red-600 transition-colors duration-200 font-medium drop-shadow-lg relative text-sm xl:text-base ${isHomePage || isIndustriesPage || isSoftwaresPage || isHardwaresPage || isConsultancyPage || isContactPage || isProductsPage || isGetQuotationPage ? 'text-white' : 'text-white'}`}
+                        className={`hover:text-red-600 transition-colors duration-200 font-medium drop-shadow-lg relative text-sm xl:text-base ${navTextClass}`}
                         onMouseEnter={() => setActiveDropdown(item.name)}
                         onMouseLeave={() => setActiveDropdown(null)}
                       >
@@ -381,7 +405,7 @@ const NavigationComponent = () => {
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: -10, scale: 0.95 }}
                             transition={{ duration: 0.2, ease: "easeOut" }}
-                            className="absolute top-full left-0 mt-2 w-64 bg-black/90 backdrop-blur-md rounded-2xl shadow-xl py-2 z-[9999] border border-white/10"
+                            className="absolute top-full left-0 mt-3 w-80 bg-black/90 backdrop-blur-xl rounded-2xl shadow-2xl py-3 z-[9999] border border-white/15"
                             onMouseEnter={() => setActiveDropdown(item.name)}
                             onMouseLeave={() => setActiveDropdown(null)}
                           >
@@ -395,10 +419,10 @@ const NavigationComponent = () => {
                                 >
                                   <Link
                                     href={dropdownItem.href}
-                                    className="block px-4 py-3 text-white hover:text-red-300 transition-colors duration-150 hover:bg-white/5 rounded-lg mx-2"
+                                    className="block px-5 py-3 text-white text-sm font-semibold hover:text-red-300 transition-colors duration-150 hover:bg-white/5 rounded-xl mx-3"
                                   >
                                     <div className="flex items-center justify-between">
-                                      <span className="font-bold text-sm">{dropdownItem.name}</span>
+                                      <span className="text-sm font-semibold">{dropdownItem.name}</span>
                                       <svg className="w-4 h-4 text-white/60 group-hover/sub:text-red-300 transition-colors duration-150" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                       </svg>
@@ -413,7 +437,7 @@ const NavigationComponent = () => {
                                         animate={{ opacity: 1, x: 0, scale: 1 }}
                                         exit={{ opacity: 0, x: -10, scale: 0.95 }}
                                         transition={{ duration: 0.2, ease: "easeOut" }}
-                                        className="absolute left-full top-0 w-56 bg-black/90 backdrop-blur-md rounded-2xl shadow-xl py-2 z-[9999] border border-white/10"
+                                        className="absolute left-full top-0 w-80 bg-black/90 backdrop-blur-xl rounded-2xl shadow-2xl py-3 z-[9999] border border-white/15"
                                         onMouseEnter={() => setActiveSubDropdown(dropdownItem.name)}
                                         onMouseLeave={() => setActiveSubDropdown(null)}
                                       >
@@ -421,7 +445,7 @@ const NavigationComponent = () => {
                                           <Link
                                             key={subItem.name}
                                             href={subItem.href}
-                                            className="block px-4 py-2 text-white hover:text-red-300 hover:bg-white/5 transition-colors duration-150 rounded-lg mx-2 text-sm"
+                                            className="block px-5 py-3 text-white text-sm font-semibold hover:text-red-300 hover:bg-white/5 transition-colors duration-150 rounded-xl mx-3"
                                           >
                                             {subItem.name}
                                           </Link>
@@ -433,7 +457,7 @@ const NavigationComponent = () => {
                               ) : (
                                 <Link
                                   href={dropdownItem.href}
-                                  className="block px-4 py-3 text-white hover:text-red-300 hover:bg-white/5 transition-colors duration-150 rounded-lg mx-2"
+                                  className="block px-5 py-3 text-white text-sm font-semibold hover:text-red-300 hover:bg-white/5 transition-colors duration-150 rounded-xl mx-3"
                                 >
                                   {dropdownItem.name}
                                 </Link>
@@ -448,7 +472,7 @@ const NavigationComponent = () => {
                 ) : (
                   <Link
                     href={item.href}
-                    className={`hover:text-red-600 transition-colors duration-200 font-medium drop-shadow-lg relative text-sm xl:text-base ${isHomePage || isIndustriesPage || isSoftwaresPage || isHardwaresPage || isConsultancyPage || isContactPage || isProductsPage || isGetQuotationPage ? 'text-white' : 'text-white'}`}
+                    className={`hover:text-red-600 transition-colors duration-200 font-medium drop-shadow-lg relative text-sm xl:text-base ${navTextClass}`}
                   >
                     {item.name}
                     <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-600 transition-all duration-300 hover:w-full"></div>
@@ -475,7 +499,9 @@ const NavigationComponent = () => {
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsOpen(!isOpen)}
               className={`p-2 rounded-lg transition-colors duration-200 ${
-                onTransparentHero
+                useLightNav
+                  ? 'text-gray-900 hover:bg-gray-100'
+                  : onTransparentHero
                   ? 'text-red-600 hover:bg-red-600/10'
                   : 'text-white hover:bg-white/10'
               }`}
@@ -547,7 +573,7 @@ const NavigationComponent = () => {
                                     <div>
                                       <Link
                                         href={dropdownItem.href}
-                                        className={`block px-3 py-3 hover:text-red-600 hover:bg-red-100/50 rounded-xl text-sm font-bold transition-all duration-200 touch-manipulation ${isHomePage || isIndustriesPage || isSoftwaresPage || isHardwaresPage || isConsultancyPage || isContactPage || isProductsPage ? 'text-white' : 'text-white'}`}
+                                        className={`block px-3 py-3 hover:text-red-600 hover:bg-red-100/50 rounded-xl text-sm font-medium transition-all duration-200 touch-manipulation ${isHomePage || isIndustriesPage || isSoftwaresPage || isHardwaresPage || isConsultancyPage || isContactPage || isProductsPage ? 'text-white' : 'text-white'}`}
                                         onClick={() => setIsOpen(false)}
                                       >
                                         {dropdownItem.name}
@@ -587,7 +613,7 @@ const NavigationComponent = () => {
                                               >
                                                 <Link
                                                   href={subItem.href}
-                                                  className={`block px-3 py-2 hover:text-red-600 hover:bg-red-100/50 rounded-xl text-xs sm:text-sm transition-all duration-200 touch-manipulation ${isHomePage || isIndustriesPage || isSoftwaresPage || isHardwaresPage || isConsultancyPage || isContactPage || isProductsPage ? 'text-white' : 'text-white'}`}
+                                                  className={`block px-3 py-2 hover:text-red-600 hover:bg-red-100/50 rounded-xl text-sm font-medium transition-all duration-200 touch-manipulation ${isHomePage || isIndustriesPage || isSoftwaresPage || isHardwaresPage || isConsultancyPage || isContactPage || isProductsPage ? 'text-white' : 'text-white'}`}
                                                   onClick={() => setIsOpen(false)}
                                                 >
                                                   {subItem.name}

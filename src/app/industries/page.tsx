@@ -389,28 +389,28 @@ const IndustriesPage = () => {
 
                 {/* Content Section */}
                 <div className="w-full lg:w-1/2">
-                  <div className="bg-gradient-to-br from-slate-900/95 via-red-900/90 to-rose-900/95 backdrop-blur-md p-8 lg:p-10 border border-red-800/30 hover:border-red-400/50 transition-all duration-500 h-[500px] flex flex-col">
+                  <div className="bg-white p-8 lg:p-10 border border-red-100 shadow-sm hover:shadow-lg transition-all duration-500 h-[500px] flex flex-col">
                     {/* Vertical Line and Title */}
                     <div className="flex items-center mb-6">
                       <div className="w-1 h-12 bg-gradient-to-b from-red-400 to-rose-500 rounded-full mr-4"></div>
-                      <h3 className="text-3xl lg:text-4xl font-bold text-white">
+                      <h3 className="text-3xl lg:text-4xl font-bold text-gray-900">
                         {industry.name}
                       </h3>
                     </div>
                     
                     {/* Subtitle */}
-                    <p className="text-red-200 text-lg mb-6 font-medium">
+                    <p className="text-red-600 text-lg mb-6 font-medium">
                       {industry.fullName}
                     </p>
 
                     {/* Description */}
-                    <p className="text-gray-300 mb-6 leading-relaxed text-lg">
+                    <p className="text-gray-600 mb-6 leading-relaxed text-lg">
                       {industry.description}
                     </p>
 
                     {/* Article */}
                     <div className="flex-grow overflow-hidden">
-                      <p className="text-gray-300 leading-relaxed text-lg">
+                      <p className="text-gray-600 leading-relaxed text-lg">
                         {industry.article}
                       </p>
                     </div>

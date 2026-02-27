@@ -29,6 +29,62 @@ async function getBlogs() {
 
 export default async function BlogsPage() {
   const blogs = await getBlogs()
+  const fallbackBlogs = [
+    {
+      id: 'fallback-1',
+      slug: 'barcode-label-best-practices',
+      title: 'Barcode Label Best Practices for Fast, Accurate Scanning',
+      excerpt:
+        'Learn how material choice, print resolution, and barcode sizing improve scan rates across warehouses and retail counters.',
+      category: 'Barcode Labels',
+      author: 'Team SDB',
+      featured_image: '/images/blogs/barcode-label.jpg',
+      published_at: '2024-06-15',
+      created_at: '2024-06-15',
+    },
+    {
+      id: 'fallback-2',
+      slug: 'thermal-labels-direct-vs-transfer',
+      title: 'Direct Thermal vs Thermal Transfer Labels: What to Use When',
+      excerpt:
+        'A simple guide to choosing the right thermal label based on durability, exposure, and cost.',
+      category: 'Thermal Labels',
+      author: 'Team SDB',
+      featured_image: '/images/blogs/Direct-thermal.png',
+      published_at: '2024-06-20',
+      created_at: '2024-06-20',
+    },
+    {
+      id: 'fallback-3',
+      slug: 'hologram-security-labels',
+      title: 'Hologram Security Labels to Protect Brand Authenticity',
+      excerpt:
+        'Discover how hologram labels deter counterfeits and build customer trust in high-value products.',
+      category: 'Hologram Labels',
+      author: 'Team SDB',
+      featured_image: '/images/blogs/printer.jpg',
+      published_at: '2024-06-25',
+      created_at: '2024-06-25',
+    },
+    {
+      id: 'fallback-4',
+      slug: 'label-materials-for-fmcg',
+      title: 'Choosing Label Materials for FMCG Packaging',
+      excerpt:
+        'From paper to BOPP and polyester, understand which label stock fits your product and supply chain.',
+      category: 'Packaging',
+      author: 'Team SDB',
+      featured_image: '',
+      published_at: '2024-06-28',
+      created_at: '2024-06-28',
+    },
+  ]
+  const displayBlogs = blogs.length > 0 ? blogs : fallbackBlogs
+  const fallbackImages = [
+    '/images/blogs/barcode-label.jpg',
+    '/images/blogs/Direct-thermal.png',
+    '/images/blogs/printer.jpg',
+  ]
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -49,14 +105,17 @@ export default async function BlogsPage() {
 
       {/* Blog Grid */}
       <main className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
-        {blogs.length === 0 ? (
+        {displayBlogs.length === 0 ? (
           <div className="text-center py-20">
             <h3 className="text-2xl font-bold text-gray-900">No articles published yet.</h3>
             <p className="text-gray-600 mt-2">Check back soon for updates!</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogs.map((blog) => (
+            {displayBlogs.map((blog, index) => {
+              const resolvedImage =
+                blog.featured_image || fallbackImages[index] || ''
+              return (
               <Link 
                 href={`/blogs/${blog.slug}`} 
                 key={blog.id}
@@ -64,16 +123,16 @@ export default async function BlogsPage() {
               >
                 {/* Image */}
                 <div className="relative h-56 w-full overflow-hidden bg-gray-200">
-                   {blog.featured_image ? (
+                   {resolvedImage ? (
                      <OptimizedImage
-                       src={blog.featured_image}
+                       src={resolvedImage}
                        alt={blog.title}
                        fill
                        className="object-cover group-hover:scale-105 transition-transform duration-500"
                      />
                    ) : (
                      <div className="flex items-center justify-center h-full text-gray-400 bg-gray-100">
-                       <span className="text-4xl">📰</span>
+                       <span className="text-sm font-semibold uppercase tracking-widest">Image</span>
                      </div>
                    )}
                    <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-red-700 uppercase tracking-wide">
@@ -115,7 +174,7 @@ export default async function BlogsPage() {
                   </div>
                 </div>
               </Link>
-            ))}
+            )})}
           </div>
         )}
       </main>

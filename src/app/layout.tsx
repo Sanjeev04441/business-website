@@ -117,7 +117,7 @@ export default function RootLayout({
         {/* Fonts - Optimized: Only load weights actually used (400, 500, 600, 700) */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Saira:wght@600;700;800&display=swap" rel="stylesheet" />
         
         {/* Critical Image Preload - Logo only */}
         <link rel="preload" href="/images/icon/logo.png?v=2" as="image" type="image/png" fetchPriority="high" />
