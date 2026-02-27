@@ -31,7 +31,7 @@ import {
 export default function Home() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [currentTestimonialSet, setCurrentTestimonialSet] = useState(0)
-  const fullHeroTitle = 'SDB LABEL Barcode & Thermal Label Manufacturer in India'
+  const fullHeroTitle = 'SDB LABEL | Product , Barcode Sticker & Label Printing Solutions Across India'
   const [typedHeroTitle, setTypedHeroTitle] = useState('')
 
   // Testimonials data
@@ -265,7 +265,7 @@ export default function Home() {
         <div className="relative z-20 text-center px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
           <div className="mb-8">
             <h1
-              className="text-3xl sm:text-4xl lg:text-6xl font-extrabold font-saira mb-6 leading-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-red-100 to-rose-200 drop-shadow-[0_6px_24px_rgba(0,0,0,0.45)] tracking-[0.01em]"
+              className="text-2xl sm:text-3xl lg:text-5xl font-extrabold font-saira mb-6 leading-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-red-100 to-rose-200 drop-shadow-[0_6px_24px_rgba(0,0,0,0.45)] tracking-[0.01em]"
               aria-label={fullHeroTitle}
             >
               <span className="sr-only">{fullHeroTitle}</span>
@@ -274,9 +274,8 @@ export default function Home() {
                 <span className="typing-cursor text-white"></span>
               </span>
             </h1>
-            <p className="text-lg sm:text-xl lg:text-2xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed drop-shadow-[0_4px_16px_rgba(0,0,0,0.45)]">
-              Transform your business with our cutting-edge labeling technology, 
-              premium materials, and expert solutions tailored to your industry needs.
+            <p className="text-lg sm:text-xl lg:text-2xl text-white/90 mb-8 max-w-4xl mx-auto leading-relaxed drop-shadow-[0_4px_16px_rgba(0,0,0,0.45)]">
+              Barcode Labels | Custom Product Labels | Direct Thermal Shipping Labels | POS Billing Rolls | Hologram Security Labels | RFID Tags | Thermal Printers & Scanners
             </p>
           </div>
           

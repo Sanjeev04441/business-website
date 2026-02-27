@@ -328,7 +328,7 @@ const NavigationComponent = () => {
               <div className="flex flex-col relative">
                 {/* Company Name with Gradient Text */}
                 <motion.span 
-                  className={`font-sagittaMont font-extrabold uppercase tracking-[0.2em] -skew-x-6 transition-all duration-500 drop-shadow-lg text-xl sm:text-2xl lg:text-3xl ${
+                  className={`font-sagittaMont font-extrabold uppercase tracking-[0.2em] transition-all duration-500 drop-shadow-lg text-xl sm:text-2xl lg:text-3xl ${
                     useLightNav
                       ? 'text-red-700'
                       : 'bg-gradient-to-r from-red-300 via-white to-red-300 bg-clip-text text-transparent'
@@ -340,7 +340,7 @@ const NavigationComponent = () => {
                 
                 {/* Tagline with Enhanced Styling */}
                 <motion.span 
-                  className={`font-medium tracking-wide uppercase hidden sm:block transition-all duration-500 drop-shadow-md text-xs sm:text-xs lg:text-sm ${
+                  className={`font-medium tracking-wide uppercase block transition-all duration-500 drop-shadow-md text-[10px] sm:text-xs lg:text-sm ${
                     useLightNav
                       ? 'text-gray-600'
                       : 'bg-gradient-to-r from-red-200 via-red-300 to-red-200 bg-clip-text text-transparent group-hover:from-red-400 group-hover:via-white group-hover:to-red-400'
