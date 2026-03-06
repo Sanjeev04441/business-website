@@ -193,7 +193,7 @@ const fallbackPosts = [
       'From paper to BOPP and polyester, understand which label stock fits your product and supply chain.',
     category: 'Packaging',
     author: 'Team SDB',
-    featured_image: '/images/blogs/CustomizationFMCG.jpg',
+    featured_image: '/images/blogs/productss.jpg',
     published_at: '2024-06-28',
     created_at: '2024-06-28',
     tags: ['fmcg', 'materials', 'packaging'],

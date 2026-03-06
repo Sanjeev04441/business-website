@@ -82,7 +82,7 @@ export default async function BlogsPage() {
         'From paper to BOPP and polyester, understand which label stock fits your product and supply chain.',
       category: 'Packaging',
       author: 'Team SDB',
-      featured_image: '/images/blogs/CustomizationFMCG.jpg',
+      featured_image: '/images/blogs/productss.jpg',
       published_at: '2024-06-28',
       created_at: '2024-06-28',
     },
@@ -92,7 +92,7 @@ export default async function BlogsPage() {
     '/images/blogs/barcode-label.jpg',
     '/images/blogs/Direct-thermal.png',
     '/images/blogs/Holograms.jpg',
-    '/images/blogs/CustomizationFMCG.jpg',
+    '/images/blogs/productss.jpg',
   ]
 
   return (
