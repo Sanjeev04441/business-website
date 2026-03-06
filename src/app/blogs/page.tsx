@@ -12,6 +12,14 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 )
 
+const slugAliases: Record<string, string> = {
+  'barcode-label-best-practices': 'how-to-choose-barcode-labels-for-manufacturing',
+  'thermal-labels-direct-vs-transfer': 'difference-between-thermal-and-paper-labels',
+  'hologram-security-labels': 'best-barcode-printers-for-warehouses-india',
+}
+
+const resolveSlug = (slug: string) => slugAliases[slug] ?? slug
+
 export const metadata = {
   title: 'Industry Insights & Blog | SDB Label Manufacturer India',
   description: 'Read the latest updates on barcode labels, sticker printing, thermal printers, and logistics solutions from SDB Label - India\'s leading manufacturer.',
@@ -32,7 +40,7 @@ export default async function BlogsPage() {
   const fallbackBlogs = [
     {
       id: 'fallback-1',
-      slug: 'barcode-label-best-practices',
+      slug: 'how-to-choose-barcode-labels-for-manufacturing',
       title: 'Barcode Label Best Practices for Fast, Accurate Scanning',
       excerpt:
         'Learn how material choice, print resolution, and barcode sizing improve scan rates across warehouses and retail counters.',
@@ -44,7 +52,7 @@ export default async function BlogsPage() {
     },
     {
       id: 'fallback-2',
-      slug: 'thermal-labels-direct-vs-transfer',
+      slug: 'difference-between-thermal-and-paper-labels',
       title: 'Direct Thermal vs Thermal Transfer Labels: What to Use When',
       excerpt:
         'A simple guide to choosing the right thermal label based on durability, exposure, and cost.',
@@ -56,7 +64,7 @@ export default async function BlogsPage() {
     },
     {
       id: 'fallback-3',
-      slug: 'hologram-security-labels',
+      slug: 'best-barcode-printers-for-warehouses-india',
       title: 'Hologram Security Labels to Protect Brand Authenticity',
       excerpt:
         'Discover how hologram labels deter counterfeits and build customer trust in high-value products.',
@@ -117,7 +125,7 @@ export default async function BlogsPage() {
                 blog.featured_image || fallbackImages[index] || ''
               return (
               <Link 
-                href={`/blogs/${blog.slug}`} 
+                href={`/blogs/${resolveSlug(blog.slug)}`} 
                 key={blog.id}
                 className="group flex flex-col bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden"
               >

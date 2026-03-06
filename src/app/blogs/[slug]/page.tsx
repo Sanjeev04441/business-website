@@ -1,6 +1,6 @@
 
 import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@supabase/supabase-js'
 import OptimizedImage from '@/components/OptimizedImage'
@@ -13,6 +13,20 @@ import { ArrowLeftIcon, CalendarIcon, ShareIcon } from '@heroicons/react/24/outl
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+)
+
+const slugAliases: Record<string, string> = {
+  'barcode-label-best-practices': 'how-to-choose-barcode-labels-for-manufacturing',
+  'thermal-labels-direct-vs-transfer': 'difference-between-thermal-and-paper-labels',
+  'hologram-security-labels': 'best-barcode-printers-for-warehouses-india',
+}
+
+const resolveSlug = (slug: string) => slugAliases[slug] ?? slug
+const reverseSlugAliases: Record<string, string> = Object.fromEntries(
+  Object.entries(slugAliases).map(([legacySlug, canonicalSlug]) => [
+    canonicalSlug,
+    legacySlug,
+  ])
 )
 
 interface Props {
@@ -98,7 +112,7 @@ function renderMarkdownToHtml(content: string) {
 const fallbackPosts = [
   {
     id: 'fallback-1',
-    slug: 'barcode-label-best-practices',
+    slug: 'how-to-choose-barcode-labels-for-manufacturing',
     title: 'Barcode Label Best Practices for Fast, Accurate Scanning',
     excerpt:
       'Learn how material choice, print resolution, and barcode sizing improve scan rates across warehouses and retail counters.',
@@ -123,7 +137,7 @@ const fallbackPosts = [
   },
   {
     id: 'fallback-2',
-    slug: 'thermal-labels-direct-vs-transfer',
+    slug: 'difference-between-thermal-and-paper-labels',
     title: 'Direct Thermal vs Thermal Transfer Labels: What to Use When',
     excerpt:
       'A simple guide to choosing the right thermal label based on durability, exposure, and cost.',
@@ -148,7 +162,7 @@ const fallbackPosts = [
   },
   {
     id: 'fallback-3',
-    slug: 'hologram-security-labels',
+    slug: 'best-barcode-printers-for-warehouses-india',
     title: 'Hologram Security Labels to Protect Brand Authenticity',
     excerpt:
       'Discover how hologram labels deter counterfeits and build customer trust in high-value products.',
@@ -200,19 +214,39 @@ const fallbackPosts = [
 ]
 
 async function getBlogPost(slug: string) {
+  const canonicalSlug = resolveSlug(slug)
   const { data: post } = await supabase
     .from('blogs')
     .select('*')
-    .eq('slug', slug)
+    .eq('slug', canonicalSlug)
     .eq('is_published', true)
     .single()
+
+  if (post) {
+    return post
+  }
+
+  const legacySlug = reverseSlugAliases[canonicalSlug]
+  if (legacySlug) {
+    const { data: legacyPost } = await supabase
+      .from('blogs')
+      .select('*')
+      .eq('slug', legacySlug)
+      .eq('is_published', true)
+      .single()
+
+    if (legacyPost) {
+      return legacyPost
+    }
+  }
   
-  return post || fallbackPosts.find((item) => item.slug === slug) || null
+  return post || fallbackPosts.find((item) => item.slug === canonicalSlug) || null
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params
-  const post = await getBlogPost(slug)
+  const { slug: rawSlug } = await params
+  const canonicalSlug = resolveSlug(rawSlug)
+  const post = await getBlogPost(rawSlug)
 
   if (!post) {
     return {
@@ -223,6 +257,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.meta_title || post.title + ' | SDB Label Insights',
     description: post.meta_description || post.excerpt,
+    alternates: {
+      canonical: `/blogs/${canonicalSlug}`,
+    },
     openGraph: {
       title: post.meta_title || post.title,
       description: post.meta_description || post.excerpt,
@@ -242,8 +279,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function BlogPostPage({ params }: Props) {
-  const { slug } = await params
-  const post = await getBlogPost(slug)
+  const { slug: rawSlug } = await params
+  const canonicalSlug = resolveSlug(rawSlug)
+
+  if (rawSlug !== canonicalSlug) {
+    redirect(`/blogs/${canonicalSlug}`)
+  }
+
+  const post = await getBlogPost(rawSlug)
 
   if (!post) {
     notFound()
@@ -297,14 +340,16 @@ Contact **SDB LABEL** to schedule a live demo of TSC TTP series printers for you
   const renderedContent = renderMarkdownToHtml(contentToRender)
 
   // Fetch recent posts for sidebar
-  const { data: recentPosts } = await supabase
+  const { data: recentPostsRaw } = await supabase
     .from('blogs')
     .select('title, slug, created_at')
     .eq('is_published', true)
-    .neq('slug', slug)
-    .limit(3)
+    .neq('slug', canonicalSlug)
+    .limit(4)
+  const recentPosts =
+    recentPostsRaw?.filter((recent) => resolveSlug(recent.slug) !== canonicalSlug).slice(0, 3) || []
   const fallbackRecent = fallbackPosts
-    .filter((item) => item.slug !== slug)
+    .filter((item) => item.slug !== canonicalSlug)
     .slice(0, 3)
 
   return (
@@ -395,7 +440,7 @@ Contact **SDB LABEL** to schedule a live demo of TSC TTP series printers for you
                 <div className="space-y-4">
                   {(recentPosts?.length ? recentPosts : fallbackRecent).map((recent) => (
                     <Link 
-                      href={`/blogs/${recent.slug}`} 
+                      href={`/blogs/${resolveSlug(recent.slug)}`} 
                       key={recent.slug}
                       className="block group"
                     >
