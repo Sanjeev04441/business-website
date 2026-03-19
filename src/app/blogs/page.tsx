@@ -86,6 +86,18 @@ export default async function BlogsPage() {
       published_at: '2024-06-28',
       created_at: '2024-06-28',
     },
+    {
+      id: 'fallback-5',
+      slug: 'counterfeit-auto-parts-label-security',
+      title: 'Counterfeiting in Auto Parts: Data-Driven Reality & How Labels Protect Your Brand',
+      excerpt:
+        'A data-backed look at counterfeit auto parts in India and the security label strategies that protect revenue, safety, and trust.',
+      category: 'Anti-Counterfeit',
+      author: 'Team SDB',
+      featured_image: '/images/blogs/fake-autoparts.jpg',
+      published_at: '2024-07-05',
+      created_at: '2024-07-05',
+    },
   ]
   const displayBlogs = blogs.length > 0 ? blogs : fallbackBlogs
   const fallbackImages = [
@@ -93,6 +105,7 @@ export default async function BlogsPage() {
     '/images/blogs/Direct-thermal.png',
     '/images/blogs/Holograms.jpg',
     '/images/blogs/productss.jpg',
+    '/images/blogs/fake-autoparts.jpg',
   ]
 
   return (
