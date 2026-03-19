@@ -95,8 +95,8 @@ export default async function BlogsPage() {
       category: 'Anti-Counterfeit',
       author: 'Team SDB',
       featured_image: '/images/blogs/fake-autoparts.jpg',
-      published_at: '2024-07-05',
-      created_at: '2024-07-05',
+      published_at: '2026-03-19',
+      created_at: '2026-03-19',
     },
   ]
   const displayBlogs = blogs.length > 0 ? blogs : fallbackBlogs

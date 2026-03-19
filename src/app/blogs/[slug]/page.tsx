@@ -220,8 +220,8 @@ const fallbackPosts = [
     category: 'Anti-Counterfeit',
     author: 'Team SDB',
     featured_image: '/images/blogs/fake-autoparts.jpg',
-    published_at: '2024-07-05',
-    created_at: '2024-07-05',
+    published_at: '2026-03-19',
+    created_at: '2026-03-19',
     tags: ['counterfeit', 'auto parts', 'security labels', 'brand protection'],
     meta_title:
       'Counterfeit Auto Parts: Data, Risks & Security Label Solutions | SDB Label',
@@ -430,6 +430,10 @@ Contact **SDB LABEL** to schedule a live demo of TSC TTP series printers for you
   const shouldOverrideContent =
     normalizedTitle === 'best barcode printers for warehouses in india' ||
     normalizedTitle === 'top barcode printers for indian warehouses'
+  const isAntiCounterfeitArticle =
+    post.slug === 'counterfeit-auto-parts-label-security' ||
+    normalizedTitle ===
+      'counterfeiting in auto parts: data-driven reality & how labels protect your brand'
 
   const contentToRender = shouldOverrideContent
     ? tscTtpContent
@@ -451,71 +455,111 @@ Contact **SDB LABEL** to schedule a live demo of TSC TTP series printers for you
     .slice(0, 3)
 
   return (
-    <div className="min-h-screen bg-white font-sans text-gray-900 selection:bg-red-100 selection:text-red-900">
+    <div className={`min-h-screen font-sans text-gray-900 selection:bg-red-100 selection:text-red-900 ${isAntiCounterfeitArticle ? 'bg-[#0b0c10]' : 'bg-white'}`}>
       <Navigation />
       
       {/* Article Header (Parallax-style) */}
-      <div className="relative h-[50vh] min-h-[400px] w-full overflow-hidden bg-gray-900">
+      <div className={`relative w-full overflow-hidden ${isAntiCounterfeitArticle ? 'h-[72vh] min-h-[560px] bg-[#0b0c10]' : 'h-[60vh] min-h-[460px] bg-gray-900'}`}>
         {post.featured_image && (
           <OptimizedImage
             src={post.featured_image}
             alt={post.title}
             fill
-            className="object-cover opacity-60"
+            className={`object-cover ${isAntiCounterfeitArticle ? 'opacity-70 saturate-125 contrast-110' : 'opacity-60'}`}
             priority
           />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+        <div className={`absolute inset-0 ${isAntiCounterfeitArticle ? 'bg-gradient-to-t from-black via-black/70 to-transparent' : 'bg-gradient-to-t from-black via-black/40 to-transparent'}`}></div>
+        {isAntiCounterfeitArticle && (
+          <>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(239,68,68,0.35),_transparent_55%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(239,68,68,0.15),transparent_40%,rgba(248,113,113,0.12))]" />
+          </>
+        )}
         
-        <div className="absolute bottom-0 left-0 w-full p-6 sm:p-12 lg:p-20">
+        <div className={`absolute bottom-0 left-0 w-full p-6 sm:p-12 lg:p-20 ${isAntiCounterfeitArticle ? 'pt-14 sm:pt-16' : ''}`}>
            <div className="container mx-auto max-w-7xl">
-             <Link href="/blogs" className="inline-flex items-center text-gray-300 hover:text-white mb-6 transition-colors group">
+             <Link href="/blogs" className={`inline-flex items-center mb-6 transition-colors group ${isAntiCounterfeitArticle ? 'text-red-100 hover:text-white' : 'text-gray-300 hover:text-white'}`}>
                <ArrowLeftIcon className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
                Back to Blog
              </Link>
              
              <div className="flex flex-wrap gap-4 items-center mb-6">
-               <span className="bg-red-600 text-white px-4 py-1.5 rounded-full text-sm font-bold shadow-lg uppercase tracking-wider">
+               <span className={`${isAntiCounterfeitArticle ? 'bg-red-500/90 text-white ring-1 ring-red-300/40' : 'bg-red-600 text-white'} px-4 py-1.5 rounded-full text-sm font-bold shadow-lg uppercase tracking-wider`}>
                  {post.category || 'Article'}
                </span>
-               <div className="flex items-center text-gray-300 text-sm">
+               <div className={`flex items-center text-sm ${isAntiCounterfeitArticle ? 'text-red-100' : 'text-gray-300'}`}>
                   <CalendarIcon className="w-4 h-4 mr-1.5" />
                   {new Date(post.published_at || post.created_at).toLocaleDateString()}
                </div>
              </div>
 
-             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white max-w-4xl leading-tight mb-4 drop-shadow-lg">
+             <h1 className={`text-3xl sm:text-4xl lg:text-6xl font-bold text-white max-w-4xl leading-tight mb-4 drop-shadow-lg ${isAntiCounterfeitArticle ? 'tracking-tight' : ''}`}>
                {post.title}
              </h1>
+             {isAntiCounterfeitArticle && (
+               <p className="max-w-2xl text-red-100/90 text-base sm:text-lg">
+                 Counterfeit auto parts are a direct threat to revenue, safety, and brand trust. Here’s the data and the security label playbook that stops the damage.
+               </p>
+             )}
            </div>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className={`container mx-auto px-4 sm:px-6 lg:px-8 py-16 ${isAntiCounterfeitArticle ? 'text-white' : ''}`}>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           
           {/* Main Content Info */}
           <article className="lg:col-span-8">
+             {isAntiCounterfeitArticle && (
+               <div className="mb-10 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
+                 <div className="flex flex-wrap gap-3 text-sm">
+                   <span className="inline-flex items-center gap-2 rounded-full bg-red-500/20 px-3 py-1 text-red-100">
+                     🚨 Active Counterfeit Threat
+                   </span>
+                   <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-white/80">
+                     🛡️ Security Labels
+                   </span>
+                   <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-white/80">
+                     📊 Data-Backed Insights
+                   </span>
+                 </div>
+                 <div className="mt-5 grid gap-4 sm:grid-cols-3">
+                   <div className="rounded-xl bg-black/30 p-4">
+                     <p className="text-2xl font-bold text-white">30–40%</p>
+                     <p className="text-sm text-white/70">Aftermarket parts in India are counterfeit</p>
+                   </div>
+                   <div className="rounded-xl bg-black/30 p-4">
+                     <p className="text-2xl font-bold text-white">₹10.5k–14k Cr</p>
+                     <p className="text-sm text-white/70">Estimated fake spare parts market</p>
+                   </div>
+                   <div className="rounded-xl bg-black/30 p-4">
+                     <p className="text-2xl font-bold text-white">20%</p>
+                     <p className="text-sm text-white/70">Road accidents tied to fake parts</p>
+                   </div>
+                 </div>
+               </div>
+             )}
              {/* Rich Text Content */}
              <div 
-               className="prose prose-lg prose-red max-w-none 
+               className={`prose prose-lg max-w-none 
                prose-headings:font-bold prose-headings:text-gray-900 
                prose-p:text-gray-700 prose-p:leading-relaxed 
                prose-li:text-gray-700
                prose-a:text-red-600 hover:prose-a:text-red-700 
                prose-img:rounded-2xl prose-img:shadow-lg prose-img:my-8
                prose-strong:text-gray-900
-               "
+               ${isAntiCounterfeitArticle ? 'prose-invert prose-red prose-headings:text-white prose-p:text-white/80 prose-li:text-white/80 prose-strong:text-white prose-a:text-red-300 hover:prose-a:text-red-200' : 'prose-red'}`}
                dangerouslySetInnerHTML={{ __html: renderedContent }}
              />
              
              {/* Tags */}
              {post.tags && post.tags.length > 0 && (
-               <div className="mt-12 pt-8 border-t border-gray-100">
-                 <h4 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4">Tags</h4>
+               <div className={`mt-12 pt-8 border-t ${isAntiCounterfeitArticle ? 'border-white/10' : 'border-gray-100'}`}>
+                 <h4 className={`text-sm font-bold uppercase tracking-widest mb-4 ${isAntiCounterfeitArticle ? 'text-red-200/80' : 'text-gray-400'}`}>Tags</h4>
                  <div className="flex flex-wrap gap-2">
                    {post.tags.map((tag: string) => (
-                     <span key={tag} className="px-3 py-1 bg-gray-100 text-gray-600 rounded-lg text-sm hover:bg-red-50 hover:text-red-700 transition-colors cursor-default">
+                     <span key={tag} className={`px-3 py-1 rounded-lg text-sm transition-colors cursor-default ${isAntiCounterfeitArticle ? 'bg-white/10 text-white/80 hover:bg-red-500/20 hover:text-white' : 'bg-gray-100 text-gray-600 hover:bg-red-50 hover:text-red-700'}`}>
                        #{tag}
                      </span>
                    ))}
@@ -533,8 +577,8 @@ Contact **SDB LABEL** to schedule a live demo of TSC TTP series printers for you
             <div className="sticky top-24 space-y-8">
               
               {/* Table of Contents / Quick Links or Ad would go here */}
-              <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100">
-                <h3 className="font-bold text-gray-900 mb-4 text-lg">Read Next</h3>
+              <div className={`rounded-2xl p-6 border ${isAntiCounterfeitArticle ? 'bg-white/5 border-white/10 text-white' : 'bg-gray-50 border-gray-100'}`}>
+                <h3 className={`font-bold mb-4 text-lg ${isAntiCounterfeitArticle ? 'text-white' : 'text-gray-900'}`}>Read Next</h3>
                 <div className="space-y-4">
                   {(recentPosts?.length ? recentPosts : fallbackRecent).map((recent) => (
                     <Link 
@@ -542,10 +586,10 @@ Contact **SDB LABEL** to schedule a live demo of TSC TTP series printers for you
                       key={recent.slug}
                       className="block group"
                     >
-                      <h4 className="text-sm font-medium text-gray-700 group-hover:text-red-600 transition-colors line-clamp-2">
+                      <h4 className={`text-sm font-medium transition-colors line-clamp-2 ${isAntiCounterfeitArticle ? 'text-white/80 group-hover:text-red-200' : 'text-gray-700 group-hover:text-red-600'}`}>
                         {recent.title}
                       </h4>
-                      <span className="text-xs text-gray-400 mt-1 block">
+                      <span className={`text-xs mt-1 block ${isAntiCounterfeitArticle ? 'text-white/50' : 'text-gray-400'}`}>
                         {new Date(recent.created_at).toLocaleDateString()}
                       </span>
                     </Link>
@@ -554,7 +598,7 @@ Contact **SDB LABEL** to schedule a live demo of TSC TTP series printers for you
               </div>
 
               {/* Mini CTA Sidebar Widget */}
-              <div className="bg-gradient-to-br from-red-700 to-red-900 rounded-2xl p-6 text-center text-white shadow-xl relative overflow-hidden">
+              <div className={`rounded-2xl p-6 text-center text-white shadow-xl relative overflow-hidden ${isAntiCounterfeitArticle ? 'bg-gradient-to-br from-red-600 via-red-700 to-black' : 'bg-gradient-to-br from-red-700 to-red-900'}`}>
                 <div className="relative z-10">
                   <h3 className="text-xl font-bold mb-2">Need Custom Labels?</h3>
                   <p className="text-red-100 text-sm mb-6">We are India's top manufacturer for industrial barcode labels.</p>
