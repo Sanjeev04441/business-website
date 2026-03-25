@@ -167,7 +167,7 @@ const IndustriesPage = () => {
       <Navigation />
       
       {/* Hero Section with Video Background */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden -mt-20 sm:-mt-24 lg:-mt-28" style={{minHeight: '100vh'}}>
+      <section className="relative min-h-[100svh] flex items-center justify-center overflow-hidden pt-16 sm:pt-20 lg:pt-24">
         {/* Video Background */}
         <div className="absolute inset-0 z-0 w-full h-full">
           <OptimizedVideo
@@ -178,7 +178,7 @@ const IndustriesPage = () => {
             playsInline
             className="w-full h-full object-cover min-h-full"
             style={{
-              minHeight: '100vh',
+              minHeight: '100svh',
               height: '100%',
               width: '100%',
               objectFit: 'cover',
